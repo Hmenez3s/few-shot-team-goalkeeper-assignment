@@ -6,3 +6,5 @@ python=${PYTHON:-python}
 (cd data && shasum -a 256 -c ../checksums.sha256)
 "$python" -u prepare.py --root "$PWD/data"
 "$python" -u train.py --root "$PWD/data"
+"$python" -u reference_bank.py --root "$PWD/data"
+"$python" -u six_references.py --root "$PWD/data"

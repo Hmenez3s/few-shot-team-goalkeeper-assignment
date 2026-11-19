@@ -9,6 +9,8 @@ This model sorts the player boxes of a football match into four groups: outfield
 
 It is a ResNet-18 fine-tuned to compare a crop with those four examples. On three matches held out from training, it labels 91.65% of 2,671 boxes correctly. With the original ImageNet weights, the same examples and the same boxes, it labels 53.61%.
 
+A second model takes six example crops of each group instead of one. On the same boxes its overall accuracy is the same (91.54%), and it gets more goalkeepers right: 94.81% and 91.36% instead of 83.12% and 85.19%.
+
 <p align="center">
   <img src="media/classification-game-7.gif" width="100%" alt="Twelve seconds of a test match. The four reference crops are shown in the header; every player box on the pitch carries the label the model predicted for it.">
 </p>
@@ -19,7 +21,7 @@ Twelve seconds of a test match ([full-resolution video](media/classification-gam
 
 | | |
 |---|---|
-| **Given once per match** | Four reference crops: player A, player B, goalkeeper A, goalkeeper B |
+| **Given once per match** | Reference crops for player A, player B, goalkeeper A and goalkeeper B: one of each, or six of each |
 | **Given afterwards** | Any number of player crops from the same match |
 | **Returned** | One of the four labels for each crop |
 
@@ -59,6 +61,14 @@ For outfield players, the boxes to classify always belong to **a different athle
 
 The run is 8 epochs of 180 steps with AdamW (learning rate 2e-4, weight decay 1e-4, cosine schedule) and seed 25. On an Apple-silicon GPU it takes about one minute.
 
+### Six references per class
+
+The second model receives six crops of each group. Each crop goes through the encoder, the six vectors of a group are normalised and averaged, and the average is that group's reference. The decision is still four cosine similarities, and each new box is still one forward pass.
+
+The six crops of a group are the original reference plus five earlier frames of the same session, drawn at random. For outfield players they show the same athlete as the original reference. They come from a bank of earlier crops (`reference_bank.py`) that reads more frames than the 96 sampled per session, because the goalkeepers rarely appear often enough otherwise. Crops covered more than 75% by another person are skipped when enough clear ones exist.
+
+This model is trained from the same ImageNet weights with the same recipe: optimizer, learning-rate schedule, 8 epochs of 180 steps and seed 25. Its checkpoint (epoch 2) was chosen on validation, where it reaches 89.10% of the 3,193 boxes against 85.03% for the one-reference model.
+
 ## Data
 
 [SoccerNet Game State Reconstruction 2025](https://huggingface.co/datasets/SoccerNet/SN-GSR-2025) provides 30-second broadcast clips in which every box carries a role (`player`, `goalkeeper`, …) and a team (`left` or `right`). Here `left` is team A and `right` is team B.
@@ -77,37 +87,39 @@ Referees, the ball and other people are ignored. Outfield players whose jersey n
 
 - **Whole matches are held out.** The three splits share no `game_id`; `prepare.py` refuses to continue otherwise and the audit is in [`results/audit.json`](results/audit.json).
 - **No crop appears twice.** Pixel hashes of all 20,910 crops show zero duplicates across splits ([`results/verification.json`](results/verification.json)).
-- **The test set was opened once.** The checkpoint (epoch 6) was chosen by validation accuracy before any test crop was read; the order is visible in [`results/training.log`](results/training.log).
-- **References come first.** Every evaluated box is later in the match than the four references.
+- **The test set was opened once per model.** Each checkpoint (epoch 6 for one reference, epoch 2 for six) was chosen on validation before any test crop was read; the order is visible in [`results/training.log`](results/training.log) and [`results/six-references.log`](results/six-references.log).
+- **References come first.** Every evaluated box is later in the match than all of its references.
 - **Other athletes.** Evaluated outfield boxes never share the jersey number of their class reference.
-- **Same boxes for the baseline.** The frozen ImageNet ResNet-18 is scored on exactly the same references and boxes.
+- **Same boxes for every model.** The frozen ImageNet ResNet-18 and the six-reference model are scored on exactly the same boxes as the one-reference model.
 
 ## Results
 
 Test split: three matches, six sessions, 2,671 boxes.
 
-| | Boxes | Frozen ImageNet ResNet-18 | Fine-tuned ResNet-18 |
-|---|---:|---:|---:|
-| Player, team A | 1,295 | 54.90% | **90.50%** |
-| Player, team B | 1,218 | 54.02% | **93.84%** |
-| Goalkeeper, team A | 77 | 40.26% | **83.12%** |
-| Goalkeeper, team B | 81 | 39.51% | **85.19%** |
-| **All boxes** | **2,671** | **53.61%** | **91.65%** |
-| **Mean of the four classes** | | **47.17%** | **88.16%** |
+| | Boxes | Frozen ImageNet ResNet-18, 1 reference | Fine-tuned, 1 reference | Fine-tuned, 6 references |
+|---|---:|---:|---:|---:|
+| Player, team A | 1,295 | 54.90% | **90.50%** | 90.42% |
+| Player, team B | 1,218 | 54.02% | **93.84%** | 92.53% |
+| Goalkeeper, team A | 77 | 40.26% | 83.12% | **94.81%** |
+| Goalkeeper, team B | 81 | 39.51% | 85.19% | **91.36%** |
+| **All boxes** | **2,671** | **53.61%** | **91.65%** | **91.54%** |
+| **Mean of the four classes** | | **47.17%** | **88.16%** | **92.28%** |
+
+Six references do not change the overall score: 2,445 correct boxes against 2,448. They change where the errors are. The goalkeepers gain 14 correct boxes out of 158, and the outfield players of team B lose 16 out of 1,218. Because the four classes are so unbalanced, the mean over the four classes rises by four points while the overall accuracy stays put.
 
 Per match:
 
-| Test match | Boxes | Frozen | Fine-tuned |
-|---|---:|---:|---:|
-| Game 7 | 843 | 39.38% | 81.14% |
-| Game 8 | 1,030 | 61.84% | 96.21% |
-| Game 11 | 798 | 58.02% | 96.87% |
+| Test match | Boxes | Frozen, 1 reference | Fine-tuned, 1 reference | Fine-tuned, 6 references |
+|---|---:|---:|---:|---:|
+| Game 7 | 843 | 39.38% | 81.14% | 81.61% |
+| Game 8 | 1,030 | 61.84% | 96.21% | 95.34% |
+| Game 11 | 798 | 58.02% | 96.87% | 97.12% |
 
-On the validation matches the fine-tuned model reaches 85.03% of 3,193 boxes (88.09% class mean) against 54.87% (50.42%) for the frozen one. Full confusion matrices, per-session numbers and the split audit are in [`results/result.json`](results/result.json).
+On the validation matches the one-reference model reaches 85.03% of 3,193 boxes (88.09% class mean), the six-reference model 89.10% (92.82%), and the frozen one 54.87% (50.42%). The validation gain of the six-reference model did not carry over to the overall test accuracy. Full confusion matrices and per-session numbers are in [`results/result.json`](results/result.json) and [`results/six-references.json`](results/six-references.json).
 
 ## What it looks like
 
-Each sheet shows the four references the model received, one later box per class it labelled correctly, and one it got wrong. Both matches are from the test split.
+These images and the video at the top come from the one-reference model. Each sheet shows the four references it received, one later box per class it labelled correctly, and one it got wrong. Both matches are from the test split.
 
 <p align="center">
   <img src="media/examples-game-11-half-2.png" width="49%" alt="Game 11, second half: four references, four correct predictions and four mistakes. 335 of 348 boxes correct.">
@@ -129,41 +141,50 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
 ./download.sh                                 # pinned dataset revision (~30 GB) and ImageNet weights
-./run.sh                                      # verify checksums, build sessions, train, test
+./run.sh                                      # verify checksums, build sessions, train and test both models
 python visualize.py --root data --out media   # example sheets, video and GIF (needs ffmpeg)
 ```
 
-`run.sh` writes `data/work/result.json` and `data/work/checkpoint.pth`. Re-running these exact scripts on the same machine (Apple-silicon GPU, PyTorch 2.9.1) reproduced `results/result.json` and the checkpoint byte for byte. Other hardware or library versions may differ in the last digits.
+`run.sh` trains the one-reference model (`data/work/checkpoint.pth`, `data/work/result.json`), builds the reference bank (`data/work/references/`, about 4 GB) and trains the six-reference model (`data/work/six-references/`). The full run takes about ten minutes on an Apple-silicon GPU. A fresh run of these scripts (PyTorch 2.9.1) reproduced `results/result.json` and the one-reference checkpoint byte for byte, and the six-reference validation results epoch by epoch. Other hardware or library versions may differ in the last digits.
 
-The trained weights are attached to the [v1.0 release](https://github.com/Hmenez3s/four-reference-team-classifier/releases/tag/v1.0) (`checkpoint.pth`, SHA-256 `e85b9de6153db41c3dac9a5139f81f1ca76a2db7aecc99610ade35b3ee5c210a`).
+### Trained models
+
+Both checkpoints are in [`models/`](models) and attached to the [v1.1 release](https://github.com/Hmenez3s/four-reference-team-classifier/releases/tag/v1.1).
+
+| File | References per class | SHA-256 |
+|---|---:|---|
+| [`models/one-reference.pth`](models/one-reference.pth) | 1 | `e85b9de6153db41c3dac9a5139f81f1ca76a2db7aecc99610ade35b3ee5c210a` |
+| [`models/six-references.pth`](models/six-references.pth) | 6 | `945d904e6daa63718efa01c022f23163358d68f45072f26cf99c17bcbe9c635c` |
 
 ### Classify your own boxes
 
-`prepare.crop_box(image, {"x_center": …, "y_center": …, "w": …, "h": …})` turns a box of a PIL image into the 96 × 48 crop the model expects. With the four reference crops stacked in class order and the boxes to classify stacked in a second array:
+`prepare.crop_box(image, {"x_center": …, "y_center": …, "w": …, "h": …})` turns a box of a PIL image into the 96 × 48 crop the model expects. With the reference crops stacked in class order and the boxes to classify stacked in a second array:
 
 ```python
 import torch
+import six_references
 import train
 
 device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 model = train.build_model("data/inputs/resnet18.pth", device)
-state = torch.load("data/work/checkpoint.pth", map_location=device, weights_only=True)
+state = torch.load("models/six-references.pth", map_location=device, weights_only=True)
 model.load_state_dict(state["model"])
 model.eval()
 
+per_class = len(reference_crops) // 4
 with torch.no_grad():
-    references = model(train.batch_images({"x": reference_crops}, [0, 1, 2, 3], device))
-    boxes = model(train.batch_images({"x": box_crops}, list(range(len(box_crops))), device))
+    references = six_references.class_prototypes(model(six_references.batch_crops(reference_crops, device)), per_class)
+    boxes = model(six_references.batch_crops(box_crops, device))
 labels = train.cosine_logits(boxes, references).argmax(dim=1).tolist()
 ```
 
-`reference_crops` is a `uint8` array of shape `[4, 96, 48, 3]` ordered as `train.CLASSES`; `box_crops` has shape `[N, 96, 48, 3]`; `labels` holds an index into `train.CLASSES` for each box.
+`reference_crops` is a `uint8` array of shape `[4 × k, 96, 48, 3]`: the k crops of player A, then player B, goalkeeper A and goalkeeper B. Use k = 6 with `models/six-references.pth` and k = 1 with `models/one-reference.pth`. `box_crops` has shape `[N, 96, 48, 3]`, and `labels` holds an index into `train.CLASSES` for each box. Only `data/inputs/resnet18.pth` from `download.sh` is needed for this; the dataset is not.
 
 ## Limits
 
 - **Small test.** Three test matches and one training seed. Accuracy per match ranges from 81.14% to 96.87%, and there are no confidence intervals. Read 91.65% as "it worked on these three matches", not as an expected score on any match.
-- **Goalkeepers are the weak spot.** 83–85%, measured on only 77 and 81 boxes.
-- **One set of references per session.** Each session was scored with a single deterministic choice of the four references; the sensitivity to which crop is used as a reference was not measured.
+- **Goalkeepers are measured on few boxes.** 77 and 81 test boxes. With one reference they are the weak spot (83.12% and 85.19%); six references bring them to 94.81% and 91.36%, a gain of 14 boxes.
+- **One set of references per session.** Each session was scored with a single choice of references; the sensitivity to which crops are used as references was not measured.
 - **Ground-truth boxes.** Boxes come from the annotations. Errors of a real detector are not part of the score.
 - **Four classes only.** The model always answers one of the four labels. A referee, a substitute or an empty box would still receive one.
 - **Per-half sessions.** The dataset's `left`/`right` team labels are assumed stable within a half; references are not carried across half-time.
@@ -176,10 +197,13 @@ labels = train.cosine_logits(boxes, references).argmax(dim=1).tolist()
 | `download.sh` | Fetches the pinned dataset revision and the ImageNet ResNet-18 weights into `data/` |
 | `checksums.sha256` | SHA-256 of every downloaded file, checked by `run.sh` |
 | `prepare.py` | Builds match-disjoint sessions and letterboxed crops straight from the ZIP archives |
-| `train.py` | Model, episodic training, validation-based checkpoint selection and the test evaluation |
+| `train.py` | Model, episodic training, validation-based checkpoint selection and the test evaluation with one reference |
+| `reference_bank.py` | Bank of earlier crops per session, used to draw the extra references |
+| `six_references.py` | Training, checkpoint selection and test evaluation with six references per class |
 | `visualize.py` | Example sheets, the classified video and its GIF |
-| `run.sh` | Runs checksum verification, `prepare.py` and `train.py` in order |
-| `results/` | Metrics, split audit, duplicate-crop check and training log of the reported run |
+| `run.sh` | Runs checksum verification, `prepare.py`, `train.py`, `reference_bank.py` and `six_references.py` in order |
+| `models/` | The one- and six-reference checkpoints |
+| `results/` | Metrics, split audit, duplicate-crop check and training logs of both models |
 | `media/` | Images and video shown in this README |
 
 ## License

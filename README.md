@@ -117,6 +117,20 @@ Per match:
 
 On the validation matches the one-reference model reaches 85.03% of 3,193 boxes (88.09% class mean), the six-reference model 89.10% (92.82%), and the frozen one 54.87% (50.42%). The validation gain of the six-reference model did not carry over to the overall test accuracy. Full confusion matrices and per-session numbers are in [`results/result.json`](results/result.json) and [`results/six-references.json`](results/six-references.json).
 
+## Speed
+
+Measured with `benchmark.py` on an Apple M4 Pro (PyTorch 2.9.1), using the six-reference model and 20 player boxes per frame, which is about how many a broadcast frame shows.
+
+| | Apple GPU (MPS) | CPU |
+|---|---:|---:|
+| Crop 20 boxes from a 1920 × 1080 frame | 0.63 ms | 0.59 ms |
+| Classify the 20 boxes in one batch | 6.19 ms | 92.93 ms |
+| **Per frame** | **6.82 ms** | **93.52 ms** |
+| **Frames per second** | **147** | **11** |
+| Encode the 24 references, once per match | 6.84 ms | 106.32 ms |
+
+The 24 reference crops (six per class) go through the network once, as one batch, and are reduced to four vectors. After that, every box costs one forward pass, exactly as with a single reference, so the one-reference model runs at the same speed. Boxes of a frame should be sent together: on the GPU, classifying the 20 boxes one at a time takes 78.99 ms instead of 6.19 ms. The numbers exclude video decoding and producing the boxes.
+
 ## What it looks like
 
 These images and the video at the top come from the one-reference model. Each sheet shows the four references it received, one later box per class it labelled correctly, and one it got wrong. Both matches are from the test split.
@@ -143,6 +157,7 @@ pip install -r requirements.txt
 ./download.sh                                 # pinned dataset revision (~30 GB) and ImageNet weights
 ./run.sh                                      # verify checksums, build sessions, train and test both models
 python visualize.py --root data --out media   # example sheets, video and GIF (needs ffmpeg)
+python benchmark.py                           # frames per second on this machine
 ```
 
 `run.sh` trains the one-reference model (`data/work/checkpoint.pth`, `data/work/result.json`), builds the reference bank (`data/work/references/`, about 4 GB) and trains the six-reference model (`data/work/six-references/`). The full run takes about ten minutes on an Apple-silicon GPU. A fresh run of these scripts (PyTorch 2.9.1) reproduced `results/result.json` and the one-reference checkpoint byte for byte, and the six-reference validation results epoch by epoch. Other hardware or library versions may differ in the last digits.
@@ -201,6 +216,7 @@ labels = train.cosine_logits(boxes, references).argmax(dim=1).tolist()
 | `reference_bank.py` | Bank of earlier crops per session, used to draw the extra references |
 | `six_references.py` | Training, checkpoint selection and test evaluation with six references per class |
 | `visualize.py` | Example sheets, the classified video and its GIF |
+| `benchmark.py` | Timing of cropping, reference encoding and classification per frame |
 | `run.sh` | Runs checksum verification, `prepare.py`, `train.py`, `reference_bank.py` and `six_references.py` in order |
 | `models/` | The one- and six-reference checkpoints |
 | `results/` | Metrics, split audit, duplicate-crop check and training logs of both models |

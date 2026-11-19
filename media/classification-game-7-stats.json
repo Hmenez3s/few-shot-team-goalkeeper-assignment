@@ -1,0 +1,41 @@
+{
+  "session": "game-7-half-2",
+  "source_clip": "SNGS-129",
+  "first_frame": "000026.jpg",
+  "last_frame": "000324.jpg",
+  "frames": 150,
+  "boxes": 2443,
+  "accuracy": 0.9693000409332787,
+  "class_names": [
+    "player_left",
+    "player_right",
+    "goalkeeper_left",
+    "goalkeeper_right"
+  ],
+  "confusion_matrix": [
+    [
+      1241,
+      7,
+      2,
+      1
+    ],
+    [
+      40,
+      1107,
+      23,
+      0
+    ],
+    [
+      0,
+      1,
+      7,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      13
+    ]
+  ]
+}

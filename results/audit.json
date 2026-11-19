@@ -1,0 +1,495 @@
+{
+  "archive_errors": [],
+  "canvas_wh": [
+    48,
+    96
+  ],
+  "class_mapping": {
+    "role": [
+      "player",
+      "goalkeeper"
+    ],
+    "team": [
+      "left",
+      "right"
+    ]
+  },
+  "classes": [
+    "player_left",
+    "player_right",
+    "goalkeeper_left",
+    "goalkeeper_right"
+  ],
+  "clip_exclusions": [],
+  "crop_shape": [
+    96,
+    48,
+    3
+  ],
+  "dropped_split_overlap": [],
+  "exclusions": {
+    "irrelevant_annotation": 410468,
+    "unknown_jersey_player": 3410
+  },
+  "frame_budget": 96,
+  "frame_time_policy": "clip_start_ms + round((file_number - 1) * 1000 / frame_rate)",
+  "label_errors": [],
+  "minimum_clipped_box_wh": [
+    8,
+    14
+  ],
+  "missing_or_invalid_game_ids": [],
+  "official_raw_overlap": {
+    "train_test": [],
+    "train_valid": [],
+    "valid_test": []
+  },
+  "output_unit_counts": {
+    "test": 6,
+    "train": 6,
+    "valid": 6
+  },
+  "raw_game_ids": {
+    "test": [
+      "11",
+      "7",
+      "8"
+    ],
+    "train": [
+      "4",
+      "6",
+      "9"
+    ],
+    "valid": [
+      "2",
+      "3",
+      "5"
+    ]
+  },
+  "retained_clip_counts": {
+    "test": 49,
+    "train": 57,
+    "valid": 58
+  },
+  "retained_game_ids": {
+    "test": [
+      "11",
+      "7",
+      "8"
+    ],
+    "train": [
+      "4",
+      "6",
+      "9"
+    ],
+    "valid": [
+      "2",
+      "3",
+      "5"
+    ]
+  },
+  "retained_label_count": 164,
+  "sample_count": 20910,
+  "unit_policy": "original game_id and matching game_time_start/game_time_stop half; camera-relative team labels assumed stable within half",
+  "units": [
+    {
+      "candidate_cutoff_count": 75,
+      "crop_failures": 2,
+      "cutoff_ms": 1421040.0,
+      "game": "4",
+      "half": "1",
+      "key": "game-4-half-1",
+      "sampled_frames": 96,
+      "samples": 1258,
+      "source_clip_ids": [
+        "060",
+        "061",
+        "062",
+        "063",
+        "064",
+        "065",
+        "066",
+        "067",
+        "068"
+      ],
+      "split": "train"
+    },
+    {
+      "candidate_cutoff_count": 62,
+      "crop_failures": 2,
+      "cutoff_ms": 839880.0,
+      "game": "4",
+      "half": "2",
+      "key": "game-4-half-2",
+      "sampled_frames": 95,
+      "samples": 1335,
+      "source_clip_ids": [
+        "069",
+        "070",
+        "071",
+        "072",
+        "073",
+        "074",
+        "075",
+        "076",
+        "077"
+      ],
+      "split": "train"
+    },
+    {
+      "candidate_cutoff_count": 73,
+      "crop_failures": 3,
+      "cutoff_ms": 1208480.0,
+      "game": "6",
+      "half": "1",
+      "key": "game-6-half-1",
+      "sampled_frames": 94,
+      "samples": 1214,
+      "source_clip_ids": [
+        "097",
+        "098",
+        "099",
+        "100",
+        "101",
+        "102",
+        "103",
+        "104",
+        "105",
+        "106"
+      ],
+      "split": "train"
+    },
+    {
+      "candidate_cutoff_count": 65,
+      "crop_failures": 0,
+      "cutoff_ms": 954880.0,
+      "game": "6",
+      "half": "2",
+      "key": "game-6-half-2",
+      "sampled_frames": 95,
+      "samples": 1155,
+      "source_clip_ids": [
+        "107",
+        "108",
+        "109",
+        "110",
+        "111",
+        "112",
+        "113",
+        "114",
+        "115"
+      ],
+      "split": "train"
+    },
+    {
+      "candidate_cutoff_count": 73,
+      "crop_failures": 1,
+      "cutoff_ms": 1698040.0,
+      "game": "9",
+      "half": "1",
+      "key": "game-9-half-1",
+      "sampled_frames": 95,
+      "samples": 1132,
+      "source_clip_ids": [
+        "151",
+        "152",
+        "153",
+        "154",
+        "155",
+        "156",
+        "157",
+        "158",
+        "159"
+      ],
+      "split": "train"
+    },
+    {
+      "candidate_cutoff_count": 71,
+      "crop_failures": 4,
+      "cutoff_ms": 1923860.0,
+      "game": "9",
+      "half": "2",
+      "key": "game-9-half-2",
+      "sampled_frames": 95,
+      "samples": 1067,
+      "source_clip_ids": [
+        "160",
+        "161",
+        "162",
+        "163",
+        "164",
+        "165",
+        "166",
+        "167",
+        "168",
+        "169",
+        "170"
+      ],
+      "split": "train"
+    },
+    {
+      "candidate_cutoff_count": 50,
+      "crop_failures": 1,
+      "cutoff_ms": 1076720.0,
+      "game": "2",
+      "half": "1",
+      "key": "game-2-half-1",
+      "sampled_frames": 95,
+      "samples": 1098,
+      "source_clip_ids": [
+        "021",
+        "022",
+        "023",
+        "024",
+        "025",
+        "026",
+        "027",
+        "028"
+      ],
+      "split": "valid"
+    },
+    {
+      "candidate_cutoff_count": 55,
+      "crop_failures": 2,
+      "cutoff_ms": 1971980.0,
+      "game": "2",
+      "half": "2",
+      "key": "game-2-half-2",
+      "sampled_frames": 95,
+      "samples": 1079,
+      "source_clip_ids": [
+        "029",
+        "030",
+        "031",
+        "032",
+        "033",
+        "034",
+        "035",
+        "036",
+        "037",
+        "038"
+      ],
+      "split": "valid"
+    },
+    {
+      "candidate_cutoff_count": 73,
+      "crop_failures": 4,
+      "cutoff_ms": 1937480.0,
+      "game": "3",
+      "half": "1",
+      "key": "game-3-half-1",
+      "sampled_frames": 94,
+      "samples": 1311,
+      "source_clip_ids": [
+        "039",
+        "040",
+        "041",
+        "042",
+        "043",
+        "044",
+        "045",
+        "046",
+        "047",
+        "048"
+      ],
+      "split": "valid"
+    },
+    {
+      "candidate_cutoff_count": 69,
+      "crop_failures": 2,
+      "cutoff_ms": 1254100.0,
+      "game": "3",
+      "half": "2",
+      "key": "game-3-half-2",
+      "sampled_frames": 95,
+      "samples": 1307,
+      "source_clip_ids": [
+        "049",
+        "050",
+        "051",
+        "052",
+        "053",
+        "054",
+        "055",
+        "056",
+        "057",
+        "058",
+        "059"
+      ],
+      "split": "valid"
+    },
+    {
+      "candidate_cutoff_count": 73,
+      "crop_failures": 4,
+      "cutoff_ms": 1138720.0,
+      "game": "5",
+      "half": "1",
+      "key": "game-5-half-1",
+      "sampled_frames": 95,
+      "samples": 1292,
+      "source_clip_ids": [
+        "078",
+        "079",
+        "080",
+        "081",
+        "082",
+        "083",
+        "084",
+        "085"
+      ],
+      "split": "valid"
+    },
+    {
+      "candidate_cutoff_count": 76,
+      "crop_failures": 0,
+      "cutoff_ms": 2023740.0,
+      "game": "5",
+      "half": "2",
+      "key": "game-5-half-2",
+      "sampled_frames": 94,
+      "samples": 1221,
+      "source_clip_ids": [
+        "086",
+        "087",
+        "088",
+        "089",
+        "090",
+        "091",
+        "092",
+        "093",
+        "094",
+        "095",
+        "096"
+      ],
+      "split": "valid"
+    },
+    {
+      "candidate_cutoff_count": 47,
+      "crop_failures": 0,
+      "cutoff_ms": 760800.0,
+      "game": "11",
+      "half": "1",
+      "key": "game-11-half-1",
+      "sampled_frames": 95,
+      "samples": 1257,
+      "source_clip_ids": [
+        "187",
+        "188",
+        "189",
+        "190",
+        "191",
+        "192",
+        "193",
+        "194"
+      ],
+      "split": "test"
+    },
+    {
+      "candidate_cutoff_count": 39,
+      "crop_failures": 3,
+      "cutoff_ms": 525740.0,
+      "game": "11",
+      "half": "2",
+      "key": "game-11-half-2",
+      "sampled_frames": 94,
+      "samples": 1208,
+      "source_clip_ids": [
+        "195",
+        "196",
+        "197",
+        "198",
+        "199",
+        "200"
+      ],
+      "split": "test"
+    },
+    {
+      "candidate_cutoff_count": 32,
+      "crop_failures": 1,
+      "cutoff_ms": 1430080.0,
+      "game": "7",
+      "half": "1",
+      "key": "game-7-half-1",
+      "sampled_frames": 94,
+      "samples": 1047,
+      "source_clip_ids": [
+        "116",
+        "117",
+        "118",
+        "119",
+        "120",
+        "121",
+        "122",
+        "123"
+      ],
+      "split": "test"
+    },
+    {
+      "candidate_cutoff_count": 71,
+      "crop_failures": 1,
+      "cutoff_ms": 1632360.0,
+      "game": "7",
+      "half": "2",
+      "key": "game-7-half-2",
+      "sampled_frames": 95,
+      "samples": 967,
+      "source_clip_ids": [
+        "124",
+        "125",
+        "126",
+        "127",
+        "128",
+        "129",
+        "130",
+        "131"
+      ],
+      "split": "test"
+    },
+    {
+      "candidate_cutoff_count": 43,
+      "crop_failures": 2,
+      "cutoff_ms": 822400.0,
+      "game": "8",
+      "half": "1",
+      "key": "game-8-half-1",
+      "sampled_frames": 95,
+      "samples": 1051,
+      "source_clip_ids": [
+        "132",
+        "133",
+        "134",
+        "135",
+        "136",
+        "137",
+        "138",
+        "139",
+        "140"
+      ],
+      "split": "test"
+    },
+    {
+      "candidate_cutoff_count": 64,
+      "crop_failures": 3,
+      "cutoff_ms": 950500.0,
+      "game": "8",
+      "half": "2",
+      "key": "game-8-half-2",
+      "sampled_frames": 95,
+      "samples": 911,
+      "source_clip_ids": [
+        "141",
+        "142",
+        "143",
+        "144",
+        "145",
+        "146",
+        "147",
+        "148",
+        "149",
+        "150"
+      ],
+      "split": "test"
+    }
+  ],
+  "version": 1
+}

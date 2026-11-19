@@ -1,0 +1,43 @@
+VERIFY SHA-256 2026-11-19T04:33:13Z
+archives/train.zip: OK
+archives/valid.zip: OK
+archives/test.zip: OK
+inputs/resnet18.pth: OK
+PREPARE 2026-11-19T04:34:13Z
+Scanned train: labels=57, retained=57
+Scanned valid: labels=58, retained=58
+Scanned test: labels=49, retained=49
+Preprocessed units: 5/18 (5 eligible)
+Preprocessed units: 10/18 (10 eligible)
+Preprocessed units: 15/18 (15 eligible)
+Preprocessed units: 18/18 (18 eligible)
+TRAIN 2026-11-19T04:34:53Z
+starting 8 epochs x 180 episodes on mps
+epoch 1/8 step 180/180 loss=0.3052
+validation epoch 1: sessions=6/6
+validation epoch 1: macro_class_accuracy=0.846671
+epoch 2/8 step 180/180 loss=0.1644
+validation epoch 2: sessions=6/6
+validation epoch 2: macro_class_accuracy=0.829240
+epoch 3/8 step 180/180 loss=0.1235
+validation epoch 3: sessions=6/6
+validation epoch 3: macro_class_accuracy=0.770348
+epoch 4/8 step 180/180 loss=0.0923
+validation epoch 4: sessions=6/6
+validation epoch 4: macro_class_accuracy=0.854977
+epoch 5/8 step 180/180 loss=0.0597
+validation epoch 5: sessions=6/6
+validation epoch 5: macro_class_accuracy=0.853360
+epoch 6/8 step 180/180 loss=0.0757
+validation epoch 6: sessions=6/6
+validation epoch 6: macro_class_accuracy=0.880859
+epoch 7/8 step 180/180 loss=0.0397
+validation epoch 7: sessions=6/6
+validation epoch 7: macro_class_accuracy=0.870525
+epoch 8/8 step 180/180 loss=0.0557
+validation epoch 8: sessions=6/6
+validation epoch 8: macro_class_accuracy=0.871972
+validation checkpoint locked; opening test split
+test: sessions=6/6
+result written: /Users/j.henrique/soccer-four-ref-gsr25/work/result.json
+DONE experiment 2026-11-19T04:35:49Z

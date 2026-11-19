@@ -5,9 +5,9 @@
 ![Backbone: ResNet-18](https://img.shields.io/badge/backbone-ResNet--18-334155)
 ![Test: 3 unseen matches](https://img.shields.io/badge/test-3%20unseen%20matches-0f766e)
 
-You already have the player boxes of a football match. You show the model **one example of each group** — an outfield player of each team and the goalkeeper of each team — and it labels every other box of that match.
+This model sorts the player boxes of a football match into four groups: outfield players of team A, outfield players of team B, goalkeeper A and goalkeeper B. It needs one example crop of each group, taken from the same match.
 
-A ResNet-18 fine-tuned for this comparison labels **91.65% of 2,671 boxes** correctly in three matches it never saw during training. The same network with untouched ImageNet weights, given the same references and the same boxes, gets **53.61%**.
+It is a ResNet-18 fine-tuned to compare a crop with those four examples. On three matches held out from training, it labels 91.65% of 2,671 boxes correctly. With the original ImageNet weights, the same examples and the same boxes, it labels 53.61%.
 
 <p align="center">
   <img src="media/classification-game-7.gif" width="100%" alt="Twelve seconds of a test match. The four reference crops are shown in the header; every player box on the pitch carries the label the model predicted for it.">
@@ -93,7 +93,7 @@ Test split: three matches, six sessions, 2,671 boxes.
 | Goalkeeper, team A | 77 | 40.26% | **83.12%** |
 | Goalkeeper, team B | 81 | 39.51% | **85.19%** |
 | **All boxes** | **2,671** | **53.61%** | **91.65%** |
-| **Mean of the four classes** | — | **47.17%** | **88.16%** |
+| **Mean of the four classes** | | **47.17%** | **88.16%** |
 
 Per match:
 

@@ -1,0 +1,29 @@
+Reference bank 1/18 game-4-half-1: frames=1277/3226 candidates=15195 classes={'0': 6336, '1': 7782, '2': 357, '3': 720}
+Reference bank 2/18 game-4-half-2: frames=1618/3597 candidates=23726 classes={'0': 9881, '1': 12437, '2': 176, '3': 1232}
+Reference bank 3/18 game-6-half-1: frames=2630/3750 candidates=30530 classes={'0': 12682, '1': 15343, '2': 977, '3': 1528}
+Reference bank 4/18 game-6-half-2: frames=1870/3597 candidates=22294 classes={'0': 10204, '1': 10395, '2': 987, '3': 708}
+Reference bank 5/18 game-9-half-1: frames=2096/3226 candidates=28849 classes={'0': 13571, '1': 13299, '2': 795, '3': 1184}
+Reference bank 6/18 game-9-half-2: frames=2465/4397 candidates=27277 classes={'0': 14208, '1': 10804, '2': 1410, '3': 855}
+Reference bank 7/18 game-2-half-1: frames=1948/3593 candidates=22035 classes={'0': 10600, '1': 9660, '2': 1524, '3': 251}
+Reference bank 8/18 game-2-half-2: frames=2738/3750 candidates=27070 classes={'0': 11297, '1': 13143, '2': 809, '3': 1821}
+Reference bank 9/18 game-3-half-1: frames=2614/3750 candidates=39731 classes={'0': 19167, '1': 18062, '2': 1082, '3': 1420}
+Reference bank 10/18 game-3-half-2: frames=2079/3853 candidates=30644 classes={'0': 14881, '1': 13857, '2': 988, '3': 918}
+Reference bank 11/18 game-5-half-1: frames=1871/2868 candidates=21225 classes={'0': 9753, '1': 9872, '2': 389, '3': 1211}
+Reference bank 12/18 game-5-half-2: frames=3110/4669 candidates=41589 classes={'0': 19460, '1': 19174, '2': 1505, '3': 1450}
+Reference bank 13/18 game-11-half-1: frames=1722/3395 candidates=24405 classes={'0': 11495, '1': 11362, '2': 723, '3': 825}
+Reference bank 14/18 game-11-half-2: frames=1844/2794 candidates=24962 classes={'0': 13175, '1': 10048, '2': 1309, '3': 430}
+Reference bank 15/18 game-7-half-1: frames=2356/4252 candidates=24103 classes={'0': 9735, '1': 12208, '2': 104, '3': 2056}
+Reference bank 16/18 game-7-half-2: frames=1663/2934 candidates=10274 classes={'0': 3686, '1': 5326, '2': 719, '3': 543}
+Reference bank 17/18 game-8-half-1: frames=917/2410 candidates=10225 classes={'0': 4838, '1': 4627, '2': 484, '3': 276}
+Reference bank 18/18 game-8-half-2: frames=1936/3338 candidates=23066 classes={'0': 10276, '1': 10998, '2': 711, '3': 1081}
+starting 8 epochs x 180 episodes with 6 references per class on mps
+epoch 1/8 loss=0.1800 validation accuracy=0.856874 class mean=0.909903
+epoch 2/8 loss=0.1003 validation accuracy=0.891012 class mean=0.928181
+epoch 3/8 loss=0.0860 validation accuracy=0.823990 class mean=0.895976
+epoch 4/8 loss=0.0912 validation accuracy=0.796743 class mean=0.844862
+epoch 5/8 loss=0.0392 validation accuracy=0.848418 class mean=0.894813
+epoch 6/8 loss=0.0497 validation accuracy=0.839962 class mean=0.890560
+epoch 7/8 loss=0.0218 validation accuracy=0.855308 class mean=0.901236
+epoch 8/8 loss=0.0295 validation accuracy=0.850298 class mean=0.898607
+validation checkpoint locked at epoch 2; opening test split
+result written: ./data/work/six-references/result.json

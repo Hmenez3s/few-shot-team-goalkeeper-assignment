@@ -1,12 +1,12 @@
-# Reference-conditioned football classification: corrected rerun
+# Reference-conditioned football classification: evaluation
 
-This is an empirical study of classifying supplied football boxes as outfield player A/B or goalkeeper A/B using labeled crops from the same half. It does not introduce a new architecture, learning rule, detector or tracker. The original release numbers are historical and are not measurements of the protocol below.
+This is an empirical study of classifying supplied football boxes as outfield player A/B or goalkeeper A/B using labeled crops from the same half. It evaluates reference selection, generalization across held-out matches, and deployment. The classifier does not do detection or tracking.
 
 ## Ground truth and evaluation
 
 SoccerNet GSR defines `left` and `right` relative to the camera, not as team IDs across clips. The preprocessing now aligns outfield slots within each half using the agreement of jersey numbers. Among 164 clips in 18 halves, five outfield assignments were swapped: `SNGS-092`, `111`, `126`, `131`, and `197`. A visual audit of the goalkeeper kits in those clips and neighboring clips supported retaining their original slots; the outfield swap is not applied to goalkeepers. Source archives were not changed. The preparation audit records each assignment and its support. No identical crop was found across the three game-disjoint splits.
 
-The **retrospective** protocol chooses references and filters queries using later jersey labels to evaluate outfield athletes other than the reference athlete. Its figures are not deployment estimates. The **prospective replay** fixes a timestamp-only bootstrap and query-frame schedule; it uses only early annotations to pick references and does not reject later labeled player or goalkeeper boxes based on jersey. The two protocols have different query populations. Neither score is directly comparable to the original release's score as an improvement on identical cases.
+The **retrospective** protocol chooses references and filters queries using later jersey labels to evaluate outfield athletes other than the reference athlete. Its figures are not deployment estimates. The **prospective replay** fixes a timestamp-only bootstrap and query-frame schedule; it uses only early annotations to pick references and does not reject later labeled player or goalkeeper boxes based on jersey. The two protocols have different query populations. Do not compare scores across these two protocols as if they were computed on identical cases.
 
 ## Retrospective results
 
@@ -47,7 +47,7 @@ The first 30% of available labeled timestamps define the bootstrap period. Up to
 
 ### Error analysis
 
-On the corrected fixed one-reference test, 117 boxes were wrong. In the 1,704 boxes with no annotated human-box overlap, 53 were wrong (3.11%); 47 of those crossed the outfield/goalkeeper role boundary. In the 128 boxes with at least 60% intersection coverage, 27 were wrong (21.09%). This is a box-overlap proxy, not proof of physical occlusion or the cause of each error. No threshold was selected on test. `SNGS-131` had 0 disagreements on 123 scored boxes after the role-specific audit and retraining.
+On the fixed one-reference test, 117 boxes were wrong. In the 1,704 boxes with no annotated human-box overlap, 53 were wrong (3.11%); 47 of those crossed the outfield/goalkeeper role boundary. In the 128 boxes with at least 60% intersection coverage, 27 were wrong (21.09%). This is a box-overlap proxy, not proof of physical occlusion or the cause of each error. No threshold was selected on test. `SNGS-131` had 0 disagreements on 123 scored boxes after the role-specific audit and retraining.
 
 ## Apple M4 Pro deployment
 
@@ -62,4 +62,4 @@ FP16 PyTorch preserved all predictions in the separate precision replay and halv
 | Neural Engine Core ML FP16 | 96.77% | 2.55 ms |
 | Neural Engine Core ML INT8 | 96.69% | 2.24 ms |
 
-The regenerated twelve-second video was checked as a 150-frame 1280×824 MP4; its 2,443 boxes are an illustrative window, not the test set. Corrected run artifacts, checkpoints, logs, and SHA-256 receipts were kept separate from the historical release artifacts.
+The regenerated twelve-second video was checked as a 150-frame 1280×824 MP4; its 2,443 boxes are an illustrative window, not the test set. See [`results/`](results/) for metrics and audit receipts, [`models/SHA256SUMS`](models/SHA256SUMS) for checkpoint hashes, and [`media/`](media/) for the demonstration.

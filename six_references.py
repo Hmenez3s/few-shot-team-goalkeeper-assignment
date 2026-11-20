@@ -79,6 +79,29 @@ def candidates_for(bank, cls, anchor_time, track, query_start):
     return clear if len(clear) >= REFERENCES - 1 else candidates
 
 
+def resolve_episode(clip, bank, episode, session_id="session"):
+    anchors, query = episode
+    anchors = list(anchors)
+    query_start = int(clip["t"][query].min())
+    for cls, anchor in enumerate(anchors):
+        def has_references(candidate):
+            track = int(clip["track"][candidate])
+            if cls < 2 and any(int(clip["track"][q]) == track for q in query if int(clip["y"][q]) == cls):
+                return False
+            return len(candidates_for(bank, cls, int(clip["t"][candidate]), track, query_start)) >= REFERENCES - 1
+
+        if has_references(anchor):
+            continue
+        alternatives = train.usable_indices(clip, cls, True)
+        if cls < 2:
+            alternatives = alternatives[clip["track"][alternatives] >= 0]
+        replacement = next((int(candidate) for candidate in alternatives
+                            if int(candidate) != anchor and has_references(int(candidate))), None)
+        if replacement is None:
+            raise ValueError(f"{session_id}: class {cls} has no anchor with {REFERENCES - 1} eligible reference frames; no comparison produced")
+        anchors[cls] = replacement
+    return anchors, query
+
 def make_session(clip, bank, episode, rng, strict):
     anchors, query = episode
     query_start = int(clip["t"][query].min())
@@ -137,7 +160,9 @@ def sessions_for(entries, cache, bank_dir):
         if episode is None:
             raise ValueError(f"no fixed episode for {entry['clip']}")
         bank_path = bank_dir / f"{entry['clip']}.npz"
-        sessions.append((entry, clip, load_bank(bank_path, root, manifest, entry), episode))
+        bank = load_bank(bank_path, root, manifest, entry)
+        episode = resolve_episode(clip, bank, episode, entry["clip"])
+        sessions.append((entry, clip, bank, episode))
     return sessions
 
 

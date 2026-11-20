@@ -193,6 +193,7 @@ def main():
     parser.add_argument("--draws", type=int, default=30)
     parser.add_argument("--split", choices=("valid", "test"), default="test")
     parser.add_argument("--device", choices=("cpu", "mps", "cuda"), default="cpu")
+    parser.add_argument("--expected-six-result", type=Path)
     args = parser.parse_args()
     if args.draws < 1:
         parser.error("--draws must be positive")
@@ -202,6 +203,21 @@ def main():
         parser.error(f"--out must be a new run-owned path: {out}")
     manifest, splits, _ = train.load_manifest(root)
     entries = splits[args.split]
+    expected_path = args.expected_six_result.resolve() if args.expected_six_result else root / "work" / "six-references" / "result.json"
+    if not expected_path.is_file():
+        raise FileNotFoundError(f"expected six-reference result not found: {expected_path}; pass --expected-six-result")
+    expected_result = json.loads(expected_path.read_text())
+    if args.split not in expected_result or "confusion_matrix" not in expected_result[args.split]:
+        raise ValueError(f"{expected_path}: missing {args.split} confusion matrix")
+    for entry in entries:
+        with np.load(entry["path"], allow_pickle=False) as data:
+            clip = {key: data[key] for key in ("x", "y", "t", "track", "early")}
+        train.validate_clip(clip, entry["path"])
+        original_episode = train.fixed_episode(clip)
+        if original_episode is None:
+            raise ValueError(f"no fixed episode for {entry['clip']}")
+        bank = load_bank(bank_dir / f"{entry['clip']}.npz", root, manifest, entry)
+        six_references.resolve_episode(clip, bank, original_episode, entry["clip"])
     if args.reid_torchscript is not None and not args.reid_torchscript.is_file():
         parser.error("--reid-torchscript must name an existing local TorchScript file")
     reid_available = args.reid_torchscript is not None
@@ -228,11 +244,12 @@ def main():
         with np.load(entry["path"], allow_pickle=False) as data:
             clip = {key: data[key] for key in ("x", "y", "t", "track", "early")}
         train.validate_clip(clip, entry["path"])
-        episode = train.fixed_episode(clip)
-        if episode is None:
+        original_episode = train.fixed_episode(clip)
+        if original_episode is None:
             raise ValueError(f"no fixed episode for {entry['clip']}")
         bank_path = bank_dir / f"{entry['clip']}.npz"
         bank = load_bank(bank_path, root, manifest, entry)
+        episode = six_references.resolve_episode(clip, bank, original_episode, entry["clip"])
         _, published_ids = choose_support(clip, bank, episode, published_rng)
         draw_selections = []
         for draw in range(args.draws):
@@ -245,14 +262,15 @@ def main():
         used_paths.extend([entry["path"], bank_path])
         selected_inputs[entry["game"] + "/" + entry["clip"]] = {
             "query_indices": list(map(int, episode[1])),
-            "fixed_original": [[int(anchor)] for anchor in episode[0]],
+            "fixed_original": [[int(anchor)] for anchor in original_episode[0]],
+            "fixed_resolved_six_anchors": list(map(int, episode[0])),
             "fixed_published_six": [[[kind, index] for kind, index in group] for group in published_ids],
             "draws": [{"six": [[[kind, index] for kind, index in group] for group in selected],
                        "nested_one": [[[kind, index] for kind, index in group] for group in nested]}
                       for selected, nested in draw_selections],
         }
         query = episode[1]
-        ids = {("clip", int(i)) for i in (*episode[0], *query)}
+        ids = {("clip", int(i)) for i in (*original_episode[0], *episode[0], *query)}
         for group in published_ids:
             ids.update(group)
         for selected, nested in draw_selections:
@@ -269,7 +287,7 @@ def main():
         query_pos = [positions[("clip", i)] for i in query]
         truth = np.asarray(clip["y"][query], dtype=np.int64)
         query_data = {"game": entry["game"], "clip": entry["clip"], "truth": truth}
-        original_ids = [[("clip", int(anchor))] for anchor in episode[0]]
+        original_ids = [[("clip", int(anchor))] for anchor in original_episode[0]]
         for name, selection in (("fixed_original_one", original_ids), ("fixed_published_six", published_ids)):
             refs = [positions[key] for group in selection for key in group]
             size = len(selection[0])
@@ -312,10 +330,11 @@ def main():
         for model_name in ("trained_one", "trained_six"):
             selected = [row for row in rows if row["model"] == model_name]
             fixed_stats[name][model_name] = statistics(selected)
-    published = json.loads((Path(__file__).parent / "results" / "six-references.json").read_text())[args.split]
+    expected = expected_result[args.split]
     observed = fixed_stats["fixed_published_six"]["trained_six"]["confusion_matrix"]
     fixed_stats["published_six_confusion_verification"] = {
-        "expected": published["confusion_matrix"], "observed": observed, "matches": published["confusion_matrix"] == observed,
+        "reference": str(expected_path), "expected": expected["confusion_matrix"], "observed": observed,
+        "matches": expected["confusion_matrix"] == observed,
         "note": "Numerically tied argmax classes may differ across kernels; mismatch is reported without altering predictions."}
     fingerprint = {str(path): sha256(path) for path in sorted(set(p.resolve() for p in used_paths))}
     result = {

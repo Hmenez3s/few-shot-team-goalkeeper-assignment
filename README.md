@@ -5,7 +5,7 @@
 ![Backbone: ResNet-18](https://img.shields.io/badge/backbone-ResNet--18-334155)
 ![Test: 3 unseen matches](https://img.shields.io/badge/test-3%20unseen%20matches-0f766e)
 
-> **Historical release results below.** The original preprocessing treated SoccerNet's camera-relative `left`/`right` as stable team identities across clips. The corrected preprocessing aligns team identities within each half. The original evaluation also used later jersey labels to choose references and to exclude the same outfield athletes from scoring; it describes a retrospective comparison, not a prospective deployment test. Do not cite these release metrics as results of the corrected protocol.
+> **Corrected rerun:** see [the research report](RESEARCH.md) for the audited data protocol, retrained results, prospective replay, and new deployment measurements. The models, media, and release figures linked below are **historical artifacts**, not outputs of the corrected rerun. In particular, the old preprocessing treated camera-relative team labels as stable IDs, and the retrospective evaluation used later jersey labels to choose references and restrict queries.
 
 This model sorts the player boxes of a football match into four groups: outfield players of team A, outfield players of team B, goalkeeper A and goalkeeper B. It needs one example crop of each group, taken from the same match.
 

@@ -1,53 +1,65 @@
-# Reference-conditioned football classification: robustness study
+# Reference-conditioned football classification: corrected rerun
 
-> **Historical, superseded metrics.** This report uses the original camera-relative team labels as if they were stable within each half. Its identity-filtered evaluation also used later jersey labels to construct earlier-reference episodes and to select scored crops. The numbers below document that prior run; they are not evidence of corrected team identity or prospective deployment performance.
+This is an empirical study of classifying supplied football boxes as outfield player A/B or goalkeeper A/B using labeled crops from the same half. It does not introduce a new architecture, learning rule, detector or tracker. The original release numbers are historical and are not measurements of the protocol below.
 
-This study classifies pre-detected crops as player A/B or goalkeeper A/B from labeled examples earlier in the same half. It evaluates a specific four-class protocol. It does not introduce a new architecture, learning rule, detector or tracker.
+## Ground truth and evaluation
 
-## Reference sensitivity and appearance baselines
+SoccerNet GSR defines `left` and `right` relative to the camera, not as team IDs across clips. The preprocessing now aligns outfield slots within each half using the agreement of jersey numbers. Among 164 clips in 18 halves, five outfield assignments were swapped: `SNGS-092`, `111`, `126`, `131`, and `197`. A visual audit of the goalkeeper kits in those clips and neighboring clips supported retaining their original slots; the outfield swap is not applied to goalkeepers. Source archives were not changed. The preparation audit records each assignment and its support. No identical crop was found across the three game-disjoint splits.
 
-On the official test (2,671 queries across three matches), each method received the same randomly selected crops per draw. The one-reference condition sampled one of the six per class. The extra crops show the same outfield reference athlete, not six different athletes. Outfield queries exclude that athlete, and all references precede the queries. No draw or checkpoint was selected by test performance.
+The **retrospective** protocol chooses references and filters queries using later jersey labels to evaluate outfield athletes other than the reference athlete. Its figures are not deployment estimates. The **prospective replay** fixes a timestamp-only bootstrap and query-frame schedule; it uses only early annotations to pick references and does not reject later labeled player or goalkeeper boxes based on jersey. The two protocols have different query populations. Neither score is directly comparable to the original release's score as an improvement on identical cases.
 
-| Encoder or comparator | 1 ref: accuracy ± SD | 6 refs: accuracy ± SD | 1 ref: macro recall ± SD | 6 refs: macro recall ± SD |
-|---|---:|---:|---:|---:|
-| ResNet-18 tuned with one reference | 90.49 ± 2.18 | **92.29 ± 0.24** | 88.13 ± 2.14 | 91.37 ± 0.53 |
-| ResNet-18 tuned with six references | 89.92 ± 1.29 | 91.38 ± 0.23 | 87.11 ± 2.64 | **91.83 ± 0.98** |
-| Frozen ImageNet ResNet-18 | 52.05 ± 4.84 | 69.78 ± 2.08 | 48.98 ± 4.01 | 67.63 ± 2.34 |
-| Torso HSV histogram, nearest prototype | 73.44 ± 6.81 | 82.01 ± 3.79 | 71.90 ± 5.65 | 83.27 ± 2.92 |
-| Torso HSV, reference-seeded clustering | 68.11 ± 8.08 | 72.86 ± 5.43 | 65.83 ± 6.52 | 71.82 ± 5.72 |
-| Frozen OSNet x1.0, Market-1501 | 57.07 ± 4.51 | 75.55 ± 2.53 | 59.57 ± 4.93 | 78.78 ± 2.59 |
+## Retrospective results
 
-Values are percent with sample SD across 30 draws on the same three matches, not intervals for generalization. Clustering is transductive: it receives all unlabeled query crops of a session, unlike the other comparators. OSNet is a generic person ReID encoder. A sports-specific PRTReID comparison is not reported: its published recipe uses SoccerNet and the match provenance of its applicable weights was not established here.
+All fixed test metrics below use the same 2,659 queries in games 7, 8, and 11. Checkpoints were selected by validation macro recall.
 
-For the same one-reference-trained weights, increasing support from one to six improved mean accuracy by 1.80 percentage points and reduced draw SD from 2.18 to 0.24 points. The range narrowed from 83.79–92.55% to 91.69–92.62%. Training with six did not yield the highest overall accuracy, but did yield the best macro recall with six references. These are descriptive results on a previously used test split, not a fresh confirmatory evaluation. The original fixed one- and six-reference confusion matrices were reproduced exactly. See [per-draw metrics, reference indices and input hashes](results/research-reference-draws.json).
+| Fixed-reference condition | Accuracy | Macro recall |
+|---|---:|---:|
+| Frozen ImageNet ResNet-18, one reference per class | 55.28% | 48.06% |
+| Tuned ResNet-18, one reference per class | 95.60% | 86.10% |
+| Tuned ResNet-18, six references per class | 96.77% | 93.81% |
 
-## Training seeds and match variation
+Five one-reference training seeds on that same split averaged **95.92% ± 0.70 pp** accuracy and **89.00% ± 2.86 pp** macro recall (sample SD). Three rotated folds holding out whole games gave **89.11% accuracy and 85.04% macro recall over 9,130 boxes in nine games**. Fold accuracies were 95.60%, 87.15%, and 85.77%. These are internal SoccerNet folds, not an external-dataset evaluation. SoccerTrack v2 was not evaluated because access to its gated annotations was unavailable.
 
-The one-reference model ran on seeds 13, 25, 29, 42 and 57, with an independent checkpoint choice on validation per run and fixed test references. The official test gave **90.72% ± 1.11 points** (88.96–91.65%) top-1 and **87.53% ± 1.88 points** macro recall. Each run used eight epochs and 180 episodes per epoch.
+The three-reference variant and the pruned VGG variants were compared on validation only (3,183 queries). The ResNet baseline reached 84.26%; the same weights with three references reached 86.40%, and the three-reference-trained model reached 88.34%. Compact VGG reached 63.87% with SNIP and 59.00% with matched layer-random pruning; the wider layer-random VGG reached 67.39%. These are not test scores.
 
-| Held-out games | Query boxes | Top-1 | Macro recall |
-|---|---:|---:|---:|
-| Official test: 7, 8, 11 | 2,671 | 91.65% | 88.16% |
-| Rotated fold: 2, 3, 5 | 3,193 | 87.54% | 89.09% |
-| Rotated fold: 4, 6, 9 | 3,290 | 85.53% | 84.50% |
-| **Pooled, nine games** | **9,154** | **88.02%** | **87.10%** |
+### Thirty paired draws on the same test queries
 
-The folds rotate the three official game groups between training, validation and test, using seed 25. Each match is evaluated only by a model fitted and selected on other matches. Equal-game mean accuracy is 88.08%. This reuses the same source dataset and is not external validation. See [seed and fold results](results/research-seeds-and-folds.json).
+Each one-reference draw is nested within its corresponding six-reference draw. For an outfield class, the samples are different crops of one reference athlete, not six different athletes. SD is across random reference choices on **the same three matches**, not across new matches.
 
-## External holdout and contribution
+| Condition | 1 ref accuracy ± SD | 6 refs accuracy ± SD |
+|---|---:|---:|
+| ResNet-18 trained with one reference | 95.82% ± 1.28 pp | 97.15% ± 0.37 pp |
+| ResNet-18 trained with six references | 95.72% ± 1.04 pp | 96.78% ± 0.26 pp |
+| Frozen ImageNet ResNet-18 | 54.60% ± 5.96 pp | 72.30% ± 2.69 pp |
+| HSV torso color | 78.53% ± 5.70 pp | 85.24% ± 4.56 pp |
+| Frozen Market-1501 OSNet | 60.63% ± 5.62 pp | 79.15% ± 3.82 pp |
 
-- SoccerNet GSR 2024 and 2025 have identical SHA-256 identifiers for all four archives. The `challenge.zip` archive index contains no `Labels-GameState.json` annotations. Neither supplies more labeled games for this evaluation.
-- [SoccerTrack v2](https://huggingface.co/datasets/atomscott/soccertrack-v2) is an external candidate. The actual file `gsr/118577/118577_1st.json` returns `401 GatedRepo` without an approved account. After obtaining access, check the shipped annotation schema, recording independence and coverage of all four classes before scoring.
-- [Prototypical Networks](https://arxiv.org/abs/1703.05175), [game-agnostic team discrimination](https://arxiv.org/abs/1907.01058) and [PRTReID](https://arxiv.org/abs/2401.09942) bound the novelty claim. The result is an empirical study of reference sensitivity and the tradeoff with simpler baselines. [The INT8 measurements](results/formats.json) describe deployment, not a new quantization method or a matched latency comparison against the appearance baselines.
+The repeated-draw evaluation reproduced the fixed six-reference confusion matrix. The separate transductive color clustering comparator could see all unlabelled queries together; it is not equivalent to independent crop inference. No comparison is claimed against a sports-specific ReID checkpoint of unknown match provenance.
 
-## Reproduce
+### Prospective replay
 
-Use the prepared data, build the reference bank with `reference_bank.py`, and run:
+The first 30% of available labeled timestamps define the bootstrap period. Up to 192 uniformly sampled bootstrap frames and 96 uniformly sampled later frames are considered per half. Both arms covered **3 of 6 halves**, since the other halves had no usable labeled bootstrap crop for at least one goalkeeper class. The table scores **the same 3,688 later boxes** in the three covered halves; it excludes the uncovered halves and does not establish an operational coverage rate for other matches or feeds.
 
-```bash
-python research_references.py --root DATA --bank DATA/work/references \
-  --one models/one-reference.pth --six models/six-references.pth \
-  --out NEW_JSON --device mps --draws 30 --reid-torchscript LOCAL_OSNET_SCRIPT
-```
+| Checkpoint | 1 early reference per class | 6 early references per class |
+|---|---:|---:|
+| Trained with one reference | 96.29% | 97.02% |
+| Trained with six references | 94.69% | 95.47% |
 
-Use `osnet_x1_0` with the Market-1501 weights listed in the official Torchreid model zoo (Google Drive file ID `1vduhq5DpN2q1g4fYEZfPI17MJeh9qyrA`). Instantiate with `num_classes=751, pretrained=False`, load the state dict strictly, set eval mode and trace its `[N, 512]` embeddings with an RGB `[1, 3, 256, 128]` input. The comparison receives ImageNet-normalized inputs at this resolution. Run `train.py --root ISOLATED_DATA --seed SEED` for each seed. For the rotated folds, remap the split of each whole official game group in an isolated input manifest before training. The original archives and models were not modified.
+### Error analysis
+
+On the corrected fixed one-reference test, 117 boxes were wrong. In the 1,704 boxes with no annotated human-box overlap, 53 were wrong (3.11%); 47 of those crossed the outfield/goalkeeper role boundary. In the 128 boxes with at least 60% intersection coverage, 27 were wrong (21.09%). This is a box-overlap proxy, not proof of physical occlusion or the cause of each error. No threshold was selected on test. `SNGS-131` had 0 disagreements on 123 scored boxes after the role-specific audit and retraining.
+
+## Apple M4 Pro deployment
+
+FP16 PyTorch preserved all predictions in the separate precision replay and halved checkpoint size. Core ML INT8 quantizes weights and activations; calibration crops came only from train games 4, 6, and 9. Compute-plan placements are preferred devices, not measured per-operation execution traces. Latency is for a batch of **20 prepared crops**, not video decoding, detection, or tracking.
+
+| Runtime | Accuracy | Median per 20 crops |
+|---|---:|---:|
+| GPU PyTorch FP32 | 96.77% | 6.17 ms |
+| GPU PyTorch FP16 | 96.77% | 5.90 ms |
+| CPU Core ML INT8 | 96.77% | 7.12 ms |
+| GPU Core ML INT8 | 96.73% | 2.99 ms |
+| Neural Engine Core ML FP16 | 96.77% | 2.55 ms |
+| Neural Engine Core ML INT8 | 96.69% | 2.24 ms |
+
+The regenerated twelve-second video was checked as a 150-frame 1280×824 MP4; its 2,443 boxes are an illustrative window, not the test set. Corrected run artifacts, checkpoints, logs, and SHA-256 receipts were kept separate from the historical release artifacts.

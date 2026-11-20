@@ -21,22 +21,14 @@ MODEL_IDS = {
 ROBOFLOW_ORACLE_METHOD = "roboflow_siglip_umap_kmeans_oracle_roles"
 ROBOFLOW_PREDICTED_METHOD = "roboflow_siglip_umap_kmeans_predicted_roles"
 ROBOFLOW_SPORTS_COMMIT = "42c80c06b6b65a7f89455b89fe31cdf4c38ba227"
-CACHE_DIR = Path("/Users/j.henrique/soccer-frozen-encoders/cache")
 MATCH_SETS = {
     "games_7_8_11": {
-        "root": Path("/Users/j.henrique/soccer-gsr-role-audited.jfj8rWrx"),
-        "extract": Path("/Users/j.henrique/soccer-prtreid-baseline.3o5PLhhC/run-compare/extract/extract.npz"),
-        "embed": Path("/Users/j.henrique/soccer-prtreid-baseline.3o5PLhhC/run-compare/embed.npz"),
         "expected_queries": 2659,
         "resnet_checkpoint": REPO / "models/six-references.pth",
         "resnet_expected": {"per_box": "ours_six_references_per_box", "tracklet_mean": "ours_six_references_tracklets"},
     },
     "games_2_3_5": {
-        "root": Path("/Users/j.henrique/soccer-gsr-fold1-compare.8rkNtZ2O"),
-        "extract": Path("/Users/j.henrique/soccer-gsr-fold1-compare.8rkNtZ2O/compare/extract/extract.npz"),
-        "embed": Path("/Users/j.henrique/soccer-gsr-fold1-compare.8rkNtZ2O/compare/embed.npz"),
         "expected_queries": 3183,
-        "resnet_checkpoint": Path("/Users/j.henrique/soccer-gsr-fold1-compare.8rkNtZ2O/work/six-references/checkpoint.pth"),
         "resnet_expected": {"per_box": "ours_six_references_per_box", "tracklet_mean": "ours_six_references_tracklets"},
     },
 }
@@ -392,7 +384,7 @@ def pooled(match_results, method, variant):
     }
 
 
-def run(output, cache_dir=CACHE_DIR):
+def run(output, cache_dir):
     import sklearn
     import torch
     import transformers
@@ -457,7 +449,7 @@ def run(output, cache_dir=CACHE_DIR):
                 ROBOFLOW_ORACLE_METHOD: "ORACLE: player and goalkeeper roles and the (clip, track_id) grouping come from the ground-truth annotations, which favours this variant.",
                 ROBOFLOW_PREDICTED_METHOD: "SoccerNet PRTReID role head logits from the official baseline's embed.npz, majority-voted per (clip, track_id) with experiments/prtreid_comparison.py track_role_votes. Tracklets voted player are clustered, tracklets voted goalkeeper use the goalkeeper rule, and boxes voted referee, other or ball stay unassigned and count as wrong.",
             },
-            "roboflow_embeddings": f"SigLIP image embeddings cached per clip in {CACHE_DIR} and reused across the reference prototype and both Roboflow variants",
+            "roboflow_embeddings": "SigLIP image embeddings cached per clip and reused across the reference prototype and both Roboflow variants",
             "roboflow_source": {"repo": "https://github.com/roboflow/sports", "commit": ROBOFLOW_SPORTS_COMMIT,
                                 "files": ["sports/common/team.py", "examples/soccer/main.py"]},
             "roboflow_deviations": [
@@ -488,8 +480,16 @@ def run(output, cache_dir=CACHE_DIR):
 def main():
     parser = argparse.ArgumentParser(description="Compare frozen SigLIP, CLIP and the Roboflow team pipeline with the reference classifier")
     parser.add_argument("--out", type=Path, default=REPO / "results/frozen-encoders.json")
-    parser.add_argument("--cache", type=Path, default=CACHE_DIR)
+    parser.add_argument("--cache", type=Path, required=True)
+    for name in ("games_7_8_11", "games_2_3_5"):
+        for field in ("root", "extract", "embed"):
+            parser.add_argument(f"--{name.replace('_', '-')}-{field}", type=Path, required=True)
+    parser.add_argument("--games-2-3-5-six", type=Path, required=True, help="six-reference checkpoint trained without matches 2, 3, 5")
     args = parser.parse_args()
+    for name in MATCH_SETS:
+        for field in ("root", "extract", "embed"):
+            MATCH_SETS[name][field] = getattr(args, f"{name}_{field}")
+    MATCH_SETS["games_2_3_5"]["resnet_checkpoint"] = args.games_2_3_5_six
     result = run(args.out, args.cache)
     print(json.dumps({name: {method: {variant: round(stats["score"], 4) for variant, stats in variants.items()}
                              for method, variants in data["methods"].items()}

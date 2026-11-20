@@ -63,3 +63,7 @@ FP16 PyTorch preserved all predictions in the separate precision replay and halv
 | Neural Engine Core ML INT8 | 96.69% | 2.24 ms |
 
 The regenerated twelve-second video was checked as a 150-frame 1280×824 MP4; its 2,443 boxes are an illustrative window, not the test set. See [`results/`](results/) for metrics and audit receipts, [`models/SHA256SUMS`](models/SHA256SUMS) for checkpoint hashes, and [`media/`](media/) for the demonstration.
+
+## Comparison with the official SoccerNet baseline
+
+<!-- PRTREID_COMPARISON_DETAIL -->

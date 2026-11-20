@@ -26,6 +26,8 @@ Three matches never seen in training, 2,659 player boxes:
 - **Five training seeds:** 95.92% ± 0.70.
 - **Better than appearance baselines** with the same six references: torso colour 85.24%, person re-identification (OSNet) 79.15%.
 
+<!-- PRTREID_COMPARISON -->
+
 Details in [RESEARCH.md](RESEARCH.md).
 
 ## Speed
@@ -127,16 +129,25 @@ mkdir -p data/work/export
 python quantize.py --root "$PWD/data" --checkpoint data/work/six-references/checkpoint.pth --out data/work/export
 ```
 
-## Files
+## Repository layout
 
-| Path | Purpose |
-|---|---|
-| `prepare.py` | Builds match-separated training, validation and test data |
-| `train.py` | One-reference model and training |
-| `reference_bank.py`, `six_references.py` | Six-reference model and training |
-| `quantize.py`, `evaluate_formats.py` | Core ML export and speed measurement |
-| `visualize.py` | Video and example images |
-| `results/` | All metrics |
+```text
+.
+├── prepare.py, train.py, reference_bank.py, six_references.py
+├── quantize.py, evaluate_formats.py, benchmark.py, visualize.py
+├── run.sh, download.sh, requirements*.txt
+├── README.md, RESEARCH.md, LICENSE, NOTICE.md, checksums.sha256
+├── experiments/       Research and evaluation scripts; see its README
+├── tests/             Unit tests
+├── models/            Trained checkpoints and Core ML package
+├── results/           Evaluation results and logs; see its README
+├── media/             Demonstration video and example frames
+└── dataset-audit/     Standalone SoccerNet label audit
+```
+
+## Dataset audit
+
+See [`dataset-audit/`](dataset-audit/) for the standalone audit and [SoccerNet issue #39](https://github.com/SoccerNet/sn-gamestate/issues/39).
 
 ## License
 

@@ -3,7 +3,7 @@
 `audit_team_labels.py` reads the official `train.zip`, `valid.zip` and `test.zip` and, for every clip, compares the jersey numbers of the outfield players labelled `left` and `right` with the other clips of the same match half. Five clips have their outfield `team` labels swapped; their goalkeepers are labelled consistently.
 
 ```bash
-python audit_team_labels.py --archives path/to/SoccerNet/SN-GSR-2025 --out audit
+python dataset-audit/audit_team_labels.py --archives path/to/SoccerNet/SN-GSR-2025 --out audit
 ```
 
 - [`report.json`](report.json): jersey agreement with every other clip of the half, goalkeeper pitch positions and annotation counts.

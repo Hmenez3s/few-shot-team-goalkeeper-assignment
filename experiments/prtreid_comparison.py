@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-import analyze_errors
+from experiments import analyze_errors
 import prepare
 import train
 

@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-import prtreid_comparison
+from experiments import prtreid_comparison
 
 
 class TeamMappingTest(unittest.TestCase):

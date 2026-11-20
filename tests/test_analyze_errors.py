@@ -1,6 +1,6 @@
 import unittest
 
-from analyze_errors import box_edges, maximum_overlap
+from experiments.analyze_errors import box_edges, maximum_overlap
 
 
 class GeometryTests(unittest.TestCase):

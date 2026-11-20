@@ -1,6 +1,6 @@
 import unittest
 
-from prospective_evaluation import choose_support, query_frame_indices, timeline_cutoff
+from experiments.prospective_evaluation import choose_support, query_frame_indices, timeline_cutoff
 
 
 class ProspectivePolicyTests(unittest.TestCase):

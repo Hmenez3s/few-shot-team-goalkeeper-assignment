@@ -51,6 +51,8 @@ Apple M4 Pro, 20 player crops per batch, six-reference model:
 | Core ML GPU, INT8 | 93.81% | 2.99 ms |
 | **Core ML Neural Engine, INT8** | **93.79%** | **2.24 ms** |
 
+Against PRTReID, the encoder of the SoccerNet baseline, on the same Mac with the same PyTorch (1.13.1, CPU): **123 ms vs 2,201 ms** per 20 crops, 0.18 vs 5.31 billion multiply-accumulates per crop, 11.2 M vs 33.4 M parameters ([details](results/speed-comparison.json)).
+
 ## How it works
 
 ```mermaid

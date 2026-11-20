@@ -39,7 +39,7 @@ Same 5,842 boxes from six held-out matches (2, 3, 5, 7, 8, 11), with the same tr
 | **FewShot-R18, 6-shot, averaged over each tracklet** | 6 per group | **97.45%** | 96.88% | 99.57% | 98.06% | 95.29% |
 | FewShot-R18, 6-shot, each box alone | 6 per group | 92.42% | 92.13% | 94.28% | 90.32% | 92.94% |
 
-The SoccerNet and Roboflow pipelines take the player/goalkeeper role of each box from PRTReID's role head. Given the true role of every box instead, the Roboflow pipeline reaches 96.05%. That number is not directly comparable: the method is handed the hardest part of the task, while FewShot-R18 decides roles itself. FewShot-R18 still scores higher with tracklets.
+The SoccerNet and Roboflow pipelines take the player/goalkeeper role of each box from PRTReID's role head. Boxes the pipeline leaves without a team count as errors: 484 of 5,842 with predicted roles (voted referee, other or ball, or no pitch position). Given the true role of every box instead, the Roboflow pipeline reaches 96.05%. That number is not directly comparable: the method is handed the hardest part of the task, while FewShot-R18 decides roles itself. FewShot-R18 still scores higher with tracklets.
 
 - **Matches 7, 8, 11:** 98.98% against 83.55% for the SoccerNet baseline.
 - **Matches 2, 3, 5:** 96.08% against 50.93%. In match 3 the baseline labels 418 of its 1,072 boxes as referees or the ball.

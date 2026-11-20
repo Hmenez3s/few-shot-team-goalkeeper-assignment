@@ -43,15 +43,23 @@ Details in [RESEARCH.md](RESEARCH.md) and the [preprint](paper/main.pdf).
 
 ## Speed
 
-Apple M4 Pro, 20 player crops per batch, six-reference model:
+**Against the SoccerNet baseline** (same Mac, same PyTorch 1.13.1, CPU, 20 player crops):
+
+| | Ours (ResNet-18) | SoccerNet baseline (PRTReID) |
+|---|---:|---:|
+| Time per 20 crops | **123 ms** | 2,201 ms |
+| Compute per crop | **0.18 billion operations** | 5.31 billion operations |
+| Parameters | **11.2 M** | 33.4 M |
+
+About **18× faster** and **30× less compute**. [Details](results/speed-comparison.json).
+
+**On an Apple M4 Pro**, six-reference model, 20 player crops per batch:
 
 | Runtime | Score | Time |
 |---|---:|---:|
 | PyTorch GPU, FP32 | 93.81% | 6.17 ms |
 | Core ML GPU, INT8 | 93.81% | 2.99 ms |
 | **Core ML Neural Engine, INT8** | **93.79%** | **2.24 ms** |
-
-Against PRTReID, the encoder of the SoccerNet baseline, on the same Mac with the same PyTorch (1.13.1, CPU): **123 ms vs 2,201 ms** per 20 crops, 0.18 vs 5.31 billion multiply-accumulates per crop, 11.2 M vs 33.4 M parameters ([details](results/speed-comparison.json)).
 
 ## How it works
 

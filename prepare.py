@@ -174,12 +174,14 @@ def sampled_indices(length, budget):
     return {round(index * (length - 1) / (count - 1)) for index in range(count)} if count > 1 else {0}
 
 
-def label_class(annotation):
+def label_class(annotation, swap_teams=False):
     attributes = annotation.get("attributes") or {}
     role = safe_text(attributes.get("role")).lower()
     team = safe_text(attributes.get("team")).lower()
     if role not in ("player", "goalkeeper") or team not in ("left", "right"):
         return None
+    if swap_teams:
+        team = "right" if team == "left" else "left"
     return CLASS_INDEX[f"{role}_{team}"]
 
 
@@ -243,6 +245,88 @@ def player_track(annotation, class_id):
     except (KeyError, TypeError, ValueError):
         return None
 
+def clip_jersey_sides(entry):
+    sides = {"left": set(), "right": set()}
+    for annotation in entry["record"]["annotations"]:
+        if not isinstance(annotation, dict):
+            continue
+        class_id = label_class(annotation)
+        if class_id not in (0, 1):
+            continue
+        jersey = player_track(annotation, class_id)
+        if jersey is not None:
+            sides["left" if class_id == 0 else "right"].add(jersey)
+    shared = sides["left"] & sides["right"]
+    sides["left"] -= shared
+    sides["right"] -= shared
+    return sides
+
+
+def normalize_team_sides(groups, audit):
+    failures = []
+    for (split, game, half), entries in sorted(groups.items(), key=lambda item: (SPLIT_PRIORITY[item[0][0]], item[0][1], item[0][2])):
+        ordered = sorted(entries, key=lambda entry: (entry["clip"], entry["member"], str(entry["archive"])))
+        if len(ordered) > 16:
+            reason = "clip_limit_exceeded"
+            failures.append({"split": split, "game": game, "half": half, "reason": reason, "clip_count": len(ordered), "maximum_clips": 16})
+            for entry in ordered:
+                audit["team_normalization_assignments"].append({"split": split, "game": game, "half": half, "clip": entry["clip"], "orientation": "unresolved", "support": []})
+            continue
+        if len(ordered) == 1:
+            signs = [1]
+            pair_scores = {}
+            best_score = 0
+        else:
+            side_sets = [clip_jersey_sides(entry) for entry in ordered]
+            pair_scores = {}
+            for left_index in range(len(ordered)):
+                for right_index in range(left_index + 1, len(ordered)):
+                    left = side_sets[left_index]
+                    right = side_sets[right_index]
+                    aligned = len(left["left"] & right["left"]) + len(left["right"] & right["right"])
+                    crossed = len(left["left"] & right["right"]) + len(left["right"] & right["left"])
+                    pair_scores[(left_index, right_index)] = {"aligned": aligned, "crossed": crossed, "score": aligned - crossed}
+            best_score = None
+            best_signs = []
+            for mask in range(1 << (len(ordered) - 1)):
+                candidate = [1] + [1 if mask & (1 << (index - 1)) else -1 for index in range(1, len(ordered))]
+                score = sum(candidate[i] * candidate[j] * pair["score"] for (i, j), pair in pair_scores.items())
+                if best_score is None or score > best_score:
+                    best_score, best_signs = score, [candidate]
+                elif score == best_score:
+                    best_signs.append(candidate)
+            if len(best_signs) != 1:
+                failures.append({"split": split, "game": game, "half": half, "reason": "ambiguous_optimum", "optimal_assignment_count": len(best_signs), "objective": best_score})
+                for index, entry in enumerate(ordered):
+                    support = [{"clip": ordered[j if i == index else i]["clip"], **pair} for (i, j), pair in sorted(pair_scores.items()) if index in (i, j)]
+                    audit["team_normalization_assignments"].append({"split": split, "game": game, "half": half, "clip": entry["clip"], "orientation": "unresolved", "support": support})
+                continue
+            signs = best_signs[0]
+            unchanged = sum(sign == 1 for sign in signs)
+            swapped = len(signs) - unchanged
+            if unchanged == swapped:
+                failures.append({"split": split, "game": game, "half": half, "reason": "tied_compatibility_majority", "objective": best_score})
+                for index, entry in enumerate(ordered):
+                    support = [{"clip": ordered[j if i == index else i]["clip"], **pair} for (i, j), pair in sorted(pair_scores.items()) if index in (i, j)]
+                    audit["team_normalization_assignments"].append({"split": split, "game": game, "half": half, "clip": entry["clip"], "orientation": "unresolved", "support": support})
+                continue
+            if swapped > unchanged:
+                signs = [-sign for sign in signs]
+        for index, entry in enumerate(ordered):
+            margin = sum(signs[index] * signs[other] * pair["score"] for (i, other), pair in pair_scores.items() if i == index)
+            margin += sum(signs[other] * signs[index] * pair["score"] for (other, j), pair in pair_scores.items() if j == index)
+            support = []
+            for (left_index, right_index), pair in sorted(pair_scores.items()):
+                if index in (left_index, right_index):
+                    other = right_index if index == left_index else left_index
+                    support.append({"clip": ordered[other]["clip"], **pair})
+            orientation = "unchanged" if signs[index] == 1 else "swapped"
+            entry["swap_teams"] = signs[index] == -1
+            audit["team_normalization_assignments"].append({"split": split, "game": game, "half": half, "clip": entry["clip"], "orientation": orientation, "signed_aggregate_margin": margin, "support": support})
+    audit["team_normalization_errors"].extend(failures)
+    return failures
+
+
 def collect_unit_frames(entries, audit):
     frames = []
     for entry in entries:
@@ -273,7 +357,7 @@ def selected_frame_indices(frames, budget):
     required = set()
     by_class = defaultdict(list)
     for index, frame in enumerate(frames):
-        classes = {label_class(annotation) for annotation in frame["annotations"]}
+        classes = {label_class(annotation, frame["entry"].get("swap_teams", False)) for annotation in frame["annotations"]}
         for class_id in (2, 3):
             if class_id in classes:
                 by_class[class_id].append(index)
@@ -328,7 +412,7 @@ def process_unit(split, game, half, entries, work, audit):
             with archive.open(image_member) as stream, Image.open(stream) as source_image:
                 image = source_image.convert("RGB")
                 for annotation in frame["annotations"]:
-                    class_id = label_class(annotation)
+                    class_id = label_class(annotation, frame["entry"].get("swap_teams", False))
                     if class_id is None:
                         continue
                     track = player_track(annotation, class_id)
@@ -382,8 +466,11 @@ def new_audit():
         "minimum_clipped_box_wh": list(MIN_BOX),
         "frame_budget": FRAME_BUDGET,
         "frame_time_policy": "clip_start_ms + round((file_number - 1) * 1000 / frame_rate)",
-        "unit_policy": "original game_id and matching game_time_start/game_time_stop half; camera-relative team labels assumed stable within half",
+        "unit_policy": "original game_id and matching game_time_start/game_time_stop half; team labels normalized to match-half slots from shared player jersey identities",
+        "team_normalization": {"schema": 1, "protocol": "per-half exact signed pairwise jersey agreement; class strings are canonical match-half slots, not camera-relative left/right", "maximum_clips": 16},
         "class_mapping": {"role": ["player", "goalkeeper"], "team": ["left", "right"]},
+        "team_normalization_assignments": [],
+        "team_normalization_errors": [],
         "archive_errors": [],
         "label_errors": [],
         "missing_or_invalid_game_ids": [],
@@ -419,14 +506,21 @@ def main():
             continue
         entry["half"] = half_data[0]
     retained = [entry for entry in retained if "half" in entry]
+    groups = defaultdict(list)
+    for entry in retained:
+        groups[(entry["split"], entry["game"], entry["half"])].append(entry)
+    normalization_failures = normalize_team_sides(groups, audit)
     if args.audit_only:
         audit["audit_only"] = True
         audit["exclusions"] = dict(audit["exclusions"])
         atomic_json(work / "audit.json", audit)
+        if normalization_failures:
+            raise SystemExit("team normalization unresolved; inspect work/audit.json")
         return 0
-    groups = defaultdict(list)
-    for entry in retained:
-        groups[(entry["split"], entry["game"], entry["half"])].append(entry)
+    if normalization_failures:
+        audit["exclusions"] = dict(audit["exclusions"])
+        atomic_json(work / "audit.json", audit)
+        raise SystemExit("team normalization unresolved; inspect work/audit.json")
     manifest_clips = []
     ordered_groups = sorted(groups.items(), key=lambda item: (SPLIT_PRIORITY[item[0][0]], item[0][1], item[0][2]))
     for index, ((split, game, half), entries) in enumerate(ordered_groups, start=1):

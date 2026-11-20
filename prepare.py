@@ -20,6 +20,7 @@ ARCHIVES = {"train": "train.zip", "valid": "valid.zip", "test": "test.zip"}
 CANVAS = (48, 96)
 MIN_BOX = (8, 14)
 FRAME_BUDGET = 96
+TEAM_NORMALIZATION_SCHEMA = 2
 
 
 def atomic_json(path, value):
@@ -180,7 +181,7 @@ def label_class(annotation, swap_teams=False):
     team = safe_text(attributes.get("team")).lower()
     if role not in ("player", "goalkeeper") or team not in ("left", "right"):
         return None
-    if swap_teams:
+    if swap_teams and role == "player":
         team = "right" if team == "left" else "left"
     return CLASS_INDEX[f"{role}_{team}"]
 
@@ -467,7 +468,7 @@ def new_audit():
         "frame_budget": FRAME_BUDGET,
         "frame_time_policy": "clip_start_ms + round((file_number - 1) * 1000 / frame_rate)",
         "unit_policy": "original game_id and matching game_time_start/game_time_stop half; team labels normalized to match-half slots from shared player jersey identities",
-        "team_normalization": {"schema": 1, "protocol": "per-half exact signed pairwise jersey agreement; class strings are canonical match-half slots, not camera-relative left/right", "maximum_clips": 16},
+        "team_normalization": {"schema": TEAM_NORMALIZATION_SCHEMA, "protocol": "outfield-only per-half signed pairwise jersey agreement; goalkeeper slots unchanged", "maximum_clips": 16},
         "class_mapping": {"role": ["player", "goalkeeper"], "team": ["left", "right"]},
         "team_normalization_assignments": [],
         "team_normalization_errors": [],

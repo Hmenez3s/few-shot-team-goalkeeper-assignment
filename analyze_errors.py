@@ -169,6 +169,8 @@ def main():
         parser.error("--root/work must contain corrected manifest, crops, and checkpoint")
     prepare.ARCHIVES = {"test": "test.zip"}
     manifest, splits, _ = train.load_manifest(root)
+    if manifest.get("audit", {}).get("team_normalization", {}).get("schema") != prepare.TEAM_NORMALIZATION_SCHEMA:
+        raise ValueError("rerun prepare.py with the current team normalization before evaluation")
     baseline_path = root / "results" / "result.json"
     if not baseline_path.is_file():
         baseline_path = work / "result.json"

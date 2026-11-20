@@ -201,6 +201,8 @@ def main():
     if not output.is_relative_to((root / "work").resolve()) or output.exists():
         parser.error("--out must be a new file under --root/work")
     manifest = json.loads((root / "work" / "manifest.json").read_text())
+    if manifest.get("audit", {}).get("team_normalization", {}).get("schema") != prepare.TEAM_NORMALIZATION_SCHEMA:
+        raise ValueError("rerun prepare.py with the current team normalization before evaluation")
     if manifest.get("classes") != prepare.CLASSES:
         raise ValueError("manifest classes do not match prepare.py")
     test_games = {row["game"] for row in manifest.get("clips", []) if row.get("split") == "test"}

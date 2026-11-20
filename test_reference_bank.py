@@ -5,6 +5,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
+import prepare
 import reference_bank
 import six_references
 
@@ -22,7 +23,7 @@ class ReferenceBankTests(unittest.TestCase):
             "classes": ["player_left", "player_right", "goalkeeper_left", "goalkeeper_right"],
             "clips": [{**self.entry}],
             "audit": {
-                "team_normalization": {"schema": 1, "protocol": " Per-half   jersey agreement "},
+                "team_normalization": {"schema": prepare.TEAM_NORMALIZATION_SCHEMA, "protocol": " Per-half   jersey agreement "},
                 "units": [{"split": "train", "game": "7", "key": self.entry["clip"], "cutoff_ms": 100}],
             },
         }

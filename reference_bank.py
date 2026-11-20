@@ -29,7 +29,7 @@ def safe_text(value):
 def normalized_protocol_id(manifest):
     audit = manifest.get("audit", {})
     normalization = audit.get("team_normalization")
-    if not isinstance(normalization, dict) or normalization.get("schema") != 1:
+    if not isinstance(normalization, dict) or normalization.get("schema") != prepare.TEAM_NORMALIZATION_SCHEMA:
         raise ValueError("corrected team normalization is missing; rerun prepare.py before consuming raw clips")
     protocol = " ".join(safe_text(normalization.get("protocol")).split()).casefold()
     classes = manifest.get("classes")
@@ -173,7 +173,7 @@ def clip_identity(record):
 def team_swap_for_clip(manifest, split, game, half, clip):
     audit = manifest.get("audit", {})
     normalization = audit.get("team_normalization")
-    if not isinstance(normalization, dict) or normalization.get("schema") != 1:
+    if not isinstance(normalization, dict) or normalization.get("schema") != prepare.TEAM_NORMALIZATION_SCHEMA:
         raise ValueError("corrected team normalization is missing; rerun prepare.py before consuming raw clips")
     assignments = audit.get("team_normalization_assignments")
     if not isinstance(assignments, list):

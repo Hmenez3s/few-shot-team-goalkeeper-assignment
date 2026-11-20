@@ -8,7 +8,7 @@ class TeamConsumerTests(unittest.TestCase):
     def test_assignments_preserve_or_swap_both_roles_and_reject_missing(self):
         manifest = {
             "audit": {
-                "team_normalization": {"schema": 1},
+                "team_normalization": {"schema": prepare.TEAM_NORMALIZATION_SCHEMA},
                 "team_normalization_assignments": [
                     {"split": "test", "game": "7", "half": "2", "clip": "128", "orientation": "unchanged"},
                     {"split": "test", "game": "7", "half": "2", "clip": "129", "orientation": "swapped"},
@@ -24,7 +24,7 @@ class TeamConsumerTests(unittest.TestCase):
         self.assertEqual(prepare.label_class(player, False), 0)
         self.assertEqual(prepare.label_class(player, True), 1)
         self.assertEqual(prepare.label_class(goalkeeper, False), 2)
-        self.assertEqual(prepare.label_class(goalkeeper, True), 3)
+        self.assertEqual(prepare.label_class(goalkeeper, True), 2)
         with self.assertRaisesRegex(ValueError, "no team normalization assignment"):
             reference_bank.team_swap_for_clip(manifest, "test", "7", "2", "130")
         duplicate = {"audit": {**manifest["audit"], "team_normalization_assignments":

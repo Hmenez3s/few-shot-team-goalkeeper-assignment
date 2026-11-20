@@ -29,7 +29,7 @@ def audit():
 
 
 class TeamNormalizationTests(unittest.TestCase):
-    def test_camera_swap_normalizes_player_and_goalkeeper_slots(self):
+    def test_camera_swap_normalizes_only_outfield_slots(self):
         clips = [
             entry("clip-a", [1, 2], [3, 4]),
             entry("clip-b", [3, 4], [1, 2]),
@@ -46,7 +46,7 @@ class TeamNormalizationTests(unittest.TestCase):
         self.assertTrue(clips[1]["swap_teams"])
         self.assertFalse(clips[2]["swap_teams"])
         goalie = clips[1]["record"]["annotations"][-1]
-        self.assertEqual(prepare.label_class(goalie, clips[1]["swap_teams"]), prepare.CLASS_INDEX["goalkeeper_right"])
+        self.assertEqual(prepare.label_class(goalie, clips[1]["swap_teams"]), prepare.CLASS_INDEX["goalkeeper_left"])
         self.assertEqual(goalie["attributes"]["team"], source_team)
         self.assertEqual(len(report["team_normalization_assignments"]), 3)
         self.assertEqual(report["team_normalization_assignments"][1]["orientation"], "swapped")

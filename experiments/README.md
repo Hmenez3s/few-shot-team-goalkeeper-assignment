@@ -9,6 +9,9 @@ Each script answers one question from [RESEARCH.md](../RESEARCH.md). Run them fr
 | `research_references` | How much does the choice of reference crops matter, and how do colour and re-identification baselines compare? | file given by `--out` |
 | `prtreid_comparison`, `prtreid_embed`, `tracklet_comparison` | How does the classifier compare with the official SoccerNet team method? | files given by `--out` |
 | `rotated_fold.sh` | Builds a fold where other matches are held out | a new data root |
+| `summarize_seeds_and_folds` | How much do results move across training seeds and held-out matches? | file given by `--out` |
+| `verify_split` | Do the checkpoints match, and does any identical crop appear in two splits? | file given by `--out` |
+| `speed_comparison` | How much compute do our encoder and PRTReID need per crop? | file given by `--out` |
 
 ## Comparison with the SoccerNet baseline
 
@@ -32,3 +35,12 @@ python six_references.py --root "$PWD/fold"
 ```
 
 Then run the four commands above with `--root fold`, adding `--one fold/work/checkpoint.pth --six fold/work/six-references/checkpoint.pth --expected-one fold/work/result.json --expected-six fold/work/six-references/result.json` to `tracklet_comparison`. Both runs together give [`results/prtreid-comparison.json`](../results/prtreid-comparison.json).
+
+## Seeds and folds
+
+`experiments/rotated_fold.sh "$DATA" seed-13 0` makes a copy of the data root with the same split (shift 0); train it with `python train.py --root "$PWD/seed-13" --seed 13`, and likewise for seeds 29, 42 and 57. Folds use shifts 1 and 2. Then:
+
+```bash
+python -m experiments.summarize_seeds_and_folds --official "$DATA" --seed-roots seed-13 seed-29 seed-42 seed-57 \
+    --fold-roots fold-1 fold-2 --out results/research-seeds-and-folds.json
+```

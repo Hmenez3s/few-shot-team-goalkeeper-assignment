@@ -8,9 +8,10 @@
 | `prospective.json` | Prospective replay protocol, coverage, and scores | `experiments/prospective_evaluation.py` |
 | `prtreid-comparison.json` | Official SoccerNet team method against the reference classifier on six held-out matches: per-group accuracies, scores and confusion matrices | `experiments/prtreid_comparison.py`, `experiments/tracklet_comparison.py` |
 | `research-reference-draws.json` | Paired reference-draw results, assignments, and uncertainty | `experiments/research_references.py` |
-| `research-seeds-and-folds.json` | Training-seed summaries and held-out-game fold results | Seed runs: `train.py`; fold-analysis producer not retained |
+| `research-seeds-and-folds.json` | Training-seed summaries and held-out-game fold results | `experiments/summarize_seeds_and_folds.py` |
+| `speed-comparison.json` | Parameters, multiply-accumulates per crop and CPU/GPU latency of our encoder and PRTReID, same machine and PyTorch | `experiments/speed_comparison.py` |
 | `result.json` | One-reference training configuration, validation, and test metrics | `train.py` |
 | `six-references.json` | Six-reference training configuration, history, validation, and test metrics | `six_references.py` |
 | `six-references.log` | Six-reference training and validation log | `six_references.py` |
 | `training.log` | Data preparation and one-reference training log | `run.sh` |
-| `verification.json` | Checkpoint hashes, test-box count, and prepared-split checks | Verification run; producer script not retained |
+| `verification.json` | Checkpoint hashes, test-box count, and prepared-split checks | `experiments/verify_split.py` |

@@ -305,6 +305,25 @@ Core ML Neural Engine & INT8 & 93.79 & 96.69 & \textbf{2.24} \\
 \end{tabular}
 \end{table}
 
+\textbf{Encoder cost.} Table~\ref{tab:cost} compares the encoders used in Section~\ref{sec:results} on the same machine, for one batch of 20 crops at each encoder's input size. Ours needs 0.18 billion multiply-accumulates per crop, against 4.36 for CLIP, 5.31 for PRTReID and 17.00 for SigLIP. On the GPU it runs a batch in 5.5 ms, against 53 ms for CLIP and 194 ms for SigLIP; on the CPU it ties with CLIP. PRTReID requires PyTorch 1.13.1, which fails on this GPU, so it was timed on the CPU in that version, where our encoder takes 123 ms. The Roboflow pipeline adds UMAP and K-means once per clip (about 21 ms after the first call).
+
+\begin{table}[H]
+\centering
+\caption{Encoder cost on an Apple M4 Pro, PyTorch FP32, median of 30 runs for a batch of 20 crops. MACs are multiply-accumulates per crop. $\ast$: PyTorch 1.13.1 on CPU; the other rows use PyTorch 2.9.1.}
+\label{tab:cost}
+\small
+\begin{tabular}{llrrrr}
+\toprule
+Encoder & Input & Parameters (M) & MACs (G) & CPU (ms) & GPU (ms) \\
+\midrule
+Ours (ResNet-18) & 96$\times$48 & 11.2 & 0.18 & 99 & 5.5 \\
+CLIP ViT-B/32 & 224$\times$224 & 87.5 & 4.36 & 99 & 53 \\
+SigLIP base & 224$\times$224 & 92.9 & 17.00 & 446 & 194 \\
+PRTReID (HRNet-W32)$^\ast$ & 256$\times$128 & 33.4 & 5.31 & 2,201 & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \section{Limitations}
 
 All results use ground-truth boxes and tracklets, so detector and tracker errors are not measured. Six matches from one dataset were evaluated, and the nine-match folds are internal to it; we make no claim about other datasets. The method needs labelled crops of each group from the same half (24 with six references), and the prospective replay covered only 3 of 6 halves because goalkeeper references were missing in the others. The retrospective protocol uses later jersey labels to pick references, so its figures are not deployment estimates. The classifier has four classes, so a referee receives a team or goalkeeper label. The baseline was used with its published weights.

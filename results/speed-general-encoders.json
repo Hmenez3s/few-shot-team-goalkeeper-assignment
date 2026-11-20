@@ -1,0 +1,50 @@
+{
+  "batch": 20,
+  "repeats": 30,
+  "torch": "2.9.1",
+  "transformers": "5.23.0",
+  "machine": "arm64",
+  "threads": 8,
+  "models": {
+    "reference_classifier": {
+      "input_hw": [
+        96,
+        48
+      ],
+      "parameters": 11176512,
+      "multiply_accumulates_per_crop": 179134464,
+      "batch_ms": {
+        "cpu": 98.83179073221982,
+        "mps": 5.539145786315203
+      }
+    },
+    "siglip": {
+      "input_hw": [
+        224,
+        224
+      ],
+      "parameters": 92884224,
+      "multiply_accumulates_per_crop": 17000208384,
+      "batch_ms": {
+        "cpu": 446.3452498894185,
+        "mps": 194.21170791611075
+      }
+    },
+    "clip": {
+      "input_hw": [
+        224,
+        224
+      ],
+      "parameters": 87456000,
+      "multiply_accumulates_per_crop": 4362338304,
+      "batch_ms": {
+        "cpu": 98.91324979253113,
+        "mps": 53.18858358077705
+      }
+    }
+  },
+  "roboflow_umap_kmeans_per_clip": {
+    "first_call_ms": 3606.832208111882,
+    "median_later_calls_ms": 20.889833103865385
+  }
+}

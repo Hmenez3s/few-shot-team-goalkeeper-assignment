@@ -48,15 +48,16 @@ Details in [RESEARCH.md](RESEARCH.md) and the [preprint](paper/main.pdf).
 
 ## Speed
 
-**Against the SoccerNet baseline** (same Mac, same PyTorch 1.13.1, CPU, 20 player crops):
+**Encoder cost** for 20 player crops, Apple M4 Pro:
 
-| | Ours (ResNet-18) | SoccerNet baseline (PRTReID) |
-|---|---:|---:|
-| Time per 20 crops | **123 ms** | 2,201 ms |
-| Compute per crop | **0.18 billion operations** | 5.31 billion operations |
-| Parameters | **11.2 M** | 33.4 M |
+| Encoder | Input | Parameters | Operations per crop | CPU | Mac GPU |
+|---|---|---:|---:|---:|---:|
+| **Ours (ResNet-18)** | 96×48 | **11.2 M** | **0.18 billion** | **99 ms** | **5.5 ms** |
+| CLIP ViT-B/32 | 224×224 | 87.5 M | 4.36 billion | 99 ms | 53 ms |
+| SigLIP base (Roboflow pipeline) | 224×224 | 92.9 M | 17.00 billion | 446 ms | 194 ms |
+| PRTReID (SoccerNet baseline) | 256×128 | 33.4 M | 5.31 billion | 2,201 ms | – |
 
-About **18× faster** and **30× less compute**. [Details](results/speed-comparison.json).
+PRTReID requires PyTorch 1.13.1, which crashes on the Mac GPU; it was timed on CPU in that version, where ours takes 123 ms. The others use PyTorch 2.9.1. The Roboflow pipeline also runs UMAP and K-means once per clip (about 21 ms). Details: [general encoders](results/speed-general-encoders.json), [PRTReID](results/speed-comparison.json).
 
 **On an Apple M4 Pro**, six-reference model, 20 player crops per batch:
 

@@ -39,7 +39,7 @@ Same 5,842 boxes from six held-out matches (2, 3, 5, 7, 8, 11), with the same tr
 - **Matches 7, 8, 11:** 98.98% against 83.55%.
 - **Matches 2, 3, 5:** 96.08% against 50.93%. In match 3 the baseline labels 418 of its 1,072 boxes as referees or the ball.
 
-Details in [RESEARCH.md](RESEARCH.md).
+Details in [RESEARCH.md](RESEARCH.md) and the [preprint](paper/main.pdf).
 
 ## Speed
 
@@ -153,7 +153,8 @@ python quantize.py --root "$PWD/data" --checkpoint data/work/six-references/chec
 ├── models/            Trained checkpoints and Core ML package
 ├── results/           Evaluation results and logs; see its README
 ├── media/             Demonstration video and example frames
-└── dataset-audit/     Standalone SoccerNet label audit
+├── dataset-audit/     Standalone SoccerNet label audit
+└── paper/             Preprint (LaTeX source and PDF)
 ```
 
 ## Dataset audit

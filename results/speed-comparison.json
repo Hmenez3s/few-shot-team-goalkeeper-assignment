@@ -1,0 +1,35 @@
+{
+  "batch": 20,
+  "repeats": 30,
+  "torch": "1.13.1",
+  "machine": "arm64",
+  "processor": "arm",
+  "threads": 8,
+  "models": {
+    "reference_classifier": {
+      "input_hw": [
+        96,
+        48
+      ],
+      "parameters": 11176512,
+      "macs_per_crop": 179134464,
+      "batch_ms": {
+        "cpu": 122.65206250000027,
+        "mps": 6.1765210000004345
+      }
+    },
+    "prtreid": {
+      "input_hw": [
+        256,
+        128
+      ],
+      "parameters": 33381186,
+      "macs_per_crop": 5306593792,
+      "batch_ms": {
+        "cpu": 2200.990708500001
+      }
+    }
+  },
+  "note": "PRTReID is measured on CPU only: with torch 1.13.1 its forward pass aborts on MPS with a Metal buffer assertion",
+  "kmeans_two_clusters_24_tracks_ms": 0.7304170000068666
+}

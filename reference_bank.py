@@ -1,6 +1,7 @@
 import argparse
 import hashlib
 import json
+import math
 import os
 import re
 import sys
@@ -51,7 +52,8 @@ def bank_identity(root, manifest, entry, bank_path):
     clips = [clip for clip in manifest.get("clips", [])
              if isinstance(clip, dict) and clip.get("split") == entry.get("split")
              and clip.get("game") == entry.get("game") and clip.get("clip") == entry.get("clip")]
-    if len(clips) != 1 or clips[0].get("path") != entry.get("path"):
+    if (len(clips) != 1 or not clips[0].get("path") or not entry.get("path")
+            or (Path(root) / clips[0]["path"]).resolve() != (Path(root) / entry["path"]).resolve()):
         raise ValueError(f"{entry.get('clip')}: prepared clip entry is missing or ambiguous")
     units = [unit for unit in manifest.get("audit", {}).get("units", [])
              if isinstance(unit, dict) and unit.get("split") == entry.get("split")
@@ -60,13 +62,9 @@ def bank_identity(root, manifest, entry, bank_path):
     if len(units) != 1:
         raise ValueError(f"{entry.get('clip')}: unit manifest entry is missing or ambiguous")
     unit = units[0]
-    try:
-        cutoff_value = unit["cutoff_ms"]
-        cutoff = int(cutoff_value)
-    except (KeyError, TypeError, ValueError) as error:
-        raise ValueError(f"{entry.get('clip')}: invalid unit cutoff") from error
-    if not isinstance(cutoff_value, int) or isinstance(cutoff_value, bool):
-        raise ValueError(f"{entry.get('clip')}: unit cutoff must be an exact integer")
+    cutoff = unit.get("cutoff_ms")
+    if type(cutoff) not in (int, float) or not np.isfinite(cutoff):
+        raise ValueError(f"{entry.get('clip')}: unit cutoff must be a finite number")
     path = Path(bank_path)
     if path.name != f"{entry['clip']}.npz":
         raise ValueError(f"{path}: unexpected bank path for {entry['clip']}")
@@ -76,7 +74,7 @@ def bank_identity(root, manifest, entry, bank_path):
     return {"bank_schema": BANK_SCHEMA,
             "protocol_id": normalized_protocol_id(manifest),
             "prepared_sha256": sha256_file(prepared_path),
-            "cutoff_ms": cutoff}
+            "cutoff_ms": math.ceil(cutoff)}
 
 
 def frame_rows(record):
@@ -227,7 +225,7 @@ def read_unit_candidates(root, unit, prepared_times, audit, manifest):
             im_dir = safe_text(record.get("info", {}).get("im_dir"))
             for row in frame_rows(record):
                 frame_time = prepare.timestamp(row, clip_start, frame_rate)
-                if frame_time is None or frame_time >= int(unit["cutoff_ms"]):
+                if frame_time is None or frame_time >= unit["cutoff_ms"]:
                     continue
                 annotations = annotations_by_image[str(row.get("image_id"))]
                 if not annotations:
@@ -382,7 +380,7 @@ def main():
         atomic_npz(bank_path, arrays)
         coverage = {str(class_id): int(np.count_nonzero(arrays["y"] == class_id)) for class_id in range(4)}
         audit["units"].append({"split": unit["split"], "game": unit["game"], "half": unit["half"], "key": unit["key"],
-                               "cutoff_ms": int(unit["cutoff_ms"]), "source_clip_ids": unit["source_clip_ids"],
+                               "cutoff_ms": unit["cutoff_ms"], "source_clip_ids": unit["source_clip_ids"],
                                "timestamped_early_frames": frame_count, "selected_frames": selected_count,
                                "candidate_count": len(candidates), "coverage_by_class": coverage,
                                "prepared_early_times": len(prepared_times),

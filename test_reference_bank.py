@@ -56,6 +56,13 @@ class ReferenceBankTests(unittest.TestCase):
         bank = six_references.load_bank(self.path, self.root, self.manifest, self.entry)
         self.assertTrue(np.isnan(bank["desc"][0, :2]).all())
 
+    def test_manifest_midpoint_and_runtime_resolved_path(self):
+        self.manifest["audit"]["units"][0]["cutoff_ms"] = 100.5
+        self.write_bank(np.asarray([100], dtype=np.int64))
+        entry = {**self.entry, "path": self.prepared.resolve()}
+        bank = six_references.load_bank(self.path, self.root, self.manifest, entry)
+        self.assertEqual(bank["t"].tolist(), [100])
+
     def test_bank_rejects_stale_timestamps_and_missing_identity(self):
         self.write_bank(np.asarray([100], dtype=np.int64))
         with self.assertRaisesRegex(ValueError, "unit cutoff"):

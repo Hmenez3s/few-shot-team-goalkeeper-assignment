@@ -4,7 +4,7 @@
 ![Dataset: SoccerNet GSR 2025](https://img.shields.io/badge/dataset-SoccerNet%20GSR%202025-334155)
 ![Backbone: ResNet-18](https://img.shields.io/badge/backbone-ResNet--18-334155)
 
-Sorts the players of a football match into four groups — **team A, team B, goalkeeper A, goalkeeper B** — from a few example crops of each group taken earlier in the same match.
+Sorts the players of a football match into four groups — **team A, team B, goalkeeper A, goalkeeper B** — from a few example crops of each group taken earlier in the same match. The model, **FewShot-R18**, is a ResNet-18 trained to compare each player with those examples; it works with one example per group (1-shot) or six (6-shot).
 
 <p align="center">
   <a href="media/classification-game-7.mp4"><img src="media/classification-game-7.gif" width="100%" alt="Football match with every player box labelled by team and role."></a>
@@ -19,8 +19,8 @@ Three matches never seen in training, 2,659 player boxes. **Score** is the avera
 | Model | Score | Team A | Team B | Goalkeeper A | Goalkeeper B |
 |---|---:|---:|---:|---:|---:|
 | ImageNet ResNet-18, not fine-tuned, one reference | 48.06% | 57.22% | 55.27% | 40.26% | 39.51% |
-| **One reference per group** | **86.10%** | 96.05% | 97.73% | 75.32% | 75.31% |
-| **Six references per group** | **93.81%** | 96.45% | 97.89% | 88.31% | 92.59% |
+| **FewShot-R18, 1-shot** | **86.10%** | 96.05% | 97.73% | 75.32% | 75.31% |
+| **FewShot-R18, 6-shot** | **93.81%** | 96.45% | 97.89% | 88.31% | 92.59% |
 
 - **Across all nine matches**, each held out in turn: **85.04%** on 9,130 boxes.
 - **Five training seeds:** 89.00% ± 2.86 (one reference).
@@ -36,10 +36,10 @@ Same 5,842 boxes from six held-out matches (2, 3, 5, 7, 8, 11), with the same tr
 | Roboflow pipeline (SigLIP + UMAP + K-means) | none | 70.85% | 84.18% | 84.14% | 57.42% | 57.65% |
 | Frozen CLIP, same references, tracklets | 6 per group | 82.17% | 93.32% | 73.20% | 90.97% | 71.18% |
 | Frozen SigLIP, same references, tracklets | 6 per group | 87.98% | 94.38% | 84.10% | 92.26% | 81.18% |
-| **Ours, averaged over each tracklet** | 6 per group | **97.45%** | 96.88% | 99.57% | 98.06% | 95.29% |
-| Ours, each box alone | 6 per group | 92.42% | 92.13% | 94.28% | 90.32% | 92.94% |
+| **FewShot-R18, 6-shot, averaged over each tracklet** | 6 per group | **97.45%** | 96.88% | 99.57% | 98.06% | 95.29% |
+| FewShot-R18, 6-shot, each box alone | 6 per group | 92.42% | 92.13% | 94.28% | 90.32% | 92.94% |
 
-The SoccerNet and Roboflow pipelines take the player/goalkeeper role of each box from PRTReID's role head. Given the true role of every box instead, the Roboflow pipeline reaches 96.05%. That number is not directly comparable: the method is handed the hardest part of the task, while ours decides roles itself. Ours still scores higher with tracklets.
+The SoccerNet and Roboflow pipelines take the player/goalkeeper role of each box from PRTReID's role head. Given the true role of every box instead, the Roboflow pipeline reaches 96.05%. That number is not directly comparable: the method is handed the hardest part of the task, while FewShot-R18 decides roles itself. FewShot-R18 still scores higher with tracklets.
 
 - **Matches 7, 8, 11:** 98.98% against 83.55% for the SoccerNet baseline.
 - **Matches 2, 3, 5:** 96.08% against 50.93%. In match 3 the baseline labels 418 of its 1,072 boxes as referees or the ball.
@@ -52,7 +52,7 @@ Details in [RESEARCH.md](RESEARCH.md) and the [preprint](paper/main.pdf).
 
 | Encoder | Input | Parameters | Operations per crop | CPU | Mac GPU |
 |---|---|---:|---:|---:|---:|
-| **Ours (ResNet-18)** | 96×48 | **11.2 M** | **0.18 billion** | **99 ms** | **5.5 ms** |
+| **FewShot-R18** | 96×48 | **11.2 M** | **0.18 billion** | **99 ms** | **5.5 ms** |
 | CLIP ViT-B/32 | 224×224 | 87.5 M | 4.36 billion | 99 ms | 53 ms |
 | SigLIP base (Roboflow pipeline) | 224×224 | 92.9 M | 17.00 billion | 446 ms | 194 ms |
 | PRTReID (SoccerNet baseline) | 256×128 | 33.4 M | 5.31 billion | 2,201 ms | – |
@@ -144,10 +144,10 @@ labels = (embed(box_crops) @ groups.T).argmax(axis=1)
 
 | File | Description |
 |---|---|
-| [`models/one-reference.pth`](models/one-reference.pth) | One reference per group |
-| [`models/six-references.pth`](models/six-references.pth) | Six references per group |
-| [`models/six-references-fp16.pth`](models/six-references-fp16.pth) | Six references, half the size |
-| [`models/six-references-int8.mlpackage`](models/six-references-int8.mlpackage) | Six references, Core ML INT8 |
+| [`models/one-reference.pth`](models/one-reference.pth) | FewShot-R18, 1-shot |
+| [`models/six-references.pth`](models/six-references.pth) | FewShot-R18, 6-shot |
+| [`models/six-references-fp16.pth`](models/six-references-fp16.pth) | FewShot-R18, 6-shot, half the size |
+| [`models/six-references-int8.mlpackage`](models/six-references-int8.mlpackage) | FewShot-R18, 6-shot, Core ML INT8 |
 
 Checksums: [`models/SHA256SUMS`](models/SHA256SUMS).
 

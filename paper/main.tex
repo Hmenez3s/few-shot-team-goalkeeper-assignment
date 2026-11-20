@@ -32,7 +32,7 @@
 \maketitle
 
 \begin{abstract}
-Kit colours change every match, so a fixed classifier cannot assign football players to teams. We study the task as 4-way few-shot classification, with one or six labelled examples per class: given the player boxes of a broadcast clip and $k$ labelled reference crops for each of four groups (team A, team B, goalkeeper A, goalkeeper B) taken earlier in the same half, a ResNet-18 embeds all crops and each box takes the group whose mean reference embedding is closest in cosine similarity. This is a prototypical network trained episodically; our contribution is the formulation, the evaluation and the comparison, not a new architecture. On 5,842 boxes from six held-out SoccerNet Game State Reconstruction matches, with the same ground-truth boxes, tracklets and pitch positions for every method, the official SoccerNet baseline (PRTReID embeddings, per-clip K-means) scores 66.15\%, the mean of four per-group accuracies. Our model with six references and tracklet averaging scores 97.45\%. With the same six references, frozen SigLIP and CLIP encoders score 87.98\% and 82.17\%. A SigLIP, UMAP and K-means team pipeline from the Roboflow sports toolkit scores 70.85\% with predicted roles, and 96.05\% when it is given the true role of every box. We also report reference-draw variance, rotated folds, a prospective replay, and Core ML latency (2.24 ms for 20 crops). Five SN-GSR-2025 clips have swapped outfield team labels; we give the evidence and use corrected labels.
+Kit colours change every match, so a fixed classifier cannot assign football players to teams. We study the task as 4-way few-shot classification, with one or six labelled examples per class: given the player boxes of a broadcast clip and $k$ labelled reference crops for each of four groups (team A, team B, goalkeeper A, goalkeeper B) taken earlier in the same half, a ResNet-18 embeds all crops and each box takes the group whose mean reference embedding is closest in cosine similarity. This is a prototypical network trained episodically, which we call FewShot-R18; our contribution is the formulation, the evaluation and the comparison, not a new architecture. On 5,842 boxes from six held-out SoccerNet Game State Reconstruction matches, with the same ground-truth boxes, tracklets and pitch positions for every method, the official SoccerNet baseline (PRTReID embeddings, per-clip K-means) scores 66.15\%, the mean of four per-group accuracies. Our model with six references and tracklet averaging scores 97.45\%. With the same six references, frozen SigLIP and CLIP encoders score 87.98\% and 82.17\%. A SigLIP, UMAP and K-means team pipeline from the Roboflow sports toolkit scores 70.85\% with predicted roles, and 96.05\% when it is given the true role of every box. We also report reference-draw variance, rotated folds, a prospective replay, and Core ML latency (2.24 ms for 20 crops). Five SN-GSR-2025 clips have swapped outfield team labels; we give the evidence and use corrected labels.
 \end{abstract}
 
 \section{Introduction}
@@ -41,7 +41,7 @@ A broadcast analysis system must decide, for every player box, which team the pl
 
 We ask a different question: how much does a small amount of labelled evidence from the same half help? An operator supplies $k$ labelled crops for each of four groups, taken earlier in the same half. A single four-way decision then assigns every box to team A, team B, goalkeeper A or goalkeeper B, and so ties each goalkeeper to a team. No clustering and no camera calibration are needed.
 
-Methodologically, this is a prototypical network~\cite{snell2017prototypical} with a ResNet-18 encoder~\cite{he2016resnet}; we do not propose a new architecture. The contributions are the four-group formulation with references from the same half (Section~\ref{sec:method}); a like-for-like comparison with the official SoccerNet team method on 5,842 boxes from six held-out matches, with the same ground-truth tracklets and pitch coordinates for both, extended to frozen SigLIP and CLIP encoders and to the Roboflow team pipeline (Section~\ref{sec:results}); an evaluation of reference choice, seeds, held-out matches, prospective use and box overlap (Sections~\ref{sec:variance}--\ref{sec:errors}); and the finding that five clips of SN-GSR-2025 have swapped outfield team labels (Section~\ref{sec:audit}). Code, checkpoints, results and the label audit are released as version 1.3 at \url{https://github.com/Hmenez3s/four-reference-team-classifier/tree/v1.3}.
+Methodologically, this is a prototypical network~\cite{snell2017prototypical} with a ResNet-18 encoder~\cite{he2016resnet}; we do not propose a new architecture. We call the trained model FewShot-R18: the standard ResNet-18 without its classification layer, fine-tuned to compare player crops with the references. The contributions are the four-group formulation with references from the same half (Section~\ref{sec:method}); a like-for-like comparison with the official SoccerNet team method on 5,842 boxes from six held-out matches, with the same ground-truth tracklets and pitch coordinates for both, extended to frozen SigLIP and CLIP encoders and to the Roboflow team pipeline (Section~\ref{sec:results}); an evaluation of reference choice, seeds, held-out matches, prospective use and box overlap (Sections~\ref{sec:variance}--\ref{sec:errors}); and the finding that five clips of SN-GSR-2025 have swapped outfield team labels (Section~\ref{sec:audit}). Code, checkpoints, results and the label audit are released as version 1.3 at \url{https://github.com/Hmenez3s/four-reference-team-classifier/tree/v1.3}.
 
 \section{Related work}
 
@@ -89,7 +89,7 @@ and a box $q$ is assigned to $\arg\max_c \cos\big(f(q),p_c\big)$. During trainin
 
 \textbf{Tracklet averaging.} Optionally, the embeddings of all boxes of one tracklet in the half are averaged and normalised before the comparison, and the tracklet takes one label. The SoccerNet baseline also pools information per tracklet, so this gives both methods the same information. It needs tracklets and works offline over the half.
 
-\textbf{Episodic training.} An episode samples one training half and draws one reference crop per group from its early part. For outfield groups the reference is an athlete, and queries exclude that athlete. Up to four box crops per group from the later part of the half serve as queries. For six references, five more crops of the same athlete (or goalkeeper) from other earlier frames are added to each group. We train for 8 epochs of 180 episodes with AdamW~\cite{loshchilov2017adamw} (learning rate $2\times10^{-4}$, weight decay $10^{-4}$) and cosine learning-rate decay. The checkpoint with the best macro recall on the validation matches is kept. We train two models: one with one reference per group and one with six.
+\textbf{Episodic training.} An episode samples one training half and draws one reference crop per group from its early part. For outfield groups the reference is an athlete, and queries exclude that athlete. Up to four box crops per group from the later part of the half serve as queries. For six references, five more crops of the same athlete (or goalkeeper) from other earlier frames are added to each group. We train for 8 epochs of 180 episodes with AdamW~\cite{loshchilov2017adamw} (learning rate $2\times10^{-4}$, weight decay $10^{-4}$) and cosine learning-rate decay. The checkpoint with the best macro recall on the validation matches is kept. We train two models: FewShot-R18 1-shot, with one reference per group, and FewShot-R18 6-shot, with six.
 
 \section{Experimental protocol}
 \label{sec:protocol}
@@ -133,11 +133,11 @@ CLIP, tracklets & 82.17 & 83.11 & 93.32 & 73.20 & 90.97 & 71.18 \\
 SigLIP, each box & 74.34 & 76.67 & 82.15 & 71.79 & 72.26 & 71.18 \\
 SigLIP, tracklets & 87.98 & 89.08 & 94.38 & 84.10 & 92.26 & 81.18 \\
 \midrule
-\multicolumn{7}{l}{\emph{Ours}} \\
-1 reference, each box & 87.69 & 91.00 & 89.84 & 92.97 & 83.23 & 84.71 \\
-1 reference, tracklets & 91.27 & 94.20 & 91.44 & 97.68 & 87.74 & 88.24 \\
-6 references, each box & 92.42 & 93.12 & 92.13 & 94.28 & 90.32 & 92.94 \\
-6 references, tracklets & \textbf{97.45} & \textbf{98.13} & 96.88 & 99.57 & 98.06 & 95.29 \\
+\multicolumn{7}{l}{\emph{FewShot-R18 (ours)}} \\
+1-shot, each box & 87.69 & 91.00 & 89.84 & 92.97 & 83.23 & 84.71 \\
+1-shot, tracklets & 91.27 & 94.20 & 91.44 & 97.68 & 87.74 & 88.24 \\
+6-shot, each box & 92.42 & 93.12 & 92.13 & 94.28 & 90.32 & 92.94 \\
+6-shot, tracklets & \textbf{97.45} & \textbf{98.13} & 96.88 & 99.57 & 98.06 & 95.29 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -165,10 +165,10 @@ SoccerNet baseline, best cluster mapping$^\dagger$ & 99.31 & 99.25 & 89.41 & 83.
 Roboflow pipeline$^\dagger$ & 98.15 & 97.07 & 94.13 & 93.84 \\
 SigLIP (frozen), six references, tracklets & 93.09 & 94.77 & 83.52 & 84.32 \\
 \midrule
-Ours, 1 reference, each box & 86.10 & 95.60 & 89.49 & 87.15 \\
-Ours, 1 reference, tracklets & 88.99 & 98.16 & 93.64 & 90.89 \\
-Ours, 6 references, each box & 93.81 & 96.77 & 91.34 & 90.07 \\
-Ours, 6 references, tracklets & \textbf{98.98} & \textbf{99.70} & \textbf{96.08} & \textbf{96.83} \\
+FewShot-R18, 1-shot, each box & 86.10 & 95.60 & 89.49 & 87.15 \\
+FewShot-R18, 1-shot, tracklets & 88.99 & 98.16 & 93.64 & 90.89 \\
+FewShot-R18, 6-shot, each box & 93.81 & 96.77 & 91.34 & 90.07 \\
+FewShot-R18, 6-shot, tracklets & \textbf{98.98} & \textbf{99.70} & \textbf{96.08} & \textbf{96.83} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -338,7 +338,7 @@ INT8, same weights, dense kernels & 94.50 & 0.47 & 94.84 & 0.58 \\
 \toprule
 Encoder & Input & Parameters (M) & MACs (G) & CPU (ms) & GPU (ms) \\
 \midrule
-Ours (ResNet-18) & 96$\times$48 & 11.2 & 0.18 & 99 & 5.5 \\
+FewShot-R18 (ResNet-18) & 96$\times$48 & 11.2 & 0.18 & 99 & 5.5 \\
 CLIP ViT-B/32 & 224$\times$224 & 87.5 & 4.36 & 99 & 53 \\
 SigLIP base & 224$\times$224 & 92.9 & 17.00 & 446 & 194 \\
 PRTReID (HRNet-W32)$^\ast$ & 256$\times$128 & 33.4 & 5.31 & 2,201 & -- \\

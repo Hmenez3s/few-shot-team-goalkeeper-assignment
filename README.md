@@ -117,19 +117,32 @@ Per match:
 
 On the validation matches the one-reference model reaches 85.03% of 3,193 boxes (88.09% class mean), the six-reference model 89.10% (92.82%), and the frozen one 54.87% (50.42%). The validation gain of the six-reference model did not carry over to the overall test accuracy. Full confusion matrices and per-session numbers are in [`results/result.json`](results/result.json) and [`results/six-references.json`](results/six-references.json).
 
-## Speed
+## Speed and precision
 
-Measured with `benchmark.py` on an Apple M4 Pro (PyTorch 2.9.1), using the six-reference model and 20 player boxes per frame, which is about how many a broadcast frame shows.
+The six-reference model was exported in three precisions and run on each compute unit of an Apple M4 Pro. Every row below classifies the same 2,671 test boxes with the same references, and times one batch of 20 boxes, about how many players a broadcast frame shows. Measured with `evaluate_formats.py`; the full numbers are in [`results/formats.json`](results/formats.json).
 
-| | Apple GPU (MPS) | CPU |
-|---|---:|---:|
-| Crop 20 boxes from a 1920 × 1080 frame | 0.63 ms | 0.59 ms |
-| Classify the 20 boxes in one batch | 6.19 ms | 92.93 ms |
-| **Per frame** | **6.82 ms** | **93.52 ms** |
-| **Frames per second** | **147** | **11** |
-| Encode the 24 references, once per match | 6.84 ms | 106.32 ms |
+| Compute unit | Runtime | Precision | Test accuracy | Mean of the four classes | 20 boxes | Frames per second |
+|---|---|---|---:|---:|---:|---:|
+| CPU | PyTorch | FP32 | 91.54% | 92.28% | 95.00 ms | 11 |
+| CPU | Core ML | INT8 | 91.54% | 92.28% | 7.81 ms | 128 |
+| GPU | PyTorch | FP32 | 91.54% | 92.28% | 11.09 ms | 90 |
+| GPU | PyTorch | FP16 | 91.54% | 92.28% | 11.87 ms | 84 |
+| GPU | Core ML | INT8 | 91.65% | 92.34% | 6.83 ms | 146 |
+| Neural Engine | Core ML | FP16 | 91.50% | 92.26% | 2.67 ms | 375 |
+| **Neural Engine** | **Core ML** | **INT8** | **91.54%** | **92.28%** | **2.30 ms** | **434** |
 
-The 24 reference crops (six per class) go through the network once, as one batch, and are reduced to four vectors. After that, every box costs one forward pass, exactly as with a single reference, so the one-reference model runs at the same speed. Boxes of a frame should be sent together: on the GPU, classifying the 20 boxes one at a time takes 78.99 ms instead of 6.19 ms. The numbers exclude video decoding and producing the boxes.
+What to use:
+
+| Compute unit | Model | Why |
+|---|---|---|
+| Neural Engine | [`models/six-references-int8.mlpackage`](models/six-references-int8.mlpackage) | Fastest configuration measured, same accuracy as FP32 |
+| GPU | [`models/six-references-int8.mlpackage`](models/six-references-int8.mlpackage) | Faster than PyTorch on the GPU at the same accuracy |
+| CPU on a Mac | [`models/six-references-int8.mlpackage`](models/six-references-int8.mlpackage) | 12 times faster than PyTorch FP32 on the CPU, same accuracy |
+| CPU elsewhere | [`models/six-references.pth`](models/six-references.pth) | Core ML only runs on Apple platforms; FP32 is the reference result |
+
+The INT8 model quantizes both the weights and the activations. Its scales were calibrated on 240 crops from the training matches only, and the network was not retrained. Core ML's compute plan places all 20 convolutions on the requested unit in every Core ML row. Across the seven rows the number of correct boxes stays between 2,444 and 2,448 out of 2,671.
+
+The 24 reference crops (six per class) go through the network once, as one batch, and are reduced to four vectors; on the Neural Engine this takes 4.30 ms once per match. After that, every box costs one forward pass, exactly as with a single reference. Send the boxes of a frame together: the network is much faster per box in a batch than one box at a time. On the GPU, PyTorch FP16 showed no consistent gain over FP32 in this measurement; repeated runs varied by about one millisecond. The timings exclude video decoding, producing the boxes and cutting the crops, which takes about 0.6 ms for 20 boxes.
 
 ## What it looks like
 
@@ -158,18 +171,25 @@ pip install -r requirements.txt
 ./run.sh                                      # verify checksums, build sessions, train and test both models
 python visualize.py --root data --out media   # example sheets, video and GIF (needs ffmpeg)
 python benchmark.py                           # frames per second on this machine
+pip install -r requirements-coreml.txt        # macOS only, for the next two lines
+python quantize.py --root data                # FP16 checkpoint and Core ML INT8 package
+python evaluate_formats.py --root data        # accuracy and latency per compute unit and precision
 ```
 
 `run.sh` trains the one-reference model (`data/work/checkpoint.pth`, `data/work/result.json`), builds the reference bank (`data/work/references/`, about 4 GB) and trains the six-reference model (`data/work/six-references/`). The full run takes about ten minutes on an Apple-silicon GPU. A fresh run of these scripts (PyTorch 2.9.1) reproduced `results/result.json` and the one-reference checkpoint byte for byte, and the six-reference validation results epoch by epoch. Other hardware or library versions may differ in the last digits.
 
 ### Trained models
 
-Both checkpoints are in [`models/`](models) and attached to the [v1.1 release](https://github.com/Hmenez3s/four-reference-team-classifier/releases/tag/v1.1).
+All models are in [`models/`](models) and attached to the [v1.2 release](https://github.com/Hmenez3s/four-reference-team-classifier/releases/tag/v1.2).
 
 | File | References per class | SHA-256 |
 |---|---:|---|
 | [`models/one-reference.pth`](models/one-reference.pth) | 1 | `e85b9de6153db41c3dac9a5139f81f1ca76a2db7aecc99610ade35b3ee5c210a` |
 | [`models/six-references.pth`](models/six-references.pth) | 6 | `945d904e6daa63718efa01c022f23163358d68f45072f26cf99c17bcbe9c635c` |
+| [`models/six-references-fp16.pth`](models/six-references-fp16.pth) | 6, FP16 weights | `5f4f30efde460afcedb2cf14f03047bcd572fd208a1cab48e7db6e2c347d6289` |
+| [`models/six-references-int8.mlpackage`](models/six-references-int8.mlpackage) | 6, Core ML INT8 (11 MB) | weights `1f51249fb650259a3c213bce0fdf9e204136c340b91d2736568df2d92b6db3a7` |
+
+The FP16 and INT8 files are derived from `six-references.pth` by `quantize.py`. The Core ML package takes exactly 20 normalised crops per call (pad the last batch) and returns their 512-number vectors; the comparison with the references stays in Python.
 
 ### Classify your own boxes
 
@@ -191,6 +211,31 @@ with torch.no_grad():
     references = six_references.class_prototypes(model(six_references.batch_crops(reference_crops, device)), per_class)
     boxes = model(six_references.batch_crops(box_crops, device))
 labels = train.cosine_logits(boxes, references).argmax(dim=1).tolist()
+```
+
+With the Core ML INT8 package on a Mac, the same comparison runs on the Neural Engine:
+
+```python
+import coremltools as ct
+import numpy as np
+import six_references
+import torch
+
+model = ct.models.MLModel("models/six-references-int8.mlpackage", compute_units=ct.ComputeUnit.CPU_AND_NE)
+
+def embed(crops):
+    data = six_references.batch_crops(crops, torch.device("cpu")).numpy()
+    out = []
+    for start in range(0, len(data), 20):
+        chunk = data[start:start + 20]
+        padded = np.concatenate([chunk, np.repeat(chunk[-1:], 20 - len(chunk), axis=0)])
+        out.append(model.predict({"crops": padded})["embedding"][:len(chunk)])
+    vectors = np.concatenate(out)
+    return vectors / np.linalg.norm(vectors, axis=1, keepdims=True)
+
+references = embed(reference_crops).reshape(4, 6, -1).mean(axis=1)
+references /= np.linalg.norm(references, axis=1, keepdims=True)
+labels = (embed(box_crops) @ references.T).argmax(axis=1)
 ```
 
 `reference_crops` is a `uint8` array of shape `[4 × k, 96, 48, 3]`: the k crops of player A, then player B, goalkeeper A and goalkeeper B. Use k = 6 with `models/six-references.pth` and k = 1 with `models/one-reference.pth`. `box_crops` has shape `[N, 96, 48, 3]`, and `labels` holds an index into `train.CLASSES` for each box. Only `data/inputs/resnet18.pth` from `download.sh` is needed for this; the dataset is not.
@@ -217,8 +262,10 @@ labels = train.cosine_logits(boxes, references).argmax(dim=1).tolist()
 | `six_references.py` | Training, checkpoint selection and test evaluation with six references per class |
 | `visualize.py` | Example sheets, the classified video and its GIF |
 | `benchmark.py` | Timing of cropping, reference encoding and classification per frame |
+| `quantize.py` | FP16 checkpoint and Core ML INT8 package, calibrated on training crops |
+| `evaluate_formats.py` | Test accuracy and latency for each compute unit and precision |
 | `run.sh` | Runs checksum verification, `prepare.py`, `train.py`, `reference_bank.py` and `six_references.py` in order |
-| `models/` | The one- and six-reference checkpoints |
+| `models/` | The one- and six-reference checkpoints, plus the FP16 and Core ML INT8 exports |
 | `results/` | Metrics, split audit, duplicate-crop check and training logs of both models |
 | `media/` | Images and video shown in this README |
 

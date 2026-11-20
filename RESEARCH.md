@@ -1,5 +1,7 @@
 # Reference-conditioned football classification: robustness study
 
+> **Historical, superseded metrics.** This report uses the original camera-relative team labels as if they were stable within each half. Its identity-filtered evaluation also used later jersey labels to construct earlier-reference episodes and to select scored crops. The numbers below document that prior run; they are not evidence of corrected team identity or prospective deployment performance.
+
 This study classifies pre-detected crops as player A/B or goalkeeper A/B from labeled examples earlier in the same half. It evaluates a specific four-class protocol. It does not introduce a new architecture, learning rule, detector or tracker.
 
 ## Reference sensitivity and appearance baselines

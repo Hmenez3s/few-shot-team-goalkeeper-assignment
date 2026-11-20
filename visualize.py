@@ -11,6 +11,7 @@ import torch
 from PIL import Image, ImageDraw, ImageFont
 
 import prepare
+import reference_bank
 import train
 
 LABELS = ["Player A", "Player B", "Goalkeeper A", "Goalkeeper B"]
@@ -141,11 +142,21 @@ def video(root, model, device, unit, source_clip, output):
     with zipfile.ZipFile(root / "archives" / "test.zip") as archive:
         labels = json.loads(archive.read(f"{source_clip}/Labels-GameState.json"))
         info = labels["info"]
-        if info["game_id"] != entry["game"] or int(info["frame_rate"]) != 25:
+        identity = prepare.identity(labels)
+        timing = prepare.unit_identity(labels)
+        half = str(unit.rsplit("-", 1)[1])
+        if (identity is None
+                or identity[0] != str(entry["game"])
+                or f"SNGS-{identity[1].zfill(3)}" != source_clip
+                or int(info["frame_rate"]) != 25
+                or timing is None
+                or timing[0] != half):
             raise ValueError(f"{source_clip} does not belong to {unit}")
+        manifest = json.loads((root / "work" / "manifest.json").read_text(encoding="utf-8"))
+        swap_teams = reference_bank.team_swap_for_clip(manifest, "test", entry["game"], half, identity[1])
         boxes = collections.defaultdict(list)
         for annotation in labels["annotations"]:
-            class_id = prepare.label_class(annotation)
+            class_id = prepare.label_class(annotation, swap_teams)
             if annotation.get("supercategory") == "object" and class_id is not None and isinstance(annotation.get("bbox_image"), dict):
                 boxes[str(annotation["image_id"])].append((class_id, annotation["bbox_image"]))
         rows = sorted((row for row in labels["images"] if row.get("is_labeled") is True), key=lambda row: row["file_name"])

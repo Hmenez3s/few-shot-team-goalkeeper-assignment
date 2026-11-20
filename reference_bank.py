@@ -111,7 +111,30 @@ def clip_identity(record):
     return safe_text(info.get("game_id")), safe_text(info.get("id"))
 
 
-def read_unit_candidates(root, unit, prepared_times, audit):
+def team_swap_for_clip(manifest, split, game, half, clip):
+    audit = manifest.get("audit", {})
+    normalization = audit.get("team_normalization")
+    if not isinstance(normalization, dict) or normalization.get("schema") != 1:
+        raise ValueError("corrected team normalization is missing; rerun prepare.py before consuming raw clips")
+    assignments = audit.get("team_normalization_assignments")
+    if not isinstance(assignments, list):
+        raise ValueError("team normalization assignments are missing; rerun prepare.py")
+    matches = [assignment for assignment in assignments
+               if isinstance(assignment, dict)
+               and assignment.get("split") == split
+               and str(assignment.get("game")) == str(game)
+               and str(assignment.get("half")) == str(half)
+               and assignment.get("clip") == clip]
+    if not matches:
+        raise ValueError(f"no team normalization assignment for {split}/{game}/half-{half}/{clip}; rerun prepare.py")
+    if len(matches) != 1:
+        raise ValueError(f"duplicate team normalization assignments for {split}/{game}/half-{half}/{clip}")
+    orientation = matches[0].get("orientation")
+    if orientation not in {"unchanged", "swapped"}:
+        raise ValueError(f"unresolved team normalization assignment for {split}/{game}/half-{half}/{clip}; rerun prepare.py")
+    return orientation == "swapped"
+
+def read_unit_candidates(root, unit, prepared_times, audit, manifest):
     split = unit["split"]
     archive_path = root / "archives" / f"{split}.zip"
     candidates = []
@@ -133,9 +156,10 @@ def read_unit_candidates(root, unit, prepared_times, audit):
             timing = prepare.unit_identity(record)
             if timing is None or timing[0] != str(unit["half"]):
                 continue
-            labels.append((member, record, clip, timing))
+            swap_teams = team_swap_for_clip(manifest, split, unit["game"], timing[0], clip)
+            labels.append((member, record, clip, timing, swap_teams))
         frames = []
-        for member, record, clip, (_, clip_start, frame_rate) in labels:
+        for member, record, clip, (_, clip_start, frame_rate), swap_teams in labels:
             annotations_by_image = defaultdict(list)
             for annotation in record.get("annotations", []):
                 if isinstance(annotation, dict) and annotation.get("supercategory") == "object" and (annotation.get("attributes") or {}).get("role") in {"player", "goalkeeper", "referee", "other"}:
@@ -155,13 +179,14 @@ def read_unit_candidates(root, unit, prepared_times, audit):
                 if image_member is None:
                     audit["missing_image_members"] += 1
                     continue
-                frames.append({"time": frame_time, "clip": clip, "annotations": annotations, "image_member": image_member})
+                frames.append({"time": frame_time, "clip": clip, "annotations": annotations,
+                               "image_member": image_member, "swap_teams": swap_teams})
         frames.sort(key=lambda frame: (frame["time"], frame["clip"], frame["image_member"]))
         sampled_slots = {}
         for index, frame in enumerate(frames):
             slot = frame["time"] // SAMPLE_INTERVAL_MS
             sampled_slots.setdefault(slot, index)
-            if any(prepare.label_class(annotation) in (2, 3) for annotation in frame["annotations"]):
+            if any(prepare.label_class(annotation, frame["swap_teams"]) in (2, 3) for annotation in frame["annotations"]):
                 frame["goalkeeper_frame"] = True
             else:
                 frame["goalkeeper_frame"] = False
@@ -174,7 +199,7 @@ def read_unit_candidates(root, unit, prepared_times, audit):
             with archive.open(frame["image_member"]) as stream, Image.open(stream) as source:
                 image = source.convert("RGB")
             for annotation in frame["annotations"]:
-                class_id = prepare.label_class(annotation)
+                class_id = prepare.label_class(annotation, frame["swap_teams"])
                 if class_id is None:
                     continue
                 track = prepare.player_track(annotation, class_id)
@@ -277,7 +302,7 @@ def main():
         if not re.fullmatch(r"game-.+-half-[12]", str(unit["key"])):
             raise SystemExit(f"unexpected unit key: {unit['key']}")
         prepared_times = read_prepared_times(root, manifest, unit)
-        candidates, frame_count, selected_count = read_unit_candidates(root, unit, prepared_times, audit["exclusions"])
+        candidates, frame_count, selected_count = read_unit_candidates(root, unit, prepared_times, audit["exclusions"], manifest)
         arrays = {"x": np.stack([item["x"] for item in candidates]).astype(np.uint8, copy=False) if candidates else np.empty((0, 96, 48, 3), dtype=np.uint8),
                   "t": np.asarray([item["t"] for item in candidates], dtype=np.int64),
                   "y": np.asarray([item["y"] for item in candidates], dtype=np.int64),

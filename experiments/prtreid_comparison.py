@@ -202,7 +202,7 @@ def cluster_tracks(rows, embeddings, role_ids, ground_truth=False, oracle=False)
     return predictions, roles
 
 
-def evaluate(extract_path, embed_path, output):
+def evaluate(extract_path, embed_path, output, weights):
     data = np.load(extract_path, allow_pickle=False)
     rows = json.loads(str(data["metadata"]))
     pixels, offsets = data["pixels"], data["offsets"]
@@ -243,7 +243,7 @@ def evaluate(extract_path, embed_path, output):
                 pred = assigned[i]
             all_records.append((row, int(row["class"]), pred))
         variants[name] = {"scored_queries": _metrics(records), "all_player_goalkeeper": _metrics(all_records)}
-    weights = Path("/Users/j.henrique/soccer-prtreid-baseline.3o5PLhhC/weights")
+    weights = Path(weights)
     result = {"variants": variants, "counts": {"extracted": len(rows), "query_count": sum(r["query_index"] >= 0 for r in rows), "missing_pitch_x": sum(not np.isfinite(r["pitch_x"]) for r in rows), "clips": sorted({r["clip"] for r in rows}), "sessions": {f"{r['game']}-{r['session']}": sum(x['game'] == r['game'] and x['session'] == r['session'] for x in rows) for r in rows}}, "weights_md5": {name: hashlib.md5((weights / name).read_bytes()).hexdigest() for name in ("prtreid-soccernet-baseline.pth.tar", "hrnetv2_w32_imagenet_pretrained.pth")}, "source_commits": {"src-prtreid": "30617a7", "src-sn-gamestate": "1c95834"}}
     Path(output).write_text(json.dumps(result, indent=2))
     print(json.dumps(result, indent=2))
@@ -283,11 +283,12 @@ def main():
     eval_parser.add_argument("--extract", required=True, type=Path)
     eval_parser.add_argument("--embed", required=True, type=Path)
     eval_parser.add_argument("--out", required=True, type=Path)
+    eval_parser.add_argument("--weights", required=True, type=Path)
     args = parser.parse_args()
     if args.command == "extract":
         extract(args.root, args.out)
     else:
-        evaluate(args.extract, args.embed, args.out)
+        evaluate(args.extract, args.embed, args.out, args.weights)
 
 
 if __name__ == "__main__":

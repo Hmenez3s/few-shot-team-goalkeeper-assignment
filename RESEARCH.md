@@ -66,4 +66,48 @@ The regenerated twelve-second video was checked as a 150-frame 1280×824 MP4; it
 
 ## Comparison with the official SoccerNet baseline
 
-<!-- PRTREID_COMPARISON_DETAIL -->
+The SoccerNet Game State Reconstruction baseline assigns teams in three steps ([sn-gamestate](https://github.com/SoccerNet/sn-gamestate) at `1c95834`): PRTReID predicts each box's role and embedding; roles are majority-voted per tracklet; the mean embeddings of player tracklets are split by `KMeans(n_clusters=2, random_state=0)` per clip, and each cluster takes the side of its mean pitch position, while each goalkeeper takes the side of its own pitch position. We ran this logic on the same boxes we score, with ground-truth tracklets and pitch coordinates instead of a detector, tracker and calibration. This removes upstream errors for both methods. Boxes the baseline cannot assign (a non-player role or a missing pitch position) count as wrong.
+
+The official checkpoint (`prtreid-soccernet-baseline.pth.tar`, [Zenodo 10653453](https://zenodo.org/records/10653453)) was trained on SoccerNet-Tracking train, according to the PRTReID paper. Those 57 clips are exactly the SN-GSR-2025 train clips (games 4, 6, 9), so no evaluated match was seen by it. Our models for matches 7, 8, 11 were trained on 4, 6, 9 and selected on 2, 3, 5; for matches 2, 3, 5 they were retrained on 7, 8, 11 and selected on 4, 6, 9.
+
+**Score** is the mean of the four per-group accuracies; **accuracy** counts every box equally. "Tracklets" averages our embeddings over each ground-truth tracklet before comparing them with the references, the same information the baseline uses.
+
+**Matches 7, 8, 11 (2,659 boxes)**
+
+| Method | Score | Accuracy | Team A | Team B | Goalkeeper A | Goalkeeper B |
+|---|---:|---:|---:|---:|---:|---:|
+| SoccerNet baseline, official (predicted roles, side from pitch position) | 83.55% | 97.29% | 99.37% | 98.95% | 76.62% | 59.26% |
+| SoccerNet baseline, true roles | 96.65% | 94.25% | 94.55% | 93.27% | 100.00% | 98.77% |
+| SoccerNet baseline, true roles and best cluster-to-team mapping (upper bound) | 99.31% | 99.25% | 99.37% | 99.11% | 100.00% | 98.77% |
+| Ours, one reference, each box | 86.10% | 95.60% | 96.05% | 97.73% | 75.32% | 75.31% |
+| Ours, one reference, tracklets | 88.99% | 98.16% | 98.82% | 100.00% | 81.82% | 75.31% |
+| Ours, six references, each box | 93.81% | 96.77% | 96.45% | 97.89% | 88.31% | 92.59% |
+| Ours, six references, tracklets | 98.98% | 99.70% | 99.61% | 100.00% | 100.00% | 96.30% |
+
+**Matches 2, 3, 5 (3,183 boxes)**
+
+| Method | Score | Accuracy | Team A | Team B | Goalkeeper A | Goalkeeper B |
+|---|---:|---:|---:|---:|---:|---:|
+| SoccerNet baseline, official (predicted roles, side from pitch position) | 50.93% | 53.25% | 48.42% | 58.42% | 38.46% | 58.43% |
+| SoccerNet baseline, true roles | 89.41% | 83.47% | 75.15% | 90.18% | 92.31% | 100.00% |
+| SoccerNet baseline, true roles and best cluster-to-team mapping (upper bound) | 89.41% | 83.47% | 75.15% | 90.18% | 92.31% | 100.00% |
+| Ours, one reference, each box | 89.49% | 87.15% | 84.55% | 89.13% | 91.03% | 93.26% |
+| Ours, one reference, tracklets | 93.64% | 90.89% | 85.16% | 95.81% | 93.59% | 100.00% |
+| Ours, six references, each box | 91.34% | 90.07% | 88.45% | 91.36% | 92.31% | 93.26% |
+| Ours, six references, tracklets | 96.08% | 96.83% | 94.56% | 99.21% | 96.15% | 94.38% |
+
+**All six matches (5,842 boxes)**
+
+| Method | Score | Accuracy | Team A | Team B | Goalkeeper A | Goalkeeper B |
+|---|---:|---:|---:|---:|---:|---:|
+| SoccerNet baseline, official (predicted roles, side from pitch position) | 66.15% | 73.30% | 71.84% | 76.53% | 57.42% | 58.82% |
+| SoccerNet baseline, true roles | 92.79% | 88.38% | 84.07% | 91.56% | 96.13% | 99.41% |
+| SoccerNet baseline, true roles and best cluster-to-team mapping (upper bound) | 94.00% | 90.65% | 86.28% | 94.17% | 96.13% | 99.41% |
+| Ours, one reference, each box | 87.69% | 91.00% | 89.84% | 92.97% | 83.23% | 84.71% |
+| Ours, one reference, tracklets | 91.27% | 94.20% | 91.44% | 97.68% | 87.74% | 88.24% |
+| Ours, six references, each box | 92.42% | 93.12% | 92.13% | 94.28% | 90.32% | 92.94% |
+| Ours, six references, tracklets | 97.45% | 98.13% | 96.88% | 99.57% | 98.06% | 95.29% |
+
+In match 3 the baseline's role vote marks 418 of the 1,072 scored boxes as referees or the ball. With true roles its score on matches 2, 3, 5 rises to 89.41%; the remaining errors come from K-means splitting a team, since the best cluster-to-team mapping gives the same score. On matches 7, 8, 11 the pitch-side rule also swaps teams in some clips (96.65% with true roles, 99.31% with the best mapping). Even with true roles and the best possible cluster-to-team mapping, it scores 94.00% over six matches against 97.45% for six references with tracklets.
+
+Reproduce: build the rotated fold with [`experiments/rotated_fold.sh`](experiments/rotated_fold.sh), train both models on it with `train.py` and `six_references.py`, then run the commands in [`experiments/README.md`](experiments/README.md). Numbers: [`results/prtreid-comparison.json`](results/prtreid-comparison.json).

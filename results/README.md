@@ -6,7 +6,7 @@
 | `formats.json` | Runtime environment and format accuracy/latency measurements | `evaluate_formats.py` |
 | `occlusion.json` | Error counts and confusion matrices by box-overlap proxy | `experiments/analyze_errors.py` |
 | `prospective.json` | Prospective replay protocol, coverage, and scores | `experiments/prospective_evaluation.py` |
-| `prtreid-comparison.json` | PRTReID clustering and reference-classifier comparison | `experiments/prtreid_comparison.py` |
+| `prtreid-comparison.json` | Official SoccerNet team method against the reference classifier on six held-out matches: per-group accuracies, scores and confusion matrices | `experiments/prtreid_comparison.py`, `experiments/tracklet_comparison.py` |
 | `research-reference-draws.json` | Paired reference-draw results, assignments, and uncertainty | `experiments/research_references.py` |
 | `research-seeds-and-folds.json` | Training-seed summaries and held-out-game fold results | Seed runs: `train.py`; fold-analysis producer not retained |
 | `result.json` | One-reference training configuration, validation, and test metrics | `train.py` |

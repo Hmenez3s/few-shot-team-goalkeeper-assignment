@@ -26,7 +26,18 @@ Three matches never seen in training, 2,659 player boxes. **Score** is the avera
 - **Five training seeds:** 89.00% ± 2.86 (one reference).
 - **Better than appearance baselines** with the same six references: our model 94.10%, torso colour 85.02%, person re-identification (OSNet) 80.72% (averages over 30 random reference choices).
 
-<!-- PRTREID_COMPARISON -->
+### Against the official SoccerNet method
+
+Same 5,842 boxes from six held-out matches (2, 3, 5, 7, 8, 11), with the same tracklets and pitch positions given to both methods. The SoccerNet baseline clusters PRTReID embeddings with K-means; its published weights were trained on other matches.
+
+| Method | Score | Team A | Team B | Goalkeeper A | Goalkeeper B |
+|---|---:|---:|---:|---:|---:|
+| SoccerNet baseline (PRTReID + K-means) | 66.15% | 71.84% | 76.53% | 57.42% | 58.82% |
+| **Six references, averaged over each tracklet** | **97.45%** | 96.88% | 99.57% | 98.06% | 95.29% |
+| Six references, each box alone | 92.42% | 92.13% | 94.28% | 90.32% | 92.94% |
+
+- **Matches 7, 8, 11:** 98.98% against 83.55%.
+- **Matches 2, 3, 5:** 96.08% against 50.93%. In match 3 the baseline labels 418 of its 1,072 boxes as referees or the ball.
 
 Details in [RESEARCH.md](RESEARCH.md).
 

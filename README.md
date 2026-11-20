@@ -14,17 +14,17 @@ Orange and blue are the two teams, `P` is an outfield player, `G` a goalkeeper, 
 
 ## Results
 
-Three matches never seen in training, 2,659 player boxes:
+Three matches never seen in training, 2,659 player boxes. **Score** is the average of the four groups' accuracies, so each goalkeeper group counts as much as each team, even though goalkeepers are only 6% of the boxes.
 
-| Model | Accuracy |
-|---|---:|
-| ImageNet ResNet-18, not fine-tuned, one reference | 55.28% |
-| **One reference per group** | **95.60%** |
-| **Six references per group** | **96.77%** |
+| Model | Score | Team A | Team B | Goalkeeper A | Goalkeeper B |
+|---|---:|---:|---:|---:|---:|
+| ImageNet ResNet-18, not fine-tuned, one reference | 48.06% | 57.22% | 55.27% | 40.26% | 39.51% |
+| **One reference per group** | **86.10%** | 96.05% | 97.73% | 75.32% | 75.31% |
+| **Six references per group** | **93.81%** | 96.45% | 97.89% | 88.31% | 92.59% |
 
-- **Across all nine matches**, each held out in turn: **89.11%** on 9,130 boxes.
-- **Five training seeds:** 95.92% ± 0.70.
-- **Better than appearance baselines** with the same six references: torso colour 85.24%, person re-identification (OSNet) 79.15%.
+- **Across all nine matches**, each held out in turn: **85.04%** on 9,130 boxes.
+- **Five training seeds:** 89.00% ± 2.86 (one reference).
+- **Better than appearance baselines** with the same six references: our model 94.10%, torso colour 85.02%, person re-identification (OSNet) 80.72% (averages over 30 random reference choices).
 
 <!-- PRTREID_COMPARISON -->
 
@@ -32,13 +32,13 @@ Details in [RESEARCH.md](RESEARCH.md).
 
 ## Speed
 
-Apple M4 Pro, 20 player crops per batch:
+Apple M4 Pro, 20 player crops per batch, six-reference model:
 
-| Runtime | Accuracy | Time |
+| Runtime | Score | Time |
 |---|---:|---:|
-| PyTorch GPU, FP32 | 96.77% | 6.17 ms |
-| Core ML GPU, INT8 | 96.73% | 2.99 ms |
-| **Core ML Neural Engine, INT8** | **96.69%** | **2.24 ms** |
+| PyTorch GPU, FP32 | 93.81% | 6.17 ms |
+| Core ML GPU, INT8 | 93.81% | 2.99 ms |
+| **Core ML Neural Engine, INT8** | **93.79%** | **2.24 ms** |
 
 ## How it works
 

@@ -67,6 +67,18 @@ PRTReID requires PyTorch 1.13.1, which crashes on the Mac GPU; it was timed on C
 | Core ML GPU, INT8 | 93.81% | 2.99 ms |
 | **Core ML Neural Engine, INT8** | **93.79%** | **2.24 ms** |
 
+**NVIDIA GPUs**, TensorRT, 20 player crops per batch:
+
+| Format | Score, RTX 3060 | Time, RTX 3060 | Score, RTX 5070 Ti | Time, RTX 5070 Ti |
+|---|---:|---:|---:|---:|
+| FP16 | 93.81% | 0.58 ms | 93.81% | 0.40 ms |
+| INT8 | 93.79% | 0.52 ms | 93.83% | 0.58 ms |
+| FP8 | – | – | 93.44% | 0.65 ms |
+| FP16, 2:4 sparse | 94.53% | 0.56 ms | 94.53% | 0.39 ms |
+| INT8, 2:4 sparse | 94.50% | 0.49 ms | 94.84% | 0.63 ms |
+
+The 2:4 sparse model has half of its convolution weights set to zero and was fine-tuned with that pattern; it scores slightly higher than the dense model, but with the same weights the sparse kernels are at most 7% faster in FP16 and slower in INT8. TensorRT has no 4-bit convolution kernels; simulated, INT4 scores 94.09% and NVFP4 93.95%. Details: [RTX 3060](results/gpu-formats-rtx3060.json), [RTX 5070 Ti](results/gpu-formats-rtx5070ti.json), [2:4 fine-tune](results/sparse24.json).
+
 ## How it works
 
 ```mermaid

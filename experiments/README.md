@@ -10,6 +10,9 @@ Each script answers one question from [RESEARCH.md](../RESEARCH.md). Run them fr
 | `prtreid_comparison`, `prtreid_embed`, `tracklet_comparison` | How does the classifier compare with the official SoccerNet team method? | files given by `--out` |
 | `frozen_encoders` | Do general-purpose encoders (SigLIP, CLIP) or the Roboflow team pipeline match the trained encoder? | file given by `--out` |
 | `speed_general_encoders` | How much compute do our encoder, SigLIP and CLIP need per crop? | file given by `--out` |
+| `export_eval_bundle` | Packs the fixed test sessions and calibration crops into one portable file | file given by `--out` |
+| `gpu_formats` | How accurate and fast is the encoder in TensorRT FP16, INT8, FP8 and 2:4 sparsity on NVIDIA GPUs? | file given by `--out` |
+| `sparse24` | Does the encoder keep its accuracy with 2:4 structured sparsity? | `--out`/result.json |
 | `rotated_fold.sh` | Builds a fold where other matches are held out | a new data root |
 | `summarize_seeds_and_folds` | How much do results move across training seeds and held-out matches? | file given by `--out` |
 | `verify_split` | Do the checkpoints match, and does any identical crop appear in two splits? | file given by `--out` |

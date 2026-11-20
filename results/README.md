@@ -5,6 +5,8 @@
 | `audit.json` | Prepared data, class mapping, exclusions, and label-normalization audit | `prepare.py` |
 | `frozen-encoders.json` | Frozen SigLIP and CLIP with the same six references, and the Roboflow team pipeline with predicted and true roles, on six held-out matches | `experiments/frozen_encoders.py` |
 | `formats.json` | Runtime environment and format accuracy/latency measurements | `evaluate_formats.py` |
+| `gpu-formats-rtx3060.json`, `gpu-formats-rtx5070ti.json` | TensorRT FP16, INT8, FP8 and 2:4 sparse accuracy and latency, batch-256 throughput, and simulated INT4/NVFP4 accuracy per GPU | `experiments/gpu_formats.py` |
+| `sparse24.json` | 2:4 pruning mask, accuracy before and after fine-tuning, selected epoch | `experiments/sparse24.py` |
 | `occlusion.json` | Error counts and confusion matrices by box-overlap proxy | `experiments/analyze_errors.py` |
 | `prospective.json` | Prospective replay protocol, coverage, and scores | `experiments/prospective_evaluation.py` |
 | `prtreid-comparison.json` | Official SoccerNet team method against the reference classifier on six held-out matches: per-group accuracies, scores and confusion matrices | `experiments/prtreid_comparison.py`, `experiments/tracklet_comparison.py` |

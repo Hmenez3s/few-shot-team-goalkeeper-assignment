@@ -301,6 +301,32 @@ Core ML Neural Engine & INT8 & 93.79 & 96.69 & \textbf{2.24} \\
 \end{tabular}
 \end{table}
 
+\textbf{NVIDIA GPUs.} We also built TensorRT~11.5 engines on an RTX 3060 (Ampere) and an RTX 5070 Ti (Blackwell), using the same test sessions (Table~\ref{tab:nvidia}). INT8 engines come from ModelOpt post-training quantization of the ONNX graph, calibrated on the same training crops; FP8 needs compute capability 8.9 and runs only on the 5070 Ti. TensorRT FP16 takes 0.58 and 0.40 ms per batch of 20 crops with no change in score. INT8 keeps the score within 0.05 points but is not faster than FP16 at this batch size.
+
+For 2:4 structured sparsity we zero two of every four input-channel weights in each eligible convolution (19 of 20; the first convolution has three input channels), giving 50\% sparsity, and fine-tune all convolutions for four epochs with the mask fixed. The test score is 93.74\% right after pruning and 94.53\% after fine-tuning, so sparsity costs no accuracy here; the gain over the dense model may come from the extra fine-tuning of layers that are frozen in the original training. TensorRT chose sparse kernels for only 4 to 11 of the 19 eligible layers on the 3060 and 3 to 6 on the 5070 Ti. Against an engine with the same weights and dense kernels, sparse FP16 is at most 7\% faster and sparse INT8 is slower. TensorRT has no INT4 or FP4 convolution kernels; with fake quantization in ModelOpt, INT4 weights and activations score 94.09\% and NVFP4 93.95\%.
+
+\begin{table}[tbp]
+\centering
+\caption{TensorRT engines on NVIDIA GPUs, fixed test split (2,659 boxes). Latency is the median per batch of 20 crops. Sparse rows use the 2:4 fine-tuned weights.}
+\label{tab:nvidia}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+ & \multicolumn{2}{c}{RTX 3060} & \multicolumn{2}{c}{RTX 5070 Ti} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Precision & Score & ms & Score & ms \\
+\midrule
+FP16 & 93.81 & 0.58 & 93.81 & 0.40 \\
+INT8 & 93.79 & 0.52 & 93.83 & 0.58 \\
+FP8 & -- & -- & 93.44 & 0.65 \\
+FP16, 2:4 sparse & 94.53 & 0.56 & 94.53 & 0.39 \\
+FP16, same weights, dense kernels & 94.53 & 0.60 & 94.53 & 0.40 \\
+INT8, 2:4 sparse & 94.50 & 0.49 & 94.84 & 0.63 \\
+INT8, same weights, dense kernels & 94.50 & 0.47 & 94.84 & 0.58 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \textbf{Encoder cost.} Table~\ref{tab:cost} compares the encoders used in Section~\ref{sec:results} on the same machine, for one batch of 20 crops at each encoder's input size. Ours needs 0.18 billion multiply-accumulates per crop, against 4.36 for CLIP, 5.31 for PRTReID and 17.00 for SigLIP. On the GPU it runs a batch in 5.5 ms, against 53 ms for CLIP and 194 ms for SigLIP; on the CPU it ties with CLIP. PRTReID requires PyTorch 1.13.1, which fails on this GPU, so it was timed on the CPU in that version, where our encoder takes 123 ms. The Roboflow pipeline adds UMAP and K-means once per clip (about 21 ms after the first call).
 
 \begin{table}[tbp]

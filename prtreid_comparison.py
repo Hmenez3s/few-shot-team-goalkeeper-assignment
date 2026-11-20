@@ -114,8 +114,9 @@ def extract(root, output):
             for archive in archives.values():
                 archive.close()
     query_rows = [r for _, r in rows if r["query_index"] >= 0]
-    if len(query_rows) != 2659:
-        raise ValueError(f"query alignment count {len(query_rows)} != 2659")
+    expected = sum(len(queries) for queries in query_by_clip.values())
+    if len(query_rows) != expected:
+        raise ValueError(f"query alignment count {len(query_rows)} != {expected}")
     lengths = np.array([len(crop) for crop, _ in rows], dtype=np.int64)
     widths = np.array([crop.shape[1] for crop, _ in rows], dtype=np.int32)
     heights = np.array([crop.shape[0] for crop, _ in rows], dtype=np.int32)

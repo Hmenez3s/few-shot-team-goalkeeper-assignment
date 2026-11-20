@@ -26,6 +26,10 @@ def main():
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--extract", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--one", type=Path, default=REPO / "models/one-reference.pth")
+    parser.add_argument("--six", type=Path, default=REPO / "models/six-references.pth")
+    parser.add_argument("--expected-one", type=Path, default=REPO / "results/result.json")
+    parser.add_argument("--expected-six", type=Path, default=REPO / "results/six-references.json")
     parser.add_argument("--device", default="mps")
     args = parser.parse_args()
     ROOT = args.root.resolve()
@@ -44,7 +48,7 @@ def main():
             key = f"game-{row['game']}-half-{row['session']}"
             tracks[(key, row["prepared_index"])] = (row["clip"], str(row["track_id"]))
     results = {}
-    for name, path, per_class in (("one_reference", REPO / "models/one-reference.pth", 1), ("six_references", REPO / "models/six-references.pth", 6)):
+    for name, path, per_class in (("one_reference", args.one, 1), ("six_references", args.six, 6)):
         model = train.build_model(ROOT / "inputs/resnet18.pth", device)
         model.load_state_dict(torch.load(path, map_location=device, weights_only=True)["model"])
         model.eval()
@@ -70,7 +74,7 @@ def main():
             per_box.append({"game": entry["game"], "clip": entry["clip"], "truth": truth, "pred": box_pred[query]})
             per_track.append({"game": entry["game"], "clip": entry["clip"], "truth": truth, "pred": track_pred[query]})
         box_stats, track_stats = train.statistics(per_box), train.statistics(per_track)
-        published = json.loads((REPO / ("results/result.json" if per_class == 1 else "results/six-references.json")).read_text())
+        published = json.loads((args.expected_one if per_class == 1 else args.expected_six).read_text())
         expected = published["test"]["trained"] if per_class == 1 else published["test"]
         assert box_stats["confusion_matrix"] == expected["confusion_matrix"], (name, box_stats["confusion_matrix"], expected["confusion_matrix"])
         results[name] = {"per_box": box_stats, "tracklet_mean": track_stats}

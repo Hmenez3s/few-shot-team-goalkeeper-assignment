@@ -1,0 +1,446 @@
+[
+  {
+    "split": "train",
+    "clip": "SNGS-111",
+    "game": "6",
+    "half": "2",
+    "game_time_start": "2 - 15:31",
+    "jersey_pairs_same_side_as_other_clips": 4,
+    "jersey_pairs_opposite_side_to_other_clips": 68,
+    "per_other_clip": {
+      "SNGS-107": {
+        "same": 0,
+        "opposite": 11
+      },
+      "SNGS-108": {
+        "same": 0,
+        "opposite": 9
+      },
+      "SNGS-109": {
+        "same": 0,
+        "opposite": 10
+      },
+      "SNGS-110": {
+        "same": 0,
+        "opposite": 11
+      },
+      "SNGS-112": {
+        "same": 0,
+        "opposite": 7
+      },
+      "SNGS-113": {
+        "same": 0,
+        "opposite": 6
+      },
+      "SNGS-114": {
+        "same": 2,
+        "opposite": 7
+      },
+      "SNGS-115": {
+        "same": 2,
+        "opposite": 7
+      }
+    },
+    "outfield_jerseys": {
+      "left": [
+        3,
+        6,
+        7,
+        14,
+        27,
+        33
+      ],
+      "right": [
+        4,
+        10,
+        16,
+        20,
+        31,
+        34
+      ]
+    },
+    "reference_clip": "SNGS-107",
+    "reference_outfield_jerseys": {
+      "left": [
+        4,
+        10,
+        16,
+        31,
+        34
+      ],
+      "right": [
+        3,
+        6,
+        7,
+        14,
+        27,
+        33,
+        36,
+        62
+      ]
+    },
+    "goalkeeper_median_pitch_x": {
+      "right": 49.5,
+      "left": -45.6
+    },
+    "reference_goalkeeper_median_pitch_x": {
+      "right": 38.6
+    },
+    "outfield_player_annotations": 9042,
+    "evidence_image": "SNGS-111.jpg"
+  },
+  {
+    "split": "valid",
+    "clip": "SNGS-092",
+    "game": "5",
+    "half": "2",
+    "game_time_start": "2 - 33:37",
+    "jersey_pairs_same_side_as_other_clips": 3,
+    "jersey_pairs_opposite_side_to_other_clips": 125,
+    "per_other_clip": {
+      "SNGS-086": {
+        "same": 1,
+        "opposite": 12
+      },
+      "SNGS-087": {
+        "same": 0,
+        "opposite": 13
+      },
+      "SNGS-088": {
+        "same": 1,
+        "opposite": 10
+      },
+      "SNGS-089": {
+        "same": 0,
+        "opposite": 14
+      },
+      "SNGS-090": {
+        "same": 0,
+        "opposite": 17
+      },
+      "SNGS-091": {
+        "same": 0,
+        "opposite": 13
+      },
+      "SNGS-093": {
+        "same": 0,
+        "opposite": 16
+      },
+      "SNGS-094": {
+        "same": 0,
+        "opposite": 13
+      },
+      "SNGS-095": {
+        "same": 1,
+        "opposite": 10
+      },
+      "SNGS-096": {
+        "same": 0,
+        "opposite": 7
+      }
+    },
+    "outfield_jerseys": {
+      "left": [
+        4,
+        8,
+        10,
+        14,
+        36,
+        43,
+        44,
+        50
+      ],
+      "right": [
+        3,
+        5,
+        13,
+        15,
+        17,
+        19,
+        20,
+        24,
+        42
+      ]
+    },
+    "reference_clip": "SNGS-090",
+    "reference_outfield_jerseys": {
+      "left": [
+        3,
+        5,
+        13,
+        15,
+        17,
+        19,
+        20,
+        24,
+        42
+      ],
+      "right": [
+        4,
+        8,
+        10,
+        14,
+        36,
+        43,
+        44,
+        50,
+        93
+      ]
+    },
+    "goalkeeper_median_pitch_x": {
+      "left": -48.0,
+      "right": 37.8
+    },
+    "reference_goalkeeper_median_pitch_x": {
+      "right": 50.5
+    },
+    "outfield_player_annotations": 11118,
+    "evidence_image": "SNGS-092.jpg"
+  },
+  {
+    "split": "test",
+    "clip": "SNGS-197",
+    "game": "11",
+    "half": "2",
+    "game_time_start": "2 - 04:23",
+    "jersey_pairs_same_side_as_other_clips": 3,
+    "jersey_pairs_opposite_side_to_other_clips": 49,
+    "per_other_clip": {
+      "SNGS-195": {
+        "same": 1,
+        "opposite": 8
+      },
+      "SNGS-196": {
+        "same": 1,
+        "opposite": 12
+      },
+      "SNGS-198": {
+        "same": 0,
+        "opposite": 12
+      },
+      "SNGS-199": {
+        "same": 0,
+        "opposite": 8
+      },
+      "SNGS-200": {
+        "same": 1,
+        "opposite": 9
+      }
+    },
+    "outfield_jerseys": {
+      "left": [
+        7,
+        16,
+        24,
+        30,
+        33,
+        34,
+        36,
+        62
+      ],
+      "right": [
+        9,
+        10,
+        15,
+        22,
+        27
+      ]
+    },
+    "reference_clip": "SNGS-196",
+    "reference_outfield_jerseys": {
+      "left": [
+        3,
+        8,
+        10,
+        15,
+        17,
+        22,
+        27,
+        31
+      ],
+      "right": [
+        7,
+        9,
+        16,
+        24,
+        30,
+        33,
+        34,
+        36,
+        62
+      ]
+    },
+    "goalkeeper_median_pitch_x": {
+      "right": 48.0
+    },
+    "reference_goalkeeper_median_pitch_x": {
+      "left": -47.7
+    },
+    "outfield_player_annotations": 11684,
+    "evidence_image": "SNGS-197.jpg"
+  },
+  {
+    "split": "test",
+    "clip": "SNGS-126",
+    "game": "7",
+    "half": "2",
+    "game_time_start": "2 - 23:00",
+    "jersey_pairs_same_side_as_other_clips": 10,
+    "jersey_pairs_opposite_side_to_other_clips": 39,
+    "per_other_clip": {
+      "SNGS-124": {
+        "same": 1,
+        "opposite": 7
+      },
+      "SNGS-125": {
+        "same": 0,
+        "opposite": 8
+      },
+      "SNGS-127": {
+        "same": 2,
+        "opposite": 4
+      },
+      "SNGS-128": {
+        "same": 0,
+        "opposite": 6
+      },
+      "SNGS-129": {
+        "same": 0,
+        "opposite": 8
+      },
+      "SNGS-130": {
+        "same": 2,
+        "opposite": 4
+      },
+      "SNGS-131": {
+        "same": 5,
+        "opposite": 2
+      }
+    },
+    "outfield_jerseys": {
+      "left": [
+        4,
+        27,
+        44,
+        50
+      ],
+      "right": [
+        8,
+        10,
+        14,
+        25,
+        31,
+        33
+      ]
+    },
+    "reference_clip": "SNGS-125",
+    "reference_outfield_jerseys": {
+      "left": [
+        10,
+        14,
+        20,
+        25,
+        31,
+        34
+      ],
+      "right": [
+        4,
+        27,
+        44,
+        50,
+        59
+      ]
+    },
+    "goalkeeper_median_pitch_x": {
+      "left": -48.1
+    },
+    "reference_goalkeeper_median_pitch_x": {
+      "left": -47.9,
+      "right": 32.4
+    },
+    "outfield_player_annotations": 8233,
+    "evidence_image": "SNGS-126.jpg"
+  },
+  {
+    "split": "test",
+    "clip": "SNGS-131",
+    "game": "7",
+    "half": "2",
+    "game_time_start": "2 - 47:08",
+    "jersey_pairs_same_side_as_other_clips": 10,
+    "jersey_pairs_opposite_side_to_other_clips": 34,
+    "per_other_clip": {
+      "SNGS-124": {
+        "same": 1,
+        "opposite": 5
+      },
+      "SNGS-125": {
+        "same": 1,
+        "opposite": 5
+      },
+      "SNGS-126": {
+        "same": 5,
+        "opposite": 2
+      },
+      "SNGS-127": {
+        "same": 0,
+        "opposite": 4
+      },
+      "SNGS-128": {
+        "same": 1,
+        "opposite": 7
+      },
+      "SNGS-129": {
+        "same": 2,
+        "opposite": 6
+      },
+      "SNGS-130": {
+        "same": 0,
+        "opposite": 5
+      }
+    },
+    "outfield_jerseys": {
+      "left": [
+        4,
+        8,
+        10,
+        27,
+        36,
+        44,
+        50
+      ],
+      "right": [
+        9,
+        16,
+        21,
+        31
+      ]
+    },
+    "reference_clip": "SNGS-128",
+    "reference_outfield_jerseys": {
+      "left": [
+        9,
+        16,
+        25,
+        31,
+        34,
+        36
+      ],
+      "right": [
+        4,
+        27,
+        44,
+        50,
+        59
+      ]
+    },
+    "goalkeeper_median_pitch_x": {
+      "left": -48.6
+    },
+    "reference_goalkeeper_median_pitch_x": {
+      "right": 35.8
+    },
+    "outfield_player_annotations": 11615,
+    "evidence_image": "SNGS-131.jpg"
+  }
+]

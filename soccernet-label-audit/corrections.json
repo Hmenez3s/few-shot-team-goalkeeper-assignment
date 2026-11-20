@@ -1,0 +1,27 @@
+[
+  {
+    "split": "train",
+    "clip": "SNGS-111",
+    "fix": "swap attributes.team left<->right for every annotation with attributes.role == \"player\"; leave goalkeepers unchanged"
+  },
+  {
+    "split": "valid",
+    "clip": "SNGS-092",
+    "fix": "swap attributes.team left<->right for every annotation with attributes.role == \"player\"; leave goalkeepers unchanged"
+  },
+  {
+    "split": "test",
+    "clip": "SNGS-197",
+    "fix": "swap attributes.team left<->right for every annotation with attributes.role == \"player\"; leave goalkeepers unchanged"
+  },
+  {
+    "split": "test",
+    "clip": "SNGS-126",
+    "fix": "swap attributes.team left<->right for every annotation with attributes.role == \"player\"; leave goalkeepers unchanged"
+  },
+  {
+    "split": "test",
+    "clip": "SNGS-131",
+    "fix": "swap attributes.team left<->right for every annotation with attributes.role == \"player\"; leave goalkeepers unchanged"
+  }
+]

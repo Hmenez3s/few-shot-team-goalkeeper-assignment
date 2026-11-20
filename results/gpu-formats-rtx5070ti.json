@@ -1,0 +1,920 @@
+{
+  "environment": {
+    "torch": "2.8.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "compute_capability": [
+      12,
+      0
+    ],
+    "driver": "unavailable",
+    "tensorrt": "11.5.0.63",
+    "modelopt": "0.48.0",
+    "onnx": "1.21.0"
+  },
+  "formats": {
+    "torch_fp32": {
+      "status": "ok",
+      "simulated": false,
+      "score": 0.9381140369414589,
+      "accuracy": 0.9676570139150057,
+      "per_class": [
+        0.9644830307813733,
+        0.9789303079416531,
+        0.8831168831168831,
+        0.9259259259259259
+      ],
+      "confusion_matrix": [
+        [
+          1222,
+          28,
+          5,
+          12
+        ],
+        [
+          19,
+          1208,
+          4,
+          3
+        ],
+        [
+          3,
+          5,
+          68,
+          1
+        ],
+        [
+          3,
+          3,
+          0,
+          75
+        ]
+      ],
+      "batch_20_ms": 2.8602174999861063,
+      "notes": [],
+      "sparse_log": [],
+      "checkpoint_bytes": 44783433,
+      "expected_confusion_match": true
+    },
+    "torch_fp16": {
+      "status": "ok",
+      "simulated": false,
+      "score": 0.9381140369414589,
+      "accuracy": 0.9676570139150057,
+      "per_class": [
+        0.9644830307813733,
+        0.9789303079416531,
+        0.8831168831168831,
+        0.9259259259259259
+      ],
+      "confusion_matrix": [
+        [
+          1222,
+          28,
+          5,
+          12
+        ],
+        [
+          19,
+          1208,
+          4,
+          3
+        ],
+        [
+          3,
+          5,
+          68,
+          1
+        ],
+        [
+          3,
+          3,
+          0,
+          75
+        ]
+      ],
+      "batch_20_ms": 3.5035124999893696,
+      "notes": [],
+      "sparse_log": [],
+      "checkpoint_bytes": 44783433
+    },
+    "trt_fp16": {
+      "status": "ok",
+      "simulated": false,
+      "score": 0.9381140369414589,
+      "accuracy": 0.9676570139150057,
+      "per_class": [
+        0.9644830307813733,
+        0.9789303079416531,
+        0.8831168831168831,
+        0.9259259259259259
+      ],
+      "confusion_matrix": [
+        [
+          1222,
+          28,
+          5,
+          12
+        ],
+        [
+          19,
+          1208,
+          4,
+          3
+        ],
+        [
+          3,
+          5,
+          68,
+          1
+        ],
+        [
+          3,
+          3,
+          0,
+          75
+        ]
+      ],
+      "batch_20_ms": 0.40147549999858256,
+      "notes": [],
+      "sparse_log": [],
+      "sparse_layer_counts": {
+        "eligible_layers": null,
+        "eligible_log_lines": 0,
+        "chosen_layers": 0
+      },
+      "batch_256_crops_per_second": 38886.940322346476,
+      "throughput_batch_size": 256,
+      "engine_bytes": 22882484,
+      "checkpoint_bytes": 44783433
+    },
+    "trt_fp8": {
+      "status": "ok",
+      "simulated": false,
+      "score": 0.9344356677013953,
+      "accuracy": 0.9661526889808199,
+      "per_class": [
+        0.9621152328334649,
+        0.9789303079416531,
+        0.8831168831168831,
+        0.9135802469135802
+      ],
+      "confusion_matrix": [
+        [
+          1219,
+          27,
+          6,
+          15
+        ],
+        [
+          19,
+          1208,
+          3,
+          4
+        ],
+        [
+          3,
+          6,
+          68,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          74
+        ]
+      ],
+      "batch_20_ms": 0.6530754999971577,
+      "notes": [
+        "ModelOpt ONNX export approach commit 187071d48ddaee2155be3a0fbd34eb265ce7229e"
+      ],
+      "sparse_log": [],
+      "modelopt_conv_quantizers": 40,
+      "sparse_layer_counts": {
+        "eligible_layers": null,
+        "eligible_log_lines": 0,
+        "chosen_layers": 0
+      },
+      "engine_bytes": 11687204,
+      "checkpoint_bytes": 44783433
+    },
+    "trt_fp16_sparse": {
+      "status": "ok",
+      "simulated": false,
+      "score": 0.94534927302119,
+      "accuracy": 0.9695374200827379,
+      "per_class": [
+        0.9684293606945541,
+        0.9773095623987034,
+        0.922077922077922,
+        0.9135802469135802
+      ],
+      "confusion_matrix": [
+        [
+          1227,
+          21,
+          8,
+          11
+        ],
+        [
+          13,
+          1206,
+          9,
+          6
+        ],
+        [
+          2,
+          3,
+          71,
+          1
+        ],
+        [
+          2,
+          3,
+          2,
+          74
+        ]
+      ],
+      "batch_20_ms": 0.390501499992979,
+      "notes": [],
+      "sparse_log": [
+        " (foreignNode)   10, 0.0105120, 1.18764, 0.81435, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x5c38aa371f9ab, , 0",
+        " (foreignNode)    2, 0.0111392, 1.25850, 0.62683, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x3791c95a3907e, , 0",
+        " (foreignNode)    3, 0.0122976, 1.38937, 0.61645, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x3c4464afa9a1d, , 0",
+        " (foreignNode)    6, 0.0140032, 1.58207, 0.57078, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x5723c970b8497, , 0",
+        " (foreignNode)   24, 0.0143520, 1.62147, 0.73307, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x5f1490ebedda6, , 0",
+        " (foreignNode)    4, 0.0106720, 1.02932, 0.76313, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x3bd998e94c547, , 0",
+        " (foreignNode)    0, 0.0125760, 1.21296, 0.59788, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x3f1e9251c9e84, , 0",
+        " (foreignNode)    8, 0.0135712, 1.30895, 0.65100, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x548e5798f0f9c, , 0",
+        " (foreignNode)   24, 0.0143456, 1.38364, 0.80190, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x2b1a622fcfe37, , 0",
+        " (foreignNode)    6, 0.0144544, 1.39414, 0.59224, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x3b1f25a3a1d45, , 0",
+        " (foreignNode)   10, 0.0086816, 1.00000, 0.71969, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x54111bb7c598c, , 0",
+        " (foreignNode)    0, 0.0114688, 1.32105, 0.45631, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x3df94b2b3edcb, , 0",
+        " (foreignNode)   11, 0.0121728, 1.40214, 0.55057, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x3f91f19e71685, , 0",
+        " (foreignNode)    7, 0.0122016, 1.40546, 0.49541, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x2a2449d497b69, , 0",
+        " (foreignNode)   24, 0.0136096, 1.56764, 0.61254, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x4848c97ea3c0d, , 0",
+        " (foreignNode)   11, 0.0108128, 1.04678, 0.81543, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x5b2bb64dff4c5, , 0",
+        " (foreignNode)   12, 0.0108800, 1.05328, 0.81897, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x2d3994d1fbb97, , 0",
+        " (foreignNode)    2, 0.0140992, 1.36493, 0.49052, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x67f55415bea65, , 0",
+        " (foreignNode)   24, 0.0145056, 1.40428, 0.85143, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x34d37c92fb568, , 0",
+        " (foreignNode)   13, 0.0146912, 1.42224, 0.68521, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x3188429e81096, , 0",
+        " (foreignNode)   27, 0.0085152, 1.03420, 0.52450, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x2d1bde421579e, , 0",
+        " (foreignNode)   28, 0.0092128, 1.11893, 0.48479, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32_t1r1s1, 0x37c7d9844e78a, , 0",
+        " (foreignNode)   26, 0.0092288, 1.12087, 0.48373, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x5d9a1bf579ee8, , 0",
+        " (foreignNode)   43, 0.0093472, 1.13525, 0.53294, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32_t1r1s1, 0x34e66a9f070d0, , 0",
+        " (foreignNode)   24, 0.0094400, 1.14652, 0.47235, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32_t1r1s1, 0x35f2684c75b69, , 0",
+        " (foreignNode)   25, 0.0094688, 1.15002, 0.47147, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32_t1r1s1, 0x41735656e2eaf, , 0",
+        " (foreignNode)   42, 0.0095872, 1.16440, 0.51960, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x300453978029a, , 0",
+        " (foreignNode)   23, 0.0097024, 1.17839, 0.45957, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x2f97f1686e4da, , 0",
+        " (foreignNode)   30, 0.0099616, 1.20987, 0.45366, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32_t1r1s1, 0x66d21f16f56db, , 0",
+        " (foreignNode)   29, 0.0105632, 1.28294, 0.42783, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x6720c35f116af, , 0",
+        " (foreignNode)    2, 0.0105888, 1.00000, 0.65313, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x67f55415bea65, , 0",
+        " (foreignNode)   13, 0.0108800, 1.02750, 0.92524, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x3188429e81096, , 0",
+        " (foreignNode)   12, 0.0140288, 1.32487, 0.63515, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x2d3994d1fbb97, , 0",
+        " (foreignNode)   11, 0.0142272, 1.34361, 0.61974, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x5b2bb64dff4c5, , 0",
+        " (foreignNode)   24, 0.0146144, 1.38018, 0.84510, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x34d37c92fb568, , 0",
+        " (foreignNode)    9, 0.0111040, 1.02998, 0.81245, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x39bf55e773e19, , 0",
+        " (foreignNode)    0, 0.0133888, 1.24191, 0.52801, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x38eff09884c62, , 0",
+        " (foreignNode)   11, 0.0136384, 1.26506, 0.76726, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x4de34839dd61f, , 0",
+        " (foreignNode)   10, 0.0140992, 1.30781, 0.64810, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x447226a9eb0c3, , 0",
+        " (foreignNode)   22, 0.0145120, 1.34610, 0.85106, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x3845978f1dab6, , 0",
+        " (foreignNode)   14, 0.0103744, 1.19675, 0.84530, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x364838b5b0e1f, , 0",
+        " (foreignNode)    0, 0.0108192, 1.24806, 0.50710, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x4d4842a4e0f67, , 0",
+        " (foreignNode)    7, 0.0108576, 1.25249, 0.67882, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x5367b8002ae52, , 0",
+        " (foreignNode)    3, 0.0141248, 1.62938, 0.46218, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x2c2529a42670a, , 0",
+        " (foreignNode)   30, 0.0145856, 1.68254, 0.84676, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x5947e55d3397d, , 0",
+        " (foreignNode)    5, 0.0154400, 1.38769, 0.63499, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x40dac15af9355, , 0",
+        " (foreignNode)   10, 0.0157600, 1.41645, 0.74171, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x333a08e0e5212, , 0",
+        " (foreignNode)   16, 0.0166720, 1.49842, 0.84533, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x4c97e29402f5a, , 0",
+        " (foreignNode)    2, 0.0166752, 1.49871, 0.46408, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x31456e490823b, , 0",
+        " (foreignNode)   33, 0.0228000, 2.04918, 0.89381, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x47be69315786f, , 0",
+        " (foreignNode)   17, 0.0083104, 1.00000, 0.46160, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32_t1r1s1, 0x3b44aa6629c8a, , 0",
+        " (foreignNode)   16, 0.0087264, 1.05006, 0.43959, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x5a76e17feafc4, , 0",
+        " (foreignNode)   28, 0.0090912, 1.09395, 0.47973, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x5274a5cde1ac6, , 0",
+        " (foreignNode)   15, 0.0094592, 1.13824, 0.40256, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x5c0eb025761be, , 0",
+        " (foreignNode)   12, 0.0094624, 1.13862, 0.39749, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32_t1r1s1, 0x4b28a04b49819, , 0",
+        " (foreignNode)   14, 0.0095488, 1.14902, 0.39878, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32_t1r1s1, 0x5ec66b6ae953a, , 0",
+        " (foreignNode)   11, 0.0097248, 1.17020, 0.38676, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x56f8efc4fc535, , 0",
+        " (foreignNode)   49, 0.0129216, 1.55487, 0.40597, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32_t1r1s1, 0x2a85447737291, , 0",
+        " (foreignNode)   48, 0.0139840, 1.68271, 0.37513, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x499c9162c3dde, , 0",
+        " (foreignNode)   29, 0.0148480, 1.78668, 0.29373, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32_t1r1s1, 0x642b06e064d44, , 0",
+        " (foreignNode)   10, 0.0124960, 1.14887, 0.93545, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x333a08e0e5212, , 0",
+        " (foreignNode)    5, 0.0152384, 1.40100, 0.64339, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x40dac15af9355, , 0",
+        " (foreignNode)    2, 0.0165344, 1.52015, 0.46803, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x31456e490823b, , 0",
+        " (foreignNode)   16, 0.0166720, 1.53280, 0.84533, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x4c97e29402f5a, , 0",
+        " (foreignNode)   33, 0.0228160, 2.09768, 0.89318, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x47be69315786f, , 0",
+        " (foreignNode)    8, 0.0129056, 1.18235, 0.91382, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x5fe1de06a90cb, , 0",
+        " (foreignNode)    0, 0.0166464, 1.52507, 0.47035, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x3a0ea817f79bd, , 0",
+        " (foreignNode)    3, 0.0166720, 1.52741, 0.59490, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x3f191a0d29b02, , 0",
+        " (foreignNode)   14, 0.0174464, 1.59836, 0.82083, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x3175d41820017, , 0",
+        " (foreignNode)   31, 0.0231232, 2.11844, 0.88131, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x523b5f603f98c, , 0",
+        " (foreignNode)    1, 0.0112192, 1.04657, 0.69227, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x50c3395f71668, , 0",
+        " (foreignNode)    4, 0.0154240, 1.43881, 0.63110, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x2c143821755fd, , 0",
+        " (foreignNode)   14, 0.0166688, 1.55493, 0.84549, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x2eb4def3bb594, , 0",
+        " (foreignNode)    0, 0.0166752, 1.55552, 0.45814, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x3c9bc321a745e, , 0",
+        " (foreignNode)   31, 0.0228160, 2.12836, 0.89318, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x433e9ada95f99, , 0",
+        " (foreignNode)    3, 0.0186400, 1.29848, 0.66569, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x52705200e87eb, , 0",
+        " (foreignNode)    5, 0.0267008, 1.86001, 0.60998, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x34eec9d836f9e, , 0",
+        " (foreignNode)    2, 0.0269312, 1.87606, 0.45094, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x560a0c57d40bb, , 0",
+        " (foreignNode)   17, 0.0287744, 2.00446, 0.85983, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x57c3adc1e3c77, , 0",
+        " (foreignNode)   35, 0.0390144, 2.71779, 0.93390, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x2f40edf5b4207, , 0",
+        " (foreignNode)    3, 0.0082208, 1.00000, 0.45855, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x6be1464851694, , 0",
+        " (foreignNode)   24, 0.0083072, 1.01051, 0.58456, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32_t1r1s1, 0x59cada13a5e7d, , 0",
+        " (foreignNode)    6, 0.0084512, 1.02803, 0.44627, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x4e5559482125d, , 0",
+        " (foreignNode)   13, 0.0084896, 1.03270, 0.47392, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x5f09b6a654cd2, , 0",
+        " (foreignNode)   14, 0.0085152, 1.03581, 0.47250, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32_t1r1s1, 0x614d7b413738e, , 0",
+        " (foreignNode)    4, 0.0089152, 1.08447, 0.42283, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32_t1r1s1, 0x6ba4453ae53c5, , 0",
+        " (foreignNode)   23, 0.0090272, 1.09809, 0.53794, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x2e6580eb8404a, , 0",
+        " (foreignNode)    5, 0.0096960, 1.17945, 0.38897, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32_t1r1s1, 0x2ec73831da853, , 0",
+        " (foreignNode)   46, 0.0110848, 1.34838, 0.55088, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32_t1r1s1, 0x58286416a92dd, , 0",
+        " (foreignNode)   45, 0.0125024, 1.52083, 0.48842, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x60ed6fd070492, , 0",
+        " (foreignNode)    3, 0.0186368, 1.35222, 0.66581, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x52705200e87eb, , 0",
+        " (foreignNode)    2, 0.0268064, 1.94497, 0.45304, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x560a0c57d40bb, , 0",
+        " (foreignNode)    5, 0.0268128, 1.94544, 0.60743, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x34eec9d836f9e, , 0",
+        " (foreignNode)   17, 0.0288288, 2.09171, 0.85821, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x57c3adc1e3c77, , 0",
+        " (foreignNode)   35, 0.0392192, 2.84560, 0.92902, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x2f40edf5b4207, , 0",
+        " (foreignNode)    1, 0.0187968, 1.28590, 0.66524, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x16x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x4acce3be43c2d, , 0",
+        " (foreignNode)    3, 0.0267264, 1.82837, 0.61364, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x64x64_stage3_warpsize1x2x1_g1_sptensor16x8x32, 0x4de549ab0c32d, , 0",
+        " (foreignNode)    0, 0.0268288, 1.83538, 0.45636, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x32x64_stage3_warpsize1x1x1_g1_sptensor16x8x32, 0x31f98cc4d8902, , 0",
+        " (foreignNode)   15, 0.0289824, 1.98271, 0.86152, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize64x128x64_stage3_warpsize1x4x1_g1_sptensor16x8x32, 0x38d8fd972b8a2, , 0",
+        " (foreignNode)   33, 0.0394240, 2.69702, 0.92420, sm80_xmma_fprop_sparse_conv_f16f16_f16f16_f16_nhwckrsc_nhwc_tilesize128x128x64_stage3_warpsize2x2x1_g1_sptensor16x8x32, 0x575637ba91514, , 0",
+        " (foreignNode) (Sparsity) Found 19 layer(s) eligible to use sparse tactics: /layer1/layer1.0/conv1/Conv, /layer1/layer1.0/conv2/Conv, /layer1/layer1.1/conv1/Conv, /layer1/layer1.1/conv2/Conv, /layer2/layer2.0/conv1/Conv, /layer2/layer2.0/conv2/Conv, /layer2/layer2.0/downsample/downsample.0/Conv, /layer2/layer2.1/conv1/Conv, /layer2/layer2.1/conv2/Conv, /layer3/layer3.0/conv1/Conv, /layer3/layer3.0/conv2/Conv, /layer3/layer3.0/downsample/downsample.0/Conv, /layer3/layer3.1/conv1/Conv, /layer3/layer3.1/conv2/Conv, /layer4/layer4.0/conv1/Conv, /layer4/layer4.0/conv2/Conv, /layer4/layer4.0/downsample/downsample.0/Conv, /layer4/layer4.1/conv1/Conv, /layer4/layer4.1/conv2/Conv",
+        " (foreignNode) (Sparsity) Chose 3 layer(s) using sparse tactics: /layer2/layer2.0/conv1/Conv, /layer2/layer2.1/conv1/Conv, /layer4/layer4.0/downsample/downsample.0/Conv"
+      ],
+      "sparsity_violations": [],
+      "sparse_layer_counts": {
+        "eligible_layers": 19,
+        "eligible_log_lines": 1,
+        "chosen_layers": 3
+      },
+      "batch_256_crops_per_second": 40875.97208167347,
+      "throughput_batch_size": 256,
+      "engine_bytes": 23367908,
+      "checkpoint_bytes": 44785161
+    },
+    "trt_fp16_sparse_dense": {
+      "status": "ok",
+      "simulated": false,
+      "score": 0.94534927302119,
+      "accuracy": 0.9695374200827379,
+      "per_class": [
+        0.9684293606945541,
+        0.9773095623987034,
+        0.922077922077922,
+        0.9135802469135802
+      ],
+      "confusion_matrix": [
+        [
+          1227,
+          21,
+          8,
+          11
+        ],
+        [
+          13,
+          1206,
+          9,
+          6
+        ],
+        [
+          2,
+          3,
+          71,
+          1
+        ],
+        [
+          2,
+          3,
+          2,
+          74
+        ]
+      ],
+      "batch_20_ms": 0.40405400000054215,
+      "notes": [],
+      "sparse_log": [],
+      "sparsity_violations": [],
+      "sparse_layer_counts": {
+        "eligible_layers": null,
+        "eligible_log_lines": 0,
+        "chosen_layers": 0
+      },
+      "batch_256_crops_per_second": 39778.65354696905,
+      "throughput_batch_size": 256,
+      "engine_bytes": 22927460,
+      "checkpoint_bytes": 44785161
+    },
+    "trt_int8": {
+      "status": "ok",
+      "simulated": false,
+      "score": 0.9383219068315373,
+      "accuracy": 0.9680330951485521,
+      "per_class": [
+        0.9636937647987371,
+        0.9805510534846029,
+        0.8831168831168831,
+        0.9259259259259259
+      ],
+      "confusion_matrix": [
+        [
+          1221,
+          28,
+          6,
+          12
+        ],
+        [
+          18,
+          1210,
+          4,
+          2
+        ],
+        [
+          3,
+          5,
+          68,
+          1
+        ],
+        [
+          3,
+          3,
+          0,
+          75
+        ]
+      ],
+      "batch_20_ms": 0.5823970000164991,
+      "notes": [],
+      "sparse_log": [],
+      "quantization_path": "ModelOpt ONNX PTQ: FP32 ONNX to INT8 Q/DQ ONNX",
+      "sparse_layer_counts": {
+        "eligible_layers": null,
+        "eligible_log_lines": 0,
+        "chosen_layers": 0
+      },
+      "batch_256_crops_per_second": 41767.85377911715,
+      "throughput_batch_size": 256,
+      "engine_bytes": 11756540,
+      "checkpoint_bytes": 44783433
+    },
+    "trt_int8_sparse": {
+      "status": "ok",
+      "simulated": false,
+      "score": 0.948440969471486,
+      "accuracy": 0.9699135013162843,
+      "per_class": [
+        0.9676400947119179,
+        0.9781199351701783,
+        0.922077922077922,
+        0.9259259259259259
+      ],
+      "confusion_matrix": [
+        [
+          1226,
+          20,
+          10,
+          11
+        ],
+        [
+          14,
+          1207,
+          8,
+          5
+        ],
+        [
+          2,
+          3,
+          71,
+          1
+        ],
+        [
+          2,
+          3,
+          1,
+          75
+        ]
+      ],
+      "batch_20_ms": 0.6261335000203871,
+      "notes": [],
+      "sparse_log": [
+        " (foreignNode)    3, 0.0086816, 1.02455, 0.68224, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x3609489284967, , 0",
+        " (foreignNode)   48, 0.0086816, 1.02455, 0.97863, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x5dbeb27375943, , 0",
+        " (foreignNode)    0, 0.0090496, 1.06798, 0.54802, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x2ec338e1dac42, , 0",
+        " (foreignNode)   38, 0.0092672, 1.09366, 0.86545, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x37871dc55c42d, , 0",
+        " (foreignNode)   36, 0.0103968, 1.22696, 0.76729, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x35e1515b4246b, , 0",
+        " (foreignNode)   45, 0.0106464, 1.25642, 0.77928, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x33be568b12a6a, , 0",
+        " (foreignNode)   56, 0.0106528, 1.25718, 0.84281, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x3e8d91f33139d, , 0",
+        " (foreignNode)   34, 0.0112224, 1.32440, 0.70763, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage2_warpsize2x4x1_g1_sptensor16x8x64, 0x2a1762358a138, , 0",
+        " (foreignNode)   29, 0.0112416, 1.32666, 0.70139, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x3188b87a2549f, , 0",
+        " (foreignNode)   24, 0.0135392, 1.59781, 0.55273, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x46695c72abb3b, , 0",
+        " (foreignNode)   54, 0.0137728, 1.62538, 0.64166, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x3e83049843203, , 0",
+        " (foreignNode)   24, 0.0082304, 1.00000, 0.90925, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x6151984b3bac8, , 0",
+        " (foreignNode)   36, 0.0103776, 1.26089, 0.76871, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x31b1ed760e69a, , 0",
+        " (foreignNode)   38, 0.0109280, 1.32776, 0.73392, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x5523a59b85be0, , 0",
+        " (foreignNode)   34, 0.0109984, 1.33631, 0.72205, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage2_warpsize2x4x1_g1_sptensor16x8x64, 0x3a4bf03192716, , 0",
+        " (foreignNode)    0, 0.0114144, 1.38686, 0.43448, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x3dbbeee64025f, , 0",
+        " (foreignNode)   45, 0.0118112, 1.43507, 0.70243, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x43629482cc452, , 0",
+        " (foreignNode)   56, 0.0118976, 1.44557, 0.75463, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x399df5e22cd2f, , 0",
+        " (foreignNode)    3, 0.0120928, 1.46928, 0.48979, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x2e6a0721ce6da, , 0",
+        " (foreignNode)   48, 0.0122176, 1.48445, 0.69540, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x49cff3b6302fa, , 0",
+        " (foreignNode)   54, 0.0125600, 1.52605, 0.70362, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x552bfa37c6dcc, , 0",
+        " (foreignNode)   29, 0.0170048, 2.06610, 0.46368, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x62459c630dc04, , 0",
+        " (foreignNode)    2, 0.0074144, 1.11074, 0.44832, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64_t1r1s1, 0x54f626891c309, , 0",
+        " (foreignNode)   50, 0.0088032, 1.31879, 0.53646, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64_t1r1s1, 0x4e12ecca72189, , 0",
+        " (foreignNode)   19, 0.0089408, 1.33941, 0.45570, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64_t1r1s1, 0x2cdae4ac7ecad, , 0",
+        " (foreignNode)   42, 0.0089568, 1.34180, 0.50722, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64_t1r1s1, 0x432b87faff6d8, , 0",
+        " (foreignNode)    1, 0.0093152, 1.39549, 0.35282, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64_t1r1s1, 0x5480dec32ed07, , 0",
+        " (foreignNode)    0, 0.0094016, 1.40844, 0.34290, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64_t1r1s1, 0x34ef0e211fa8d, , 0",
+        " (foreignNode)   51, 0.0094208, 1.41131, 0.50169, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x637e6faa243bd, , 0",
+        " (foreignNode)   53, 0.0094656, 1.41802, 0.50460, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x31248fa519cb4, , 0",
+        " (foreignNode)    7, 0.0094720, 1.41898, 0.39905, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64_t1r1s1, 0x4d47d3d3ac114, , 0",
+        " (foreignNode)   28, 0.0098368, 1.47363, 0.43918, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64_t1r1s1, 0x2f64f9c69542f, , 0",
+        " (foreignNode)   29, 0.0099744, 1.49425, 0.43323, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x64x128_stage3_warpsize2x2x1_g1_sptensor16x8x64_t1r1s1, 0x4ab37e82cb517, , 0",
+        " (foreignNode)   26, 0.0100096, 1.49952, 0.42660, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64_t1r1s1, 0x30fe11d6d9f7b, , 0",
+        " (foreignNode)   49, 0.0101888, 1.52637, 0.46263, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage2_warpsize2x4x1_g1_sptensor16x8x64_t1r1s1, 0x640ddc594afe8, , 0",
+        " (foreignNode)   31, 0.0104640, 1.56759, 0.41434, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64_t1r1s1, 0x4032a4b907b5b, , 0",
+        " (foreignNode)   23, 0.0108992, 1.63279, 0.38533, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x32d211ac15af9, , 0",
+        " (foreignNode)   45, 0.0117088, 1.75407, 0.39274, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x4430a36c16c98, , 0",
+        " (foreignNode)   30, 0.0089792, 1.03124, 0.69054, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x64x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x56db6eb598899, , 0",
+        " (foreignNode)   21, 0.0098272, 1.12863, 0.59610, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x64f8673aaaddc, , 0",
+        " (foreignNode)   49, 0.0098848, 1.13524, 0.71992, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x50c277d3ffa8d, , 0",
+        " (foreignNode)   19, 0.0106048, 1.21793, 0.54897, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x5ae59777cd2a4, , 0",
+        " (foreignNode)   11, 0.0110880, 1.27343, 0.48648, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x3dbdfb7be46e9, , 0",
+        " (foreignNode)   47, 0.0112576, 1.29291, 0.60625, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x6739ca8b26367, , 0",
+        " (foreignNode)    6, 0.0117120, 1.34509, 0.43714, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x2dcb6d6f78ae2, , 0",
+        " (foreignNode)    4, 0.0117312, 1.34730, 0.40771, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x517a6bc302392, , 0",
+        " (foreignNode)   42, 0.0168352, 1.93348, 0.39640, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x4bf53f76f16f0, , 0",
+        " (foreignNode)    4, 0.0109632, 1.25265, 0.51969, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x654021b38aa1c, , 0",
+        " (foreignNode)   12, 0.0112160, 1.28154, 0.57862, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x64x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x3d813da695661, , 0",
+        " (foreignNode)   37, 0.0116224, 1.32797, 0.70736, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x5dea30e22a510, , 0",
+        " (foreignNode)   34, 0.0122624, 1.40110, 0.65492, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage2_warpsize2x4x1_g1_sptensor16x8x64, 0x620a34544a79e, , 0",
+        " (foreignNode)    3, 0.0129504, 1.47971, 0.42517, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x627456e750d62, , 0",
+        " (foreignNode)   52, 0.0137088, 1.56636, 0.66227, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x43af9fa81defa, , 0",
+        " (foreignNode)    7, 0.0138624, 1.58391, 0.42302, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x632ad4ceaea43, , 0",
+        " (foreignNode)   41, 0.0139200, 1.59049, 0.59591, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x2ad4401dead5c, , 0",
+        " (foreignNode)   10, 0.0140032, 1.60000, 0.44420, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x3d5ce04b81fed, , 0",
+        " (foreignNode)   27, 0.0145344, 1.66069, 0.52914, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x51278b9768814, , 0",
+        " (foreignNode)   51, 0.0156832, 1.79196, 0.57797, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x30273129132c5, , 0",
+        " (foreignNode)   17, 0.0176736, 2.01938, 0.40819, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x35c1b310d5267, , 0",
+        " (foreignNode)   51, 0.0091264, 1.00000, 0.99321, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x40e99fb2d3658, , 0",
+        " (foreignNode)    4, 0.0098688, 1.08135, 0.57732, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x456d59cb56343, , 0",
+        " (foreignNode)   37, 0.0103104, 1.12973, 0.79737, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x4e2a951d64371, , 0",
+        " (foreignNode)   34, 0.0103808, 1.13745, 0.77363, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage2_warpsize2x4x1_g1_sptensor16x8x64, 0x318c8266513d1, , 0",
+        " (foreignNode)   41, 0.0109664, 1.20161, 0.75641, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x3b54fe9cdfbbe, , 0",
+        " (foreignNode)   17, 0.0112736, 1.23527, 0.63992, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x420dac93c1c5a, , 0",
+        " (foreignNode)   12, 0.0117472, 1.28717, 0.55245, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x64x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x6542942de979e, , 0",
+        " (foreignNode)    3, 0.0119104, 1.30505, 0.46229, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x647d614ffca68, , 0",
+        " (foreignNode)   10, 0.0119648, 1.31101, 0.51987, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x5f0143868e366, , 0",
+        " (foreignNode)   27, 0.0125536, 1.37553, 0.61264, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x53fc284d3b8dd, , 0",
+        " (foreignNode)    7, 0.0128224, 1.40498, 0.45733, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x6599608e4fa97, , 0",
+        " (foreignNode)   52, 0.0136928, 1.50035, 0.66304, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x449dfaa1ea3fd, , 0",
+        " (foreignNode)   57, 0.0068928, 1.00000, 0.66657, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x45d4b41a1cc16, , 0",
+        " (foreignNode)   16, 0.0069216, 1.00418, 0.53010, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64_t1r1s1, 0x581233ede0aff, , 0",
+        " (foreignNode)   52, 0.0069248, 1.00464, 0.64732, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x5e07623c2aabf, , 0",
+        " (foreignNode)    5, 0.0070752, 1.02646, 0.47767, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64_t1r1s1, 0x534548cca4b1a, , 0",
+        " (foreignNode)   56, 0.0071648, 1.03946, 0.64002, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x337357f1c4980, , 0",
+        " (foreignNode)   17, 0.0072640, 1.05385, 0.50808, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64_t1r1s1, 0x4f4189d46b0d2, , 0",
+        " (foreignNode)   43, 0.0075744, 1.09889, 0.57580, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x64x128_stage3_warpsize2x2x1_g1_sptensor16x8x64_t1r1s1, 0x67785fd47cca6, , 0",
+        " (foreignNode)    7, 0.0078752, 1.14253, 0.43486, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64_t1r1s1, 0x518b9a4bef4a4, , 0",
+        " (foreignNode)   50, 0.0085728, 1.24373, 0.52054, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x36387dd46084b, , 0",
+        " (foreignNode)    3, 0.0092320, 1.33937, 0.35506, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64_t1r1s1, 0x47e2260dad692, , 0",
+        " (foreignNode)   37, 0.0094112, 1.36537, 0.45359, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x579d83ee1e38c, , 0",
+        " (foreignNode)   21, 0.0095296, 1.38254, 0.40371, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64_t1r1s1, 0x4d1be6f154e64, , 0",
+        " (foreignNode)    2, 0.0095552, 1.38626, 0.33299, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64_t1r1s1, 0x588ed2bcb27bb, , 0",
+        " (foreignNode)    9, 0.0110944, 1.60956, 0.31089, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64_t1r1s1, 0x5a8846d840d57, , 0",
+        " (foreignNode)   25, 0.0082720, 1.00000, 0.77736, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x64x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x5bf1192568500, , 0",
+        " (foreignNode)   20, 0.0085216, 1.03017, 0.70190, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x2a85de4405bcb, , 0",
+        " (foreignNode)   27, 0.0090784, 1.09749, 0.74749, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x49c114f409d34, , 0",
+        " (foreignNode)   12, 0.0093120, 1.12573, 0.60004, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x661b25e18c086, , 0",
+        " (foreignNode)   17, 0.0093984, 1.13617, 0.62555, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x2a84debfaf39c, , 0",
+        " (foreignNode)   45, 0.0103808, 1.25493, 0.77363, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage2_warpsize2x4x1_g1_sptensor16x8x64, 0x43c05850a04e0, , 0",
+        " (foreignNode)   11, 0.0105312, 1.27311, 0.52964, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x39ebb01231f6f, , 0",
+        " (foreignNode)    9, 0.0117856, 1.42476, 0.46557, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x3dc2eaba2e99b, , 0",
+        " (foreignNode)   14, 0.0120512, 1.45687, 0.47715, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x615075e73839e, , 0",
+        " (foreignNode)   23, 0.0135360, 1.63636, 0.45797, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x536b2487c0d10, , 0",
+        " (foreignNode)   21, 0.0104800, 1.22567, 0.77271, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x64x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x38286b40c8a1e, , 0",
+        " (foreignNode)   12, 0.0104896, 1.22680, 0.68608, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x37e25ffd28b43, , 0",
+        " (foreignNode)    9, 0.0110784, 1.29566, 0.62586, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x68b0ecf50e649, , 0",
+        " (foreignNode)    3, 0.0118880, 1.39034, 0.56557, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x5646ad271aba2, , 0",
+        " (foreignNode)   26, 0.0126080, 1.47455, 0.72806, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x590f8224bea77, , 0",
+        " (foreignNode)   19, 0.0126816, 1.48316, 0.61680, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x3b2cb019636bb, , 0",
+        " (foreignNode)   11, 0.0135168, 1.58084, 0.52864, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x352facb0fda86, , 0",
+        " (foreignNode)   10, 0.0136384, 1.59506, 0.51064, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x547d6b0ade2a7, , 0",
+        " (foreignNode)   20, 0.0138592, 1.62088, 0.57713, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x3d3db4077670b, , 0",
+        " (foreignNode)   47, 0.0146784, 1.71669, 0.78043, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x3314fd78159e6, , 0",
+        " (foreignNode)   46, 0.0154240, 1.80389, 0.74235, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x49a6fa413642e, , 0",
+        " (foreignNode)   36, 0.0165184, 1.93189, 0.63611, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage2_warpsize2x4x1_g1_sptensor16x8x64, 0x40cc575ca3f30, , 0",
+        " (foreignNode)   21, 0.0102464, 1.10834, 0.79032, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x64x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x505a979fc6faf, , 0",
+        " (foreignNode)   12, 0.0108864, 1.17757, 0.66107, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x35351645a01f0, , 0",
+        " (foreignNode)   20, 0.0109696, 1.18657, 0.72916, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x483913900ed87, , 0",
+        " (foreignNode)   10, 0.0110336, 1.19349, 0.63119, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x32afba35047c4, , 0",
+        " (foreignNode)   26, 0.0116832, 1.26376, 0.78569, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x31ebae1330c54, , 0",
+        " (foreignNode)    9, 0.0123040, 1.33091, 0.56352, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x5e486e2f4c341, , 0",
+        " (foreignNode)    3, 0.0137536, 1.48771, 0.48885, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x44b0699368911, , 0",
+        " (foreignNode)   19, 0.0138336, 1.49637, 0.56543, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x56109367e9194, , 0",
+        " (foreignNode)   11, 0.0146144, 1.58082, 0.48894, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x58bd0bbd95252, , 0",
+        " (foreignNode)   46, 0.0146240, 1.58186, 0.78296, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x2f840250ff3ba, , 0",
+        " (foreignNode)   36, 0.0152352, 1.64798, 0.68969, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage2_warpsize2x4x1_g1_sptensor16x8x64, 0x3f5f7b0ea855b, , 0",
+        " (foreignNode)   47, 0.0162144, 1.75389, 0.70650, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x2c6e137d84608, , 0",
+        " (foreignNode)   23, 0.0068512, 1.00000, 0.58266, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x360e94e5b5ac4, , 0",
+        " (foreignNode)    5, 0.0071584, 1.04484, 0.47380, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64_t1r1s1, 0x60b8082e4db7b, , 0",
+        " (foreignNode)    4, 0.0073152, 1.06773, 0.44770, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64_t1r1s1, 0x395471f36a5b3, , 0",
+        " (foreignNode)   44, 0.0074368, 1.08547, 0.62410, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x4ba3e7a3f4a35, , 0",
+        " (foreignNode)   53, 0.0084832, 1.23821, 0.56565, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64_t1r1s1, 0x40e0190b9c69a, , 0",
+        " (foreignNode)    3, 0.0087136, 1.27184, 0.37398, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64_t1r1s1, 0x5888662df1368, , 0",
+        " (foreignNode)    6, 0.0088448, 1.29099, 0.38370, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64_t1r1s1, 0x2baad77859476, , 0",
+        " (foreignNode)   18, 0.0091872, 1.34096, 0.40822, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64_t1r1s1, 0x481bbf12c3221, , 0",
+        " (foreignNode)   43, 0.0092384, 1.34844, 0.50133, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x339be2066eac8, , 0",
+        " (foreignNode)   45, 0.0092416, 1.34890, 0.50737, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x4c6435dee045d, , 0",
+        " (foreignNode)   59, 0.0094496, 1.37926, 0.52702, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage2_warpsize2x4x1_g1_sptensor16x8x64_t1r1s1, 0x5db0afd49e634, , 0",
+        " (foreignNode)    9, 0.0096352, 1.40635, 0.36094, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64_t1r1s1, 0x4e44ec1e03ca0, , 0",
+        " (foreignNode)   58, 0.0098336, 1.43531, 0.50640, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64_t1r1s1, 0x3be972b4ad451, , 0",
+        " (foreignNode)   28, 0.0098592, 1.43905, 0.44798, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x5a1217529ec46, , 0",
+        " (foreignNode)    7, 0.0098784, 1.44185, 0.34969, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64_t1r1s1, 0x49f79b92628b9, , 0",
+        " (foreignNode)   35, 0.0099008, 1.44512, 0.45366, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x64x128_stage3_warpsize2x2x1_g1_sptensor16x8x64_t1r1s1, 0x390fac5bfbc1f, , 0",
+        " (foreignNode)   40, 0.0100640, 1.46894, 0.45334, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x2d3a81bb0ff48, , 0",
+        " (foreignNode)   11, 0.0114176, 1.66651, 0.30643, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64_t1r1s1, 0x588ec12b5151a, , 0",
+        " (foreignNode)   57, 0.0115040, 1.67912, 0.43251, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x4d7cd8f13e6b3, , 0",
+        " (foreignNode)   13, 0.0104800, 1.20228, 0.66031, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x430bf733872fe, , 0",
+        " (foreignNode)   23, 0.0110336, 1.26579, 0.70892, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x4e8dd8ac879a0, , 0",
+        " (foreignNode)    1, 0.0110400, 1.26652, 0.55019, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x339333b035ddc, , 0",
+        " (foreignNode)   16, 0.0113216, 1.29883, 0.62990, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x37914d62d97c5, , 0",
+        " (foreignNode)   17, 0.0113536, 1.30250, 0.63247, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x5b60d1eac5cde, , 0",
+        " (foreignNode)   14, 0.0114432, 1.31278, 0.60860, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x6207024c22a80, , 0",
+        " (foreignNode)   15, 0.0118592, 1.36050, 0.59083, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x5d689ff87b87d, , 0",
+        " (foreignNode)   47, 0.0122688, 1.40749, 0.93371, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x6be7c25b607ad, , 0",
+        " (foreignNode)   24, 0.0124512, 1.42841, 0.65038, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x64x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x6be2d1921f336, , 0",
+        " (foreignNode)   46, 0.0146176, 1.67695, 0.78330, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x31ef558a81fd9, , 0",
+        " (foreignNode)   36, 0.0146624, 1.68209, 0.71663, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage2_warpsize2x4x1_g1_sptensor16x8x64, 0x57c9d5d43082c, , 0",
+        " (foreignNode)    7, 0.0148160, 1.69971, 0.45279, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x50730625c7e1d, , 0",
+        " (foreignNode)    1, 0.0124320, 1.10684, 0.67088, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x311d4dbef37c0, , 0",
+        " (foreignNode)   10, 0.0134112, 1.19402, 0.71625, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x590ee11f3e06d, , 0",
+        " (foreignNode)   14, 0.0146912, 1.30798, 0.67144, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x3af9076f87997, , 0",
+        " (foreignNode)   23, 0.0151552, 1.34929, 0.75386, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x64x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x62f1ee6c2a533, , 0",
+        " (foreignNode)    9, 0.0151712, 1.35071, 0.63041, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x35b21c809778a, , 0",
+        " (foreignNode)    4, 0.0165728, 1.47550, 0.54305, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x2cb10f67f9ffa, , 0",
+        " (foreignNode)   15, 0.0166560, 1.48291, 0.59273, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x2ba018056c5d4, , 0",
+        " (foreignNode)   21, 0.0172000, 1.53134, 0.63861, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x46e74180b3b29, , 0",
+        " (foreignNode)    8, 0.0183040, 1.62963, 0.52226, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x56874902dc911, , 0",
+        " (foreignNode)   38, 0.0225120, 2.00427, 0.71936, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x5fac3af3d31f8, , 0",
+        " (foreignNode)   36, 0.0247424, 2.20285, 0.65218, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x2dae7da935f9d, , 0",
+        " (foreignNode)   30, 0.0247808, 2.20627, 0.62330, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage2_warpsize2x4x1_g1_sptensor16x8x64, 0x4d85d5a0b6072, , 0",
+        " (foreignNode)    1, 0.0124576, 1.18834, 0.66950, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x2a1d69e1345f8, , 0",
+        " (foreignNode)    8, 0.0124704, 1.18956, 0.76657, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x58462f2955e06, , 0",
+        " (foreignNode)   10, 0.0125472, 1.19689, 0.76557, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x5bc9ca9db5b0e, , 0",
+        " (foreignNode)   14, 0.0126720, 1.20879, 0.77843, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x444db84e4ec42, , 0",
+        " (foreignNode)    9, 0.0136352, 1.30067, 0.70142, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize64x16x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x34b8fd8b183e9, , 0",
+        " (foreignNode)    4, 0.0165664, 1.58028, 0.54326, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x32x128_stage3_warpsize1x1x1_g1_sptensor16x8x64, 0x4bdeffa08af9c, , 0",
+        " (foreignNode)   15, 0.0166912, 1.59219, 0.59148, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x64x128_stage3_warpsize1x2x1_g1_sptensor16x8x64, 0x599854d9a7cc8, , 0",
+        " (foreignNode)   21, 0.0167712, 1.59982, 0.65494, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize64x128x128_stage3_warpsize1x4x1_g1_sptensor16x8x64, 0x351fea59936df, , 0",
+        " (foreignNode)   23, 0.0176096, 1.67979, 0.64879, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x64x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x2b27526c0b023, , 0",
+        " (foreignNode)   38, 0.0189120, 1.80403, 0.85629, sm80_xmma_fprop_sparse_conv_interleaved_i8i8_i8i32_f32_nchw_vect_c_32kcrs_vect_c_32_nchw_vect_c_32_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x2d2e3d7fe7731, , 0",
+        " (foreignNode)   36, 0.0228640, 2.18101, 0.70576, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage3_warpsize2x2x1_g1_sptensor16x8x64, 0x3727f6e02b2c6, , 0",
+        " (foreignNode)   30, 0.0247552, 2.36142, 0.62395, sm80_xmma_fprop_sparse_conv_i8i8_i8i32_f32_nhwckrsc_nhwc_tilesize128x128x128_stage2_warpsize2x4x1_g1_sptensor16x8x64, 0x4c2df7dc51ae6, , 0",
+        " (foreignNode) (Sparsity) Found 19 layer(s) eligible to use sparse tactics: /layer1/layer1.0/conv1/Conv, /layer1/layer1.0/conv2/Conv, /layer1/layer1.1/conv1/Conv, /layer1/layer1.1/conv2/Conv, /layer2/layer2.0/downsample/downsample.0/Conv, /layer2/layer2.0/conv1/Conv, /layer2/layer2.0/conv2/Conv, /layer2/layer2.1/conv1/Conv, /layer2/layer2.1/conv2/Conv, /layer3/layer3.0/conv1/Conv, /layer3/layer3.0/downsample/downsample.0/Conv, /layer3/layer3.0/conv2/Conv, /layer3/layer3.1/conv1/Conv, /layer3/layer3.1/conv2/Conv, /layer4/layer4.0/conv1/Conv, /layer4/layer4.0/downsample/downsample.0/Conv, /layer4/layer4.0/conv2/Conv, /layer4/layer4.1/conv1/Conv, /layer4/layer4.1/conv2/Conv",
+        " (foreignNode) (Sparsity) Chose 6 layer(s) using sparse tactics: /layer1/layer1.0/conv2/Conv, /layer1/layer1.1/conv2/Conv, /layer2/layer2.1/conv1/Conv, /layer3/layer3.0/conv1/Conv, /layer3/layer3.0/downsample/downsample.0/Conv, /layer4/layer4.0/downsample/downsample.0/Conv"
+      ],
+      "sparsity_violations": [],
+      "quantization_path": "ModelOpt ONNX PTQ: FP32 ONNX to INT8 Q/DQ ONNX",
+      "sparse_layer_counts": {
+        "eligible_layers": 19,
+        "eligible_log_lines": 1,
+        "chosen_layers": 6
+      },
+      "batch_256_crops_per_second": 40471.75841967282,
+      "throughput_batch_size": 256,
+      "engine_bytes": 13210476,
+      "checkpoint_bytes": 44785161
+    },
+    "trt_int8_sparse_dense": {
+      "status": "ok",
+      "simulated": false,
+      "score": 0.948440969471486,
+      "accuracy": 0.9699135013162843,
+      "per_class": [
+        0.9676400947119179,
+        0.9781199351701783,
+        0.922077922077922,
+        0.9259259259259259
+      ],
+      "confusion_matrix": [
+        [
+          1226,
+          20,
+          10,
+          11
+        ],
+        [
+          14,
+          1207,
+          8,
+          5
+        ],
+        [
+          2,
+          3,
+          71,
+          1
+        ],
+        [
+          2,
+          3,
+          1,
+          75
+        ]
+      ],
+      "batch_20_ms": 0.579787000020815,
+      "notes": [],
+      "sparse_log": [],
+      "sparsity_violations": [],
+      "quantization_path": "ModelOpt ONNX PTQ: FP32 ONNX to INT8 Q/DQ ONNX",
+      "sparse_layer_counts": {
+        "eligible_layers": null,
+        "eligible_log_lines": 0,
+        "chosen_layers": 0
+      },
+      "batch_256_crops_per_second": 37111.12774996712,
+      "throughput_batch_size": 256,
+      "engine_bytes": 11739924,
+      "checkpoint_bytes": 44785161
+    },
+    "sim_nvfp4": {
+      "status": "ok",
+      "simulated": true,
+      "score": 0.9395321286336595,
+      "accuracy": 0.9642722828130876,
+      "per_class": [
+        0.9589581689029203,
+        0.9764991896272285,
+        0.9090909090909091,
+        0.9135802469135802
+      ],
+      "confusion_matrix": [
+        [
+          1215,
+          31,
+          9,
+          12
+        ],
+        [
+          19,
+          1205,
+          6,
+          4
+        ],
+        [
+          1,
+          5,
+          70,
+          1
+        ],
+        [
+          3,
+          3,
+          1,
+          74
+        ]
+      ],
+      "batch_20_ms": null,
+      "notes": [
+        "fake quantization only; enabled Conv2d quantizers: 40"
+      ],
+      "sparse_log": [],
+      "modelopt_config": "NVFP4",
+      "checkpoint_bytes": 44783433
+    },
+    "sim_nvfp4_sparse": {
+      "status": "ok",
+      "simulated": true,
+      "score": 0.9323991362567644,
+      "accuracy": 0.9620157954118089,
+      "per_class": [
+        0.9573796369376479,
+        0.9748784440842788,
+        0.8961038961038961,
+        0.9012345679012346
+      ],
+      "confusion_matrix": [
+        [
+          1213,
+          21,
+          15,
+          18
+        ],
+        [
+          13,
+          1203,
+          11,
+          7
+        ],
+        [
+          2,
+          3,
+          69,
+          3
+        ],
+        [
+          3,
+          3,
+          2,
+          73
+        ]
+      ],
+      "batch_20_ms": null,
+      "notes": [
+        "fake quantization only; enabled Conv2d quantizers: 40"
+      ],
+      "sparse_log": [],
+      "modelopt_config": "NVFP4",
+      "checkpoint_bytes": 44785161
+    },
+    "sim_int4": {
+      "status": "ok",
+      "simulated": true,
+      "score": 0.9409291741949019,
+      "accuracy": 0.9669048514479127,
+      "per_class": [
+        0.9621152328334649,
+        0.9789303079416531,
+        0.9090909090909091,
+        0.9135802469135802
+      ],
+      "confusion_matrix": [
+        [
+          1219,
+          29,
+          5,
+          14
+        ],
+        [
+          19,
+          1208,
+          3,
+          4
+        ],
+        [
+          3,
+          4,
+          70,
+          0
+        ],
+        [
+          4,
+          3,
+          0,
+          74
+        ]
+      ],
+      "batch_20_ms": null,
+      "notes": [
+        "fake quantization only; enabled Conv2d quantizers: 20"
+      ],
+      "sparse_log": [],
+      "modelopt_config": "INT4",
+      "checkpoint_bytes": 44783433
+    },
+    "sim_int4_sparse": {
+      "status": "ok",
+      "simulated": true,
+      "score": 0.9323252770321847,
+      "accuracy": 0.9676570139150057,
+      "per_class": [
+        0.9676400947119179,
+        0.9773095623987034,
+        0.8831168831168831,
+        0.9012345679012346
+      ],
+      "confusion_matrix": [
+        [
+          1226,
+          19,
+          10,
+          12
+        ],
+        [
+          13,
+          1206,
+          9,
+          6
+        ],
+        [
+          2,
+          5,
+          68,
+          2
+        ],
+        [
+          2,
+          3,
+          3,
+          73
+        ]
+      ],
+      "batch_20_ms": null,
+      "notes": [
+        "fake quantization only; enabled Conv2d quantizers: 20"
+      ],
+      "sparse_log": [],
+      "modelopt_config": "INT4",
+      "checkpoint_bytes": 44785161
+    }
+  }
+}

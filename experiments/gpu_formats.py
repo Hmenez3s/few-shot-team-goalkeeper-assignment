@@ -3,6 +3,8 @@ import copy
 import json
 import re
 import statistics
+import subprocess
+import sys
 import time
 import traceback
 from pathlib import Path
@@ -107,14 +109,38 @@ def latency_ms(run, device):
         samples.append((time.perf_counter() - start) * 1000)
     return statistics.median(samples)
 
+def quantize_onnx_int8(onnx_path, output_path, calibration, workdir, device, calibration_batch_size=BATCH):
+    batches = [batch_crops(calibration[start:start + BATCH], torch.device("cpu")).numpy()
+               for start in range(0, len(calibration), BATCH)]
+    normalized = np.concatenate(batches)
+    padded_count = (-len(normalized)) % calibration_batch_size
+    if padded_count:
+        normalized = np.concatenate((normalized, np.repeat(normalized[-1:], padded_count, axis=0)))
+    calibration_path = workdir / "calibration.npy"
+    np.save(calibration_path, normalized)
+    subprocess.run([
+        sys.executable, "-m", "modelopt.onnx.quantization",
+        "--onnx_path", str(onnx_path), "--quantize_mode", "int8",
+        "--calibration_data_path", str(calibration_path),
+        "--calibration_eps", f"cuda:{device.index or 0}",
+        "--output_path", str(output_path),
+    ], check=True)
+    return output_path
+
+def throughput_crops_per_second(encoder, crops, device, batch_size=256):
+    batch = np.concatenate([crops[i % len(crops):i % len(crops) + 1]
+                            for i in range(batch_size)])
+    elapsed_ms = latency_ms(lambda: encoder(batch), device)
+    return batch_size * 1000 / elapsed_ms
+
 
 def load_trt():
     import tensorrt as trt
     return trt
 
 
-def export_onnx(model, onnx_path, device):
-    dummy = torch.zeros(BATCH, 3, 96, 48, device=device)
+def export_onnx(model, onnx_path, device, batch_size=BATCH):
+    dummy = torch.zeros(batch_size, 3, 96, 48, device=device, dtype=next(model.parameters()).dtype)
     torch.onnx.export(model, dummy, str(onnx_path), input_names=["crops"], output_names=["embedding"],
                       opset_version=20, do_constant_folding=True, dynamo=False)
 
@@ -131,17 +157,19 @@ def build_engine(onnx_path, engine_path, precision, sparse=False):
 
     logger = CapturingLogger()
     builder = trt.Builder(logger)
-    network = builder.create_network(1 << int(trt.NetworkDefinitionCreationFlag.EXPLICIT_BATCH))
+    network_flag = getattr(trt.NetworkDefinitionCreationFlag, "STRONGLY_TYPED", None)
+    if network_flag is None:
+        network_flag = getattr(trt.NetworkDefinitionCreationFlag, "EXPLICIT_BATCH", None)
+    network_flags = 0 if network_flag is None else 1 << int(network_flag)
+    network = builder.create_network(network_flags)
     parser = trt.OnnxParser(network, logger)
     if not parser.parse(onnx_path.read_bytes()):
         errors = [str(parser.get_error(i)) for i in range(parser.num_errors)]
         raise RuntimeError("ONNX parse failed: " + " | ".join(errors))
     config = builder.create_builder_config()
-    if precision == "fp16":
-        config.set_flag(trt.BuilderFlag.FP16)
-    elif precision in ("int8", "fp8"):
-        if hasattr(trt.BuilderFlag, "STRONGLY_TYPED"):
-            config.set_flag(trt.BuilderFlag.STRONGLY_TYPED)
+    precision_flag = {"fp16": "FP16", "int8": "INT8", "fp8": "FP8"}.get(precision)
+    if precision_flag and hasattr(trt.BuilderFlag, precision_flag):
+        config.set_flag(getattr(trt.BuilderFlag, precision_flag))
     if sparse:
         config.set_flag(trt.BuilderFlag.SPARSE_WEIGHTS)
     serialized = builder.build_serialized_network(network, config)
@@ -149,20 +177,23 @@ def build_engine(onnx_path, engine_path, precision, sparse=False):
         raise RuntimeError("TensorRT returned no serialized engine")
     engine_path.write_bytes(bytes(serialized))
     sparse_lines = [line for line in logger.lines if "sparse" in line.lower()]
-    eligible_matches = [re.search(r"(?:(\d+)\s+layers? eligible|eligible for sparse math\D*(\d+))", line, re.IGNORECASE) for line in sparse_lines]
-    eligible_counts = [int(match.group(1) or match.group(2)) for match in eligible_matches if match]
-    chosen = sum("sparse tactic" in line.lower() for line in sparse_lines)
+    eligible_matches = [re.search(r"(?:(\d+)\s+layer(?:s|\(s\))? eligible|eligible for sparse math\D*(\d+)|Found\s+(\d+)\s+layer(?:s|\(s\))? eligible to use sparse tactics)", line, re.IGNORECASE) for line in sparse_lines]
+    eligible_counts = [int(next(group for group in match.groups() if group)) for match in eligible_matches if match]
+    chosen_matches = [re.search(r"Chose\s+(\d+)\s+layer(?:s|\(s\))? using sparse tactics", line, re.IGNORECASE) for line in sparse_lines]
+    chosen_counts = [int(match.group(1)) for match in chosen_matches if match]
+    chosen = max(chosen_counts, default=0)
     return engine_path.stat().st_size, sparse_lines, {
         "eligible_layers": max(eligible_counts) if eligible_counts else None,
-        "eligible_log_lines": sum("eligible for sparse math" in line.lower() for line in sparse_lines),
+        "eligible_log_lines": sum(bool(match) for match in eligible_matches),
         "chosen_layers": chosen,
     }
 
 
 class TrtEncoder:
-    def __init__(self, engine_path, device):
+    def __init__(self, engine_path, device, batch_size=BATCH):
         trt = load_trt()
         self.device = device
+        self.batch_size = batch_size
         self.runtime = trt.Runtime(trt.Logger(trt.Logger.ERROR))
         self.engine = self.runtime.deserialize_cuda_engine(engine_path.read_bytes())
         if self.engine is None:
@@ -178,15 +209,15 @@ class TrtEncoder:
     def __call__(self, crops):
         result = []
         with torch.inference_mode():
-            for start in range(0, len(crops), BATCH):
-                chunk = crops[start:start + BATCH]
+            for start in range(0, len(crops), self.batch_size):
+                chunk = crops[start:start + self.batch_size]
                 count = len(chunk)
-                if count < BATCH:
-                    chunk = np.concatenate((chunk, np.repeat(chunk[-1:], BATCH - count, axis=0)))
+                if count < self.batch_size:
+                    chunk = np.concatenate((chunk, np.repeat(chunk[-1:], self.batch_size - count, axis=0)))
                 tensor = batch_crops(chunk, self.device, self.input_dtype).contiguous()
                 output_shape = tuple(self.engine.get_tensor_shape(self.output_name))
                 if output_shape[0] < 0:
-                    output_shape = (BATCH, *output_shape[1:])
+                    output_shape = (self.batch_size, *output_shape[1:])
                 output = torch.empty(output_shape, device=self.device, dtype=self.output_dtype)
                 self.context.set_tensor_address(self.input_name, tensor.data_ptr())
                 self.context.set_tensor_address(self.output_name, output.data_ptr())
@@ -342,7 +373,9 @@ def main():
                     if violations:
                         raise ValueError(f"checkpoint violates 2:4 in {len(violations)} convolution layers")
                 precision = "fp16" if "fp16" in name else ("int8" if "int8" in name else "fp8")
-                if precision in ("int8", "fp8"):
+                if precision == "fp16":
+                    model = model.half()
+                if precision == "fp8":
                     quantized, mtq = quantized_format(model, precision, calibration, device)
                     row["modelopt_conv_quantizers"] = enabled_conv_quantizers(quantized, mtq)
                     if not row["modelopt_conv_quantizers"]:
@@ -351,6 +384,10 @@ def main():
                 onnx_path = args.workdir / f"{name}.onnx"
                 engine_path = args.workdir / f"{name}.plan"
                 export_onnx(model, onnx_path, device)
+                if precision == "int8":
+                    qdq_path = args.workdir / f"{name}.qdq.onnx"
+                    onnx_path = quantize_onnx_int8(onnx_path, qdq_path, calibration, args.workdir, device)
+                    row["quantization_path"] = "ModelOpt ONNX PTQ: FP32 ONNX to INT8 Q/DQ ONNX"
                 engine_bytes, sparse_lines, sparse_counts = build_engine(onnx_path, engine_path, precision, sparse_build)
                 row["sparse_log"] = sparse_lines
                 row["sparse_layer_counts"] = sparse_counts
@@ -368,9 +405,23 @@ def main():
                     encoder.context.execute_async_v3(encoder.stream.cuda_stream)
                     return y.float() @ prototypes.T
                 row["batch_20_ms"] = latency_ms(timed_inference, device)
+                if name in ("trt_fp16", "trt_fp16_sparse", "trt_fp16_sparse_dense",
+                            "trt_int8", "trt_int8_sparse", "trt_int8_sparse_dense"):
+                    throughput_onnx = args.workdir / f"{name}-batch256.onnx"
+                    throughput_engine = args.workdir / f"{name}-batch256.plan"
+                    export_onnx(model, throughput_onnx, device, batch_size=256)
+                    if precision == "int8":
+                        throughput_qdq = args.workdir / f"{name}-batch256.qdq.onnx"
+                        throughput_onnx = quantize_onnx_int8(
+                            throughput_onnx, throughput_qdq, calibration, args.workdir, device, calibration_batch_size=256)
+                    build_engine(throughput_onnx, throughput_engine, precision, sparse_build)
+                    throughput_encoder = TrtEncoder(throughput_engine, device, batch_size=256)
+                    row["batch_256_crops_per_second"] = throughput_crops_per_second(
+                        throughput_encoder, sessions[0]["crops"], device)
+                    row["throughput_batch_size"] = 256
                 row["engine_bytes"] = engine_bytes
                 row["checkpoint_bytes"] = checkpoint.stat().st_size
-                row["notes"].append(f"ModelOpt ONNX export approach commit {MODEL_OPT_EXPORT_COMMIT}") if precision in ("int8", "fp8") else None
+                row["notes"].append(f"ModelOpt ONNX export approach commit {MODEL_OPT_EXPORT_COMMIT}") if precision == "fp8" else None
             row.setdefault("status", "ok")
             row["status"] = "ok"
             if expected_matrix is not None and name == "torch_fp32":
@@ -385,6 +436,8 @@ def main():
             row["traceback"] = traceback.format_exc()
             print(f"{name}: failed: {row['error']}", flush=True)
         rows[name] = row
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        args.out.write_text(json.dumps({"environment": environment, "formats": rows}, indent=2) + "\n")
     output = {"environment": environment, "formats": rows}
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(output, indent=2) + "\n")

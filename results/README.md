@@ -3,6 +3,7 @@
 | File | Contents | Producing script |
 |---|---|---|
 | `audit.json` | Prepared data, class mapping, exclusions, and label-normalization audit | `prepare.py` |
+| `frozen-encoders.json` | Frozen SigLIP and CLIP with the same six references, and the Roboflow team pipeline with predicted and true roles, on six held-out matches | `experiments/frozen_encoders.py` |
 | `formats.json` | Runtime environment and format accuracy/latency measurements | `evaluate_formats.py` |
 | `occlusion.json` | Error counts and confusion matrices by box-overlap proxy | `experiments/analyze_errors.py` |
 | `prospective.json` | Prospective replay protocol, coverage, and scores | `experiments/prospective_evaluation.py` |

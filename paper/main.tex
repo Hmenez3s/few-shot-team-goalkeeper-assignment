@@ -32,7 +32,7 @@
 \maketitle
 
 \begin{abstract}
-Kit colours change every match, so a fixed classifier cannot assign football players to teams. We study a reference-conditioned formulation. Given the player boxes of a broadcast clip and $k$ labelled reference crops for each of four groups (team A, team B, goalkeeper A, goalkeeper B) taken earlier in the same half, a ResNet-18 embeds all crops and each box takes the group whose mean reference embedding is closest in cosine similarity. This is a prototypical network trained episodically; our contribution is the formulation, the evaluation and the comparison, not a new architecture. On 5,842 boxes from six held-out SoccerNet Game State Reconstruction matches, with identical ground-truth boxes, tracklets and pitch positions for both methods, the official SoccerNet baseline (PRTReID embeddings, per-clip K-means) scores 66.15\%, the mean of four per-group accuracies. Our model with six references and tracklet averaging scores 97.45\%. We also report reference-draw variance, rotated folds, a prospective replay, and Core ML latency (2.24 ms for 20 crops). Five SN-GSR-2025 clips have swapped outfield team labels; we give the evidence and use corrected labels.
+Kit colours change every match, so a fixed classifier cannot assign football players to teams. We study a reference-conditioned formulation. Given the player boxes of a broadcast clip and $k$ labelled reference crops for each of four groups (team A, team B, goalkeeper A, goalkeeper B) taken earlier in the same half, a ResNet-18 embeds all crops and each box takes the group whose mean reference embedding is closest in cosine similarity. This is a prototypical network trained episodically; our contribution is the formulation, the evaluation and the comparison, not a new architecture. On 5,842 boxes from six held-out SoccerNet Game State Reconstruction matches, with identical ground-truth boxes, tracklets and pitch positions for both methods, the official SoccerNet baseline (PRTReID embeddings, per-clip K-means) scores 66.15\%, the mean of four per-group accuracies. Our model with six references and tracklet averaging scores 97.45\%. With the same six references, frozen SigLIP and CLIP encoders score 87.98\% and 82.17\%. A SigLIP, UMAP and K-means team pipeline from the Roboflow sports toolkit scores 70.85\% with predicted roles, and 96.05\% when it is given the true role of every box. We also report reference-draw variance, rotated folds, a prospective replay, and Core ML latency (2.24 ms for 20 crops). Five SN-GSR-2025 clips have swapped outfield team labels; we give the evidence and use corrected labels.
 \end{abstract}
 
 \section{Introduction}
@@ -41,7 +41,7 @@ A broadcast analysis system must decide, for every player box, which team the pl
 
 We ask a different question: how much does a small amount of labelled evidence from the same half help? An operator supplies $k$ labelled crops for each of four groups, taken earlier in the same half. A single four-way decision then assigns every box to team A, team B, goalkeeper A or goalkeeper B, and so ties each goalkeeper to a team. No clustering and no camera calibration are needed.
 
-Methodologically, this is a prototypical network~\cite{snell2017prototypical} with a ResNet-18 encoder~\cite{he2016resnet}; we do not propose a new architecture. The contributions are the four-group formulation with references from the same half (Section~\ref{sec:method}); a like-for-like comparison with the official SoccerNet team method on 5,842 boxes from six held-out matches, with the same ground-truth tracklets and pitch coordinates for both (Section~\ref{sec:results}); an evaluation of reference choice, seeds, held-out matches, prospective use and box overlap (Sections~\ref{sec:variance}--\ref{sec:errors}); and the finding that five clips of SN-GSR-2025 have swapped outfield team labels (Section~\ref{sec:audit}). Code, checkpoints, results and the label audit are at \url{https://github.com/Hmenez3s/four-reference-team-classifier}.
+Methodologically, this is a prototypical network~\cite{snell2017prototypical} with a ResNet-18 encoder~\cite{he2016resnet}; we do not propose a new architecture. The contributions are the four-group formulation with references from the same half (Section~\ref{sec:method}); a like-for-like comparison with the official SoccerNet team method on 5,842 boxes from six held-out matches, with the same ground-truth tracklets and pitch coordinates for both, extended to frozen SigLIP and CLIP encoders and to the Roboflow team pipeline (Section~\ref{sec:results}); an evaluation of reference choice, seeds, held-out matches, prospective use and box overlap (Sections~\ref{sec:variance}--\ref{sec:errors}); and the finding that five clips of SN-GSR-2025 have swapped outfield team labels (Section~\ref{sec:audit}). Code, checkpoints, results and the label audit are at \url{https://github.com/Hmenez3s/four-reference-team-classifier}.
 
 \section{Related work}
 
@@ -100,39 +100,57 @@ and a box $q$ is assigned to $\arg\max_c \cos\big(f(q),p_c\big)$. During trainin
 
 \textbf{Comparison with the SoccerNet method.} The baseline predicts a role and an embedding per box with PRTReID. Roles are majority-voted per tracklet. The mean embeddings of player tracklets are split by \texttt{KMeans(n\_clusters=2, random\_state=0)} per clip. Each cluster takes the side of its mean pitch position, and each goalkeeper takes the side of its own pitch position~\cite{sngamestate}. We ran this logic on the same boxes that we score, with ground-truth tracklets and pitch coordinates instead of a detector, a tracker and a camera calibration. This removes upstream errors for both methods. Boxes the baseline cannot assign (a non-player role or a missing pitch position) count as wrong. We also report two diagnostic variants: the baseline with true roles, and the baseline with true roles and, for each clip, the cluster-to-team mapping that is best according to the ground truth. The second is an oracle upper bound.
 
+\textbf{Other baselines.} To separate the effect of training the encoder from the effect of the references, we replace our encoder by frozen SigLIP base, patch 16, 224 px~\cite{zhai2023siglip} or CLIP ViT-B/32~\cite{radford2021clip} and keep everything else: the same six reference crops per group, the same cosine prototypes and the same tracklet averaging. We also run the team pipeline of the Roboflow sports toolkit~\cite{roboflow2025sports} at commit \texttt{42c80c0}: per clip, the mean SigLIP feature of each player tracklet is reduced with UMAP~\cite{mcinnes2018umap} (3 components) and split by K-means into two clusters, which then label every box. Clusters take the side of their mean pitch position, as in the SoccerNet baseline, and each goalkeeper joins the team whose players are nearer along the pitch. This pipeline needs to know who is a player and who is a goalkeeper. We give it the roles predicted by the PRTReID role head, voted per tracklet as above; in a second variant we give it the true roles. All encoders see the same 96\,$\times$\,48 crops, resized to their input size.
+
 \textbf{Provenance.} The official PRTReID checkpoint~\cite{prtreid2024weights} was trained on SoccerNet-Tracking train, according to the PRTReID paper. Those 57 clips are exactly the SN-GSR-2025 train clips (matches 4, 6, 9), so no evaluated match was seen by it. Our models for matches 7, 8, 11 were trained on 4, 6, 9 and selected on 2, 3, 5. For matches 2, 3, 5, we retrained on 7, 8, 11 and selected on 4, 6, 9. The six evaluated matches contain 2,756, 2,761, 155 and 170 boxes in team~A, team~B, goalkeeper~A and goalkeeper~B, 5,842 in total.
 
-\section{Comparison with the SoccerNet baseline}
+\section{Comparison with team-assignment baselines}
 \label{sec:results}
 
-Table~\ref{tab:main} gives the pooled result on the six held-out matches. The baseline scores 66.15\%. Six references with tracklet averaging score 97.45\%. With each box classified alone, six references score 92.42\%, still above the baseline. The baseline is weakest on goalkeepers (57.42\% and 58.82\%).
+Table~\ref{tab:main} gives the pooled result on the six held-out matches. The rows are grouped by what each method receives. The SoccerNet baseline scores 66.15\%. Our model with six references scores 97.45\% with tracklet averaging and 92.42\% with each box classified alone. The baseline is weakest on goalkeepers (57.42\% and 58.82\%).
 
 \begin{table}[H]
 \centering
-\caption{Six held-out matches, 5,842 boxes. Score is the mean of the four per-group accuracies; accuracy counts every box once. GK is goalkeeper.}
+\caption{Six held-out matches, 5,842 boxes. Score is the mean of the four per-group accuracies; accuracy counts every box once. GK is goalkeeper. Rows marked $\dagger$ receive the true role of every box from the annotations and are not directly comparable with the other rows.}
 \label{tab:main}
 \small
 \begin{tabular}{lrrrrrr}
 \toprule
 Method & Score & Accuracy & Team A & Team B & GK A & GK B \\
 \midrule
+\multicolumn{7}{l}{\emph{No labelled crops, predicted roles}} \\
 SoccerNet baseline (PRTReID + K-means) & 66.15 & 73.30 & 71.84 & 76.53 & 57.42 & 58.82 \\
-\quad with true roles & 92.79 & 88.38 & 84.07 & 91.56 & 96.13 & 99.41 \\
-\quad with true roles, best mapping (oracle) & 94.00 & 90.65 & 86.28 & 94.17 & 96.13 & 99.41 \\
+Roboflow pipeline (SigLIP + UMAP + K-means) & 70.85 & 82.68 & 84.18 & 84.14 & 57.42 & 57.65 \\
 \midrule
-Ours, 1 reference, each box & 87.69 & 91.00 & 89.84 & 92.97 & 83.23 & 84.71 \\
-Ours, 1 reference, tracklets & 91.27 & 94.20 & 91.44 & 97.68 & 87.74 & 88.24 \\
-Ours, 6 references, each box & 92.42 & 93.12 & 92.13 & 94.28 & 90.32 & 92.94 \\
-Ours, 6 references, tracklets & \textbf{97.45} & \textbf{98.13} & 96.88 & 99.57 & 98.06 & 95.29 \\
+\multicolumn{7}{l}{\emph{No labelled crops, true roles}} \\
+SoccerNet baseline$^\dagger$ & 92.79 & 88.38 & 84.07 & 91.56 & 96.13 & 99.41 \\
+SoccerNet baseline, best cluster mapping$^\dagger$ & 94.00 & 90.65 & 86.28 & 94.17 & 96.13 & 99.41 \\
+Roboflow pipeline$^\dagger$ & 96.05 & 95.31 & 94.99 & 95.44 & 96.13 & 97.65 \\
+\midrule
+\multicolumn{7}{l}{\emph{Six labelled crops per group, frozen encoder}} \\
+CLIP, each box & 63.83 & 66.38 & 74.13 & 59.33 & 67.74 & 54.12 \\
+CLIP, tracklets & 82.17 & 83.11 & 93.32 & 73.20 & 90.97 & 71.18 \\
+SigLIP, each box & 74.34 & 76.67 & 82.15 & 71.79 & 72.26 & 71.18 \\
+SigLIP, tracklets & 87.98 & 89.08 & 94.38 & 84.10 & 92.26 & 81.18 \\
+\midrule
+\multicolumn{7}{l}{\emph{Ours}} \\
+1 reference, each box & 87.69 & 91.00 & 89.84 & 92.97 & 83.23 & 84.71 \\
+1 reference, tracklets & 91.27 & 94.20 & 91.44 & 97.68 & 87.74 & 88.24 \\
+6 references, each box & 92.42 & 93.12 & 92.13 & 94.28 & 90.32 & 92.94 \\
+6 references, tracklets & \textbf{97.45} & \textbf{98.13} & 96.88 & 99.57 & 98.06 & 95.29 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:sets} splits the result by match set. On matches 7, 8, 11 its accuracy is 97.29\%, higher than ours with each box alone (96.77\%), but its score is 83.55\% because goalkeepers are assigned correctly in only 76.62\% and 59.26\% of boxes. On matches 2, 3, 5 its score is 50.93\%. In match 3 the baseline's role vote marks 418 of the 1,072 scored boxes as referees or the ball, and each of those counts as an error. With true roles, its score on matches 2, 3, 5 rises to 89.41\%, and the best cluster-to-team mapping gives the same score, so the remaining errors come from K-means splitting a team. On matches 7, 8, 11 the pitch-side rule also swaps teams in some clips: true roles give 96.65\%, and the best mapping gives 99.31\%. That oracle value is slightly above our 98.98\%. Over six matches, the oracle gives 94.00\%.
+\textbf{Frozen encoders.} With the same six references and tracklets, frozen SigLIP scores 87.98\% and frozen CLIP 82.17\%. Training the encoder for the task raises the score to 97.45\%. The references alone do not explain the result.
+
+\textbf{Roboflow pipeline.} With roles predicted by the PRTReID role head, the Roboflow pipeline scores 70.85\%. Its outfield accuracy (84.18\% and 84.14\%) is higher than that of the SoccerNet baseline, but its goalkeeper accuracy stays near 57\%, because both depend on the same role predictions. When it receives the true role of every box, it scores 96.05\%. That variant is not directly comparable with ours: the hardest part of the task, telling goalkeepers from outfield players, is given to it, while our model makes that decision itself. Even so, our model with tracklets scores higher (97.45\%). With each box classified alone, ours scores 92.42\%, below this variant.
+
+\textbf{Per match set.} Table~\ref{tab:sets} splits the result. On matches 7, 8, 11 the SoccerNet baseline's accuracy is 97.29\%, higher than ours with each box alone (96.77\%), but its score is 83.55\% because goalkeepers are assigned correctly in only 76.62\% and 59.26\% of boxes. On matches 2, 3, 5 its score is 50.93\%. In match 3 its role vote marks 418 of the 1,072 scored boxes as referees or the ball, and each of those counts as an error. With true roles, its score on matches 2, 3, 5 rises to 89.41\%, and the best cluster-to-team mapping gives the same score, so the remaining errors come from K-means splitting a team. On matches 7, 8, 11 the pitch-side rule also swaps teams in some clips: true roles give 96.65\%, and the best mapping gives 99.31\%, slightly above our 98.98\%.
 
 \begin{table}[H]
 \centering
-\caption{Score and accuracy per set of held-out matches. Matches 7, 8, 11: 2,659 boxes. Matches 2, 3, 5: 3,183 boxes.}
+\caption{Score and accuracy per set of held-out matches. Matches 7, 8, 11: 2,659 boxes. Matches 2, 3, 5: 3,183 boxes. $\dagger$: receives true roles.}
 \label{tab:sets}
 \small
 \begin{tabular}{lrrrr}
@@ -141,8 +159,11 @@ Table~\ref{tab:sets} splits the result by match set. On matches 7, 8, 11 its acc
 \cmidrule(lr){2-3}\cmidrule(lr){4-5}
 Method & Score & Accuracy & Score & Accuracy \\
 \midrule
-SoccerNet baseline (official) & 83.55 & 97.29 & 50.93 & 53.25 \\
-\quad with true roles, best mapping (oracle) & 99.31 & 99.25 & 89.41 & 83.47 \\
+SoccerNet baseline & 83.55 & 97.29 & 50.93 & 53.25 \\
+Roboflow pipeline & 82.43 & 95.19 & 60.45 & 72.23 \\
+SoccerNet baseline, best cluster mapping$^\dagger$ & 99.31 & 99.25 & 89.41 & 83.47 \\
+Roboflow pipeline$^\dagger$ & 98.15 & 97.07 & 94.13 & 93.84 \\
+SigLIP (frozen), six references, tracklets & 93.09 & 94.77 & 83.52 & 84.32 \\
 \midrule
 Ours, 1 reference, each box & 86.10 & 95.60 & 89.49 & 87.15 \\
 Ours, 1 reference, tracklets & 88.99 & 98.16 & 93.64 & 90.89 \\
@@ -152,7 +173,7 @@ Ours, 6 references, tracklets & \textbf{98.98} & \textbf{99.70} & \textbf{96.08}
 \end{tabular}
 \end{table}
 
-The comparison is not symmetric in what each method receives. The baseline uses no labelled crop from the evaluated half. Our method uses 24 labelled crops per half (four with one reference). Both sets of weights were trained on other matches.
+The methods differ in what they receive. The SoccerNet and Roboflow pipelines use no labelled crop from the evaluated half but need a role for every box. Our method uses 24 labelled crops per half (four with one reference) and needs no role classifier and no pitch position. All weights were trained on other matches.
 
 \begin{figure}[H]
 \centering

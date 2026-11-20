@@ -110,4 +110,19 @@ The official checkpoint (`prtreid-soccernet-baseline.pth.tar`, [Zenodo 10653453]
 
 In match 3 the baseline's role vote marks 418 of the 1,072 scored boxes as referees or the ball. With true roles its score on matches 2, 3, 5 rises to 89.41%; the remaining errors come from K-means splitting a team, since the best cluster-to-team mapping gives the same score. On matches 7, 8, 11 the pitch-side rule also swaps teams in some clips (96.65% with true roles, 99.31% with the best mapping). Even with true roles and the best possible cluster-to-team mapping, it scores 94.00% over six matches against 97.45% for six references with tracklets.
 
+### General-purpose encoders and the Roboflow pipeline
+
+Two more baselines use the same boxes, tracklets and pitch positions. First, our encoder is replaced by frozen SigLIP (base, patch 16, 224 px) or CLIP (ViT-B/32), keeping the same six reference crops per group, cosine prototypes and tracklet averaging. Second, the team pipeline of the [Roboflow sports toolkit](https://github.com/roboflow/sports) at commit `42c80c0`: per clip, the mean SigLIP feature of each player tracklet is reduced with UMAP (3 components) and split by K-means into two clusters that label every box; clusters take the side of their mean pitch position and each goalkeeper joins the team whose players are nearer along the pitch. That pipeline needs the role of each box. It is run with the roles voted from PRTReID's role head, and once more with the true roles. All encoders see the same 96×48 crops. Score is the mean of the four per-group accuracies.
+
+| Method | 7, 8, 11 | 2, 3, 5 | All six | Accuracy (all six) |
+|---|---:|---:|---:|---:|
+| Roboflow pipeline, roles from PRTReID | 82.43% | 60.45% | 70.85% | 82.68% |
+| Roboflow pipeline, true roles (not directly comparable) | 98.15% | 94.13% | 96.05% | 95.31% |
+| Frozen CLIP, six references, each box | 68.22% | 60.14% | 63.83% | 66.38% |
+| Frozen CLIP, six references, tracklets | 88.47% | 76.74% | 82.17% | 83.11% |
+| Frozen SigLIP, six references, each box | 81.70% | 67.80% | 74.34% | 76.67% |
+| Frozen SigLIP, six references, tracklets | 93.09% | 83.52% | 87.98% | 89.08% |
+
+With the same six references and tracklets, the trained encoder scores 97.45% against 87.98% for frozen SigLIP. With predicted roles, the Roboflow pipeline improves on the SoccerNet baseline for outfield players but not for goalkeepers (57.42% and 57.65%), since both use the same role predictions. Given the true roles it reaches 96.05%. That variant receives the part of the task our model has to solve, telling goalkeepers from outfield players, so it is not directly comparable; our model with tracklets still scores higher. Numbers: [`results/frozen-encoders.json`](results/frozen-encoders.json); code: [`experiments/frozen_encoders.py`](experiments/frozen_encoders.py).
+
 Reproduce: build the rotated fold with [`experiments/rotated_fold.sh`](experiments/rotated_fold.sh), train both models on it with `train.py` and `six_references.py`, then run the commands in [`experiments/README.md`](experiments/README.md). Numbers: [`results/prtreid-comparison.json`](results/prtreid-comparison.json).

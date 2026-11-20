@@ -8,6 +8,7 @@ Each script answers one question from [RESEARCH.md](../RESEARCH.md). Run them fr
 | `prospective_evaluation` | How well do references picked early in a half classify everything after them? | `DATA/work/prospective-evaluation-v1.json` |
 | `research_references` | How much does the choice of reference crops matter, and how do colour and re-identification baselines compare? | file given by `--out` |
 | `prtreid_comparison`, `prtreid_embed`, `tracklet_comparison` | How does the classifier compare with the official SoccerNet team method? | files given by `--out` |
+| `frozen_encoders` | Do general-purpose encoders (SigLIP, CLIP) or the Roboflow team pipeline match the trained encoder? | file given by `--out` |
 | `rotated_fold.sh` | Builds a fold where other matches are held out | a new data root |
 | `summarize_seeds_and_folds` | How much do results move across training seeds and held-out matches? | file given by `--out` |
 | `verify_split` | Do the checkpoints match, and does any identical crop appear in two splits? | file given by `--out` |

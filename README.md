@@ -26,17 +26,22 @@ Three matches never seen in training, 2,659 player boxes. **Score** is the avera
 - **Five training seeds:** 89.00% ± 2.86 (one reference).
 - **Better than appearance baselines** with the same six references: our model 94.10%, torso colour 85.02%, person re-identification (OSNet) 80.72% (averages over 30 random reference choices).
 
-### Against the official SoccerNet method
+### Against other methods
 
-Same 5,842 boxes from six held-out matches (2, 3, 5, 7, 8, 11), with the same tracklets and pitch positions given to both methods. The SoccerNet baseline clusters PRTReID embeddings with K-means; its published weights were trained on other matches.
+Same 5,842 boxes from six held-out matches (2, 3, 5, 7, 8, 11), with the same tracklets and pitch positions for every method.
 
-| Method | Score | Team A | Team B | Goalkeeper A | Goalkeeper B |
-|---|---:|---:|---:|---:|---:|
-| SoccerNet baseline (PRTReID + K-means) | 66.15% | 71.84% | 76.53% | 57.42% | 58.82% |
-| **Six references, averaged over each tracklet** | **97.45%** | 96.88% | 99.57% | 98.06% | 95.29% |
-| Six references, each box alone | 92.42% | 92.13% | 94.28% | 90.32% | 92.94% |
+| Method | Labelled crops | Score | Team A | Team B | Goalkeeper A | Goalkeeper B |
+|---|:---:|---:|---:|---:|---:|---:|
+| SoccerNet baseline (PRTReID + K-means) | none | 66.15% | 71.84% | 76.53% | 57.42% | 58.82% |
+| Roboflow pipeline (SigLIP + UMAP + K-means) | none | 70.85% | 84.18% | 84.14% | 57.42% | 57.65% |
+| Frozen CLIP, same references, tracklets | 6 per group | 82.17% | 93.32% | 73.20% | 90.97% | 71.18% |
+| Frozen SigLIP, same references, tracklets | 6 per group | 87.98% | 94.38% | 84.10% | 92.26% | 81.18% |
+| **Ours, averaged over each tracklet** | 6 per group | **97.45%** | 96.88% | 99.57% | 98.06% | 95.29% |
+| Ours, each box alone | 6 per group | 92.42% | 92.13% | 94.28% | 90.32% | 92.94% |
 
-- **Matches 7, 8, 11:** 98.98% against 83.55%.
+The SoccerNet and Roboflow pipelines take the player/goalkeeper role of each box from PRTReID's role head. Given the true role of every box instead, the Roboflow pipeline reaches 96.05%. That number is not directly comparable: the method is handed the hardest part of the task, while ours decides roles itself. Ours still scores higher with tracklets.
+
+- **Matches 7, 8, 11:** 98.98% against 83.55% for the SoccerNet baseline.
 - **Matches 2, 3, 5:** 96.08% against 50.93%. In match 3 the baseline labels 418 of its 1,072 boxes as referees or the ball.
 
 Details in [RESEARCH.md](RESEARCH.md) and the [preprint](paper/main.pdf).

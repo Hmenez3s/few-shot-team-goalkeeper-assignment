@@ -90,7 +90,9815 @@
   },
   "retained_label_count": 164,
   "sample_count": 20910,
-  "unit_policy": "original game_id and matching game_time_start/game_time_stop half; camera-relative team labels assumed stable within half",
+  "team_normalization": {
+    "maximum_clips": 16,
+    "protocol": "outfield-only per-half signed pairwise jersey agreement; goalkeeper slots unchanged",
+    "schema": 2
+  },
+  "team_normalization_assignments": [
+    {
+      "clip": "060",
+      "game": "4",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 45,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "061",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "062",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "063",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "064",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "065",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "066",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 3,
+          "clip": "067",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 5,
+          "clip": "068",
+          "crossed": 0,
+          "score": 5
+        }
+      ]
+    },
+    {
+      "clip": "061",
+      "game": "4",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 69,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "060",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 10,
+          "clip": "062",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 11,
+          "clip": "063",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 10,
+          "clip": "064",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 11,
+          "clip": "065",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 10,
+          "clip": "066",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 4,
+          "clip": "067",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "068",
+          "crossed": 1,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "062",
+      "game": "4",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 69,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "060",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 10,
+          "clip": "061",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "063",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "064",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "065",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 12,
+          "clip": "066",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 6,
+          "clip": "067",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "068",
+          "crossed": 1,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "063",
+      "game": "4",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 66,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "060",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 11,
+          "clip": "061",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 9,
+          "clip": "062",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "064",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "065",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "066",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 4,
+          "clip": "067",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "068",
+          "crossed": 1,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "064",
+      "game": "4",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 68,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "060",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 10,
+          "clip": "061",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "062",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "063",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "065",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "066",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 4,
+          "clip": "067",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "068",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "065",
+      "game": "4",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 68,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "060",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 11,
+          "clip": "061",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 10,
+          "clip": "062",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "063",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "064",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "066",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 4,
+          "clip": "067",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "068",
+          "crossed": 1,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "066",
+      "game": "4",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 68,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "060",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 10,
+          "clip": "061",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 12,
+          "clip": "062",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 9,
+          "clip": "063",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "064",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "065",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 6,
+          "clip": "067",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "068",
+          "crossed": 1,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "067",
+      "game": "4",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 35,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 3,
+          "clip": "060",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 4,
+          "clip": "061",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 6,
+          "clip": "062",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "063",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 4,
+          "clip": "064",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 4,
+          "clip": "065",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 6,
+          "clip": "066",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "068",
+          "crossed": 0,
+          "score": 4
+        }
+      ]
+    },
+    {
+      "clip": "068",
+      "game": "4",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 50,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 5,
+          "clip": "060",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 8,
+          "clip": "061",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "062",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "063",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "064",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "065",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "066",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "067",
+          "crossed": 0,
+          "score": 4
+        }
+      ]
+    },
+    {
+      "clip": "069",
+      "game": "4",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 61,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "070",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "071",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 11,
+          "clip": "072",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 5,
+          "clip": "073",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 10,
+          "clip": "074",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "075",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 3,
+          "clip": "076",
+          "crossed": 1,
+          "score": 2
+        },
+        {
+          "aligned": 6,
+          "clip": "077",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "070",
+      "game": "4",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 63,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "069",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "071",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 12,
+          "clip": "072",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 5,
+          "clip": "073",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 10,
+          "clip": "074",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "075",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 3,
+          "clip": "076",
+          "crossed": 1,
+          "score": 2
+        },
+        {
+          "aligned": 6,
+          "clip": "077",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "071",
+      "game": "4",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 71,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 9,
+          "clip": "069",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "070",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 12,
+          "clip": "072",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 7,
+          "clip": "073",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 10,
+          "clip": "074",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 11,
+          "clip": "075",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 5,
+          "clip": "076",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "077",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "072",
+      "game": "4",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 74,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 11,
+          "clip": "069",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 12,
+          "clip": "070",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 12,
+          "clip": "071",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 6,
+          "clip": "073",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 12,
+          "clip": "074",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 10,
+          "clip": "075",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 5,
+          "clip": "076",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 7,
+          "clip": "077",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "073",
+      "game": "4",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 41,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 5,
+          "clip": "069",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 5,
+          "clip": "070",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 7,
+          "clip": "071",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "072",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "074",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "075",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 3,
+          "clip": "076",
+          "crossed": 2,
+          "score": 1
+        },
+        {
+          "aligned": 5,
+          "clip": "077",
+          "crossed": 1,
+          "score": 4
+        }
+      ]
+    },
+    {
+      "clip": "074",
+      "game": "4",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 71,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "069",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "070",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "071",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 12,
+          "clip": "072",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 6,
+          "clip": "073",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 10,
+          "clip": "075",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 5,
+          "clip": "076",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 8,
+          "clip": "077",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "075",
+      "game": "4",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 69,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "069",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "070",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 11,
+          "clip": "071",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 10,
+          "clip": "072",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 7,
+          "clip": "073",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 10,
+          "clip": "074",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 6,
+          "clip": "076",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 10,
+          "clip": "077",
+          "crossed": 0,
+          "score": 10
+        }
+      ]
+    },
+    {
+      "clip": "076",
+      "game": "4",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 29,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 3,
+          "clip": "069",
+          "crossed": 1,
+          "score": 2
+        },
+        {
+          "aligned": 3,
+          "clip": "070",
+          "crossed": 1,
+          "score": 2
+        },
+        {
+          "aligned": 5,
+          "clip": "071",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 5,
+          "clip": "072",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 3,
+          "clip": "073",
+          "crossed": 2,
+          "score": 1
+        },
+        {
+          "aligned": 5,
+          "clip": "074",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "075",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "077",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "077",
+      "game": "4",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 55,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "069",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "070",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "071",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "072",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 5,
+          "clip": "073",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "074",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "075",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 6,
+          "clip": "076",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "097",
+      "game": "6",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 74,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "098",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "099",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 10,
+          "clip": "100",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "101",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "102",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "103",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "104",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "105",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 6,
+          "clip": "106",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "098",
+      "game": "6",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 81,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "097",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "099",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "100",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "101",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "102",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "103",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "104",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "105",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 7,
+          "clip": "106",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "099",
+      "game": "6",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 76,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "097",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "098",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "100",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "101",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "102",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "103",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "104",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "105",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "106",
+          "crossed": 0,
+          "score": 9
+        }
+      ]
+    },
+    {
+      "clip": "100",
+      "game": "6",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 74,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "097",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "098",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "099",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "101",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "102",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "103",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "104",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "105",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "106",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "101",
+      "game": "6",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 78,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "097",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "098",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "099",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "100",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "102",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "103",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "104",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "105",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "106",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "102",
+      "game": "6",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 67,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "097",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "098",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "099",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "100",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 9,
+          "clip": "101",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "103",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "104",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "105",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "106",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "103",
+      "game": "6",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 76,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "097",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "098",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "099",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "100",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "101",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "102",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "104",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "105",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "106",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "104",
+      "game": "6",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 84,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 9,
+          "clip": "097",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "098",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "099",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "100",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "101",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "102",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "103",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "105",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "106",
+          "crossed": 0,
+          "score": 9
+        }
+      ]
+    },
+    {
+      "clip": "105",
+      "game": "6",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 73,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "097",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "098",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "099",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "100",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "101",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "102",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "103",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "104",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "106",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "106",
+      "game": "6",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 67,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "097",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "098",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "099",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "100",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "101",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "102",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "103",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "104",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "105",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "107",
+      "game": "6",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 64,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "108",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 11,
+          "clip": "109",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 12,
+          "clip": "110",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 0,
+          "clip": "111",
+          "crossed": 11,
+          "score": -11
+        },
+        {
+          "aligned": 9,
+          "clip": "112",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 5,
+          "clip": "113",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 7,
+          "clip": "114",
+          "crossed": 2,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "115",
+          "crossed": 2,
+          "score": 4
+        }
+      ]
+    },
+    {
+      "clip": "108",
+      "game": "6",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 53,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "107",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "109",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "110",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 0,
+          "clip": "111",
+          "crossed": 9,
+          "score": -9
+        },
+        {
+          "aligned": 6,
+          "clip": "112",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 3,
+          "clip": "113",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 6,
+          "clip": "114",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "115",
+          "crossed": 1,
+          "score": 5
+        }
+      ]
+    },
+    {
+      "clip": "109",
+      "game": "6",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 63,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 11,
+          "clip": "107",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 8,
+          "clip": "108",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 12,
+          "clip": "110",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 0,
+          "clip": "111",
+          "crossed": 10,
+          "score": -10
+        },
+        {
+          "aligned": 8,
+          "clip": "112",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 4,
+          "clip": "113",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 7,
+          "clip": "114",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "115",
+          "crossed": 1,
+          "score": 5
+        }
+      ]
+    },
+    {
+      "clip": "110",
+      "game": "6",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 70,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 12,
+          "clip": "107",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 9,
+          "clip": "108",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 12,
+          "clip": "109",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 0,
+          "clip": "111",
+          "crossed": 11,
+          "score": -11
+        },
+        {
+          "aligned": 9,
+          "clip": "112",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 5,
+          "clip": "113",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "114",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "115",
+          "crossed": 1,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "111",
+      "game": "6",
+      "half": "2",
+      "orientation": "swapped",
+      "signed_aggregate_margin": 64,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 0,
+          "clip": "107",
+          "crossed": 11,
+          "score": -11
+        },
+        {
+          "aligned": 0,
+          "clip": "108",
+          "crossed": 9,
+          "score": -9
+        },
+        {
+          "aligned": 0,
+          "clip": "109",
+          "crossed": 10,
+          "score": -10
+        },
+        {
+          "aligned": 0,
+          "clip": "110",
+          "crossed": 11,
+          "score": -11
+        },
+        {
+          "aligned": 0,
+          "clip": "112",
+          "crossed": 7,
+          "score": -7
+        },
+        {
+          "aligned": 0,
+          "clip": "113",
+          "crossed": 6,
+          "score": -6
+        },
+        {
+          "aligned": 2,
+          "clip": "114",
+          "crossed": 7,
+          "score": -5
+        },
+        {
+          "aligned": 2,
+          "clip": "115",
+          "crossed": 7,
+          "score": -5
+        }
+      ]
+    },
+    {
+      "clip": "112",
+      "game": "6",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 54,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 9,
+          "clip": "107",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "108",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "109",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "110",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 0,
+          "clip": "111",
+          "crossed": 7,
+          "score": -7
+        },
+        {
+          "aligned": 3,
+          "clip": "113",
+          "crossed": 2,
+          "score": 1
+        },
+        {
+          "aligned": 9,
+          "clip": "114",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "115",
+          "crossed": 1,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "113",
+      "game": "6",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 26,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 5,
+          "clip": "107",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 3,
+          "clip": "108",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 4,
+          "clip": "109",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 5,
+          "clip": "110",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 0,
+          "clip": "111",
+          "crossed": 6,
+          "score": -6
+        },
+        {
+          "aligned": 3,
+          "clip": "112",
+          "crossed": 2,
+          "score": 1
+        },
+        {
+          "aligned": 5,
+          "clip": "114",
+          "crossed": 3,
+          "score": 2
+        },
+        {
+          "aligned": 5,
+          "clip": "115",
+          "crossed": 2,
+          "score": 3
+        }
+      ]
+    },
+    {
+      "clip": "114",
+      "game": "6",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 50,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "107",
+          "crossed": 2,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "108",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 7,
+          "clip": "109",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "110",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 2,
+          "clip": "111",
+          "crossed": 7,
+          "score": -5
+        },
+        {
+          "aligned": 9,
+          "clip": "112",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 5,
+          "clip": "113",
+          "crossed": 3,
+          "score": 2
+        },
+        {
+          "aligned": 12,
+          "clip": "115",
+          "crossed": 0,
+          "score": 12
+        }
+      ]
+    },
+    {
+      "clip": "115",
+      "game": "6",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 46,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "107",
+          "crossed": 2,
+          "score": 4
+        },
+        {
+          "aligned": 6,
+          "clip": "108",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "109",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 7,
+          "clip": "110",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 2,
+          "clip": "111",
+          "crossed": 7,
+          "score": -5
+        },
+        {
+          "aligned": 7,
+          "clip": "112",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "113",
+          "crossed": 2,
+          "score": 3
+        },
+        {
+          "aligned": 12,
+          "clip": "114",
+          "crossed": 0,
+          "score": 12
+        }
+      ]
+    },
+    {
+      "clip": "151",
+      "game": "9",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 46,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 5,
+          "clip": "152",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 7,
+          "clip": "153",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 5,
+          "clip": "154",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 7,
+          "clip": "155",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 4,
+          "clip": "156",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 6,
+          "clip": "157",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "158",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "159",
+          "crossed": 1,
+          "score": 5
+        }
+      ]
+    },
+    {
+      "clip": "152",
+      "game": "9",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 65,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 5,
+          "clip": "151",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 9,
+          "clip": "153",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 11,
+          "clip": "154",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 9,
+          "clip": "155",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "156",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 7,
+          "clip": "157",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "158",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "159",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "153",
+      "game": "9",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 66,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "151",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "152",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "154",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "155",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "156",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "157",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "158",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "159",
+          "crossed": 1,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "154",
+      "game": "9",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 65,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 5,
+          "clip": "151",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 11,
+          "clip": "152",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 9,
+          "clip": "153",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "155",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "156",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 7,
+          "clip": "157",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "158",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "159",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "155",
+      "game": "9",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 62,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "151",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "152",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "153",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "154",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "156",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "157",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "158",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "159",
+          "crossed": 1,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "156",
+      "game": "9",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 58,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 4,
+          "clip": "151",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 10,
+          "clip": "152",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "153",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "154",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "155",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "157",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "158",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 7,
+          "clip": "159",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "157",
+      "game": "9",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 56,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "151",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "152",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "153",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "154",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "155",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "156",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "158",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "159",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "158",
+      "game": "9",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 54,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "151",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "152",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 9,
+          "clip": "153",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "154",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "155",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "156",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 8,
+          "clip": "157",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "159",
+          "crossed": 1,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "159",
+      "game": "9",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 54,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "151",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 8,
+          "clip": "152",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "153",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "154",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "155",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "156",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "157",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "158",
+          "crossed": 1,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "160",
+      "game": "9",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 55,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "161",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 3,
+          "clip": "162",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 9,
+          "clip": "163",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "164",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "165",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "166",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 6,
+          "clip": "167",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "168",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 5,
+          "clip": "169",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 3,
+          "clip": "170",
+          "crossed": 0,
+          "score": 3
+        }
+      ]
+    },
+    {
+      "clip": "161",
+      "game": "9",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 74,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "160",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 5,
+          "clip": "162",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 12,
+          "clip": "163",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 10,
+          "clip": "164",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "165",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 4,
+          "clip": "166",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 10,
+          "clip": "167",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 7,
+          "clip": "168",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "169",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "170",
+          "crossed": 0,
+          "score": 5
+        }
+      ]
+    },
+    {
+      "clip": "162",
+      "game": "9",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 44,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 3,
+          "clip": "160",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 5,
+          "clip": "161",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "163",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "164",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 4,
+          "clip": "165",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 2,
+          "clip": "166",
+          "crossed": 0,
+          "score": 2
+        },
+        {
+          "aligned": 6,
+          "clip": "167",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "168",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 4,
+          "clip": "169",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 5,
+          "clip": "170",
+          "crossed": 0,
+          "score": 5
+        }
+      ]
+    },
+    {
+      "clip": "163",
+      "game": "9",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 81,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 9,
+          "clip": "160",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 12,
+          "clip": "161",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 6,
+          "clip": "162",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 11,
+          "clip": "164",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 8,
+          "clip": "165",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 4,
+          "clip": "166",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 11,
+          "clip": "167",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 7,
+          "clip": "168",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "169",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "170",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "164",
+      "game": "9",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 71,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "160",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "161",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 5,
+          "clip": "162",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 11,
+          "clip": "163",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 7,
+          "clip": "165",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 4,
+          "clip": "166",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 9,
+          "clip": "167",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "168",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "169",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "170",
+          "crossed": 0,
+          "score": 5
+        }
+      ]
+    },
+    {
+      "clip": "165",
+      "game": "9",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 59,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "160",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "161",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 4,
+          "clip": "162",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "163",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "164",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "166",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "167",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 5,
+          "clip": "168",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 5,
+          "clip": "169",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 5,
+          "clip": "170",
+          "crossed": 1,
+          "score": 4
+        }
+      ]
+    },
+    {
+      "clip": "166",
+      "game": "9",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 33,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 4,
+          "clip": "160",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 4,
+          "clip": "161",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 2,
+          "clip": "162",
+          "crossed": 0,
+          "score": 2
+        },
+        {
+          "aligned": 4,
+          "clip": "163",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 4,
+          "clip": "164",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 6,
+          "clip": "165",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "167",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 4,
+          "clip": "168",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 2,
+          "clip": "169",
+          "crossed": 1,
+          "score": 1
+        },
+        {
+          "aligned": 2,
+          "clip": "170",
+          "crossed": 1,
+          "score": 1
+        }
+      ]
+    },
+    {
+      "clip": "167",
+      "game": "9",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 85,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "160",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 10,
+          "clip": "161",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 6,
+          "clip": "162",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 11,
+          "clip": "163",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 9,
+          "clip": "164",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "165",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 4,
+          "clip": "166",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 10,
+          "clip": "168",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 12,
+          "clip": "169",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 11,
+          "clip": "170",
+          "crossed": 0,
+          "score": 11
+        }
+      ]
+    },
+    {
+      "clip": "168",
+      "game": "9",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 61,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 4,
+          "clip": "160",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 7,
+          "clip": "161",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 4,
+          "clip": "162",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 7,
+          "clip": "163",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "164",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "165",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 4,
+          "clip": "166",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 10,
+          "clip": "167",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 7,
+          "clip": "169",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "170",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "169",
+      "game": "9",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 62,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 5,
+          "clip": "160",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "161",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "162",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 7,
+          "clip": "163",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "164",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "165",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 2,
+          "clip": "166",
+          "crossed": 1,
+          "score": 1
+        },
+        {
+          "aligned": 12,
+          "clip": "167",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 7,
+          "clip": "168",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 10,
+          "clip": "170",
+          "crossed": 0,
+          "score": 10
+        }
+      ]
+    },
+    {
+      "clip": "170",
+      "game": "9",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 57,
+      "split": "train",
+      "support": [
+        {
+          "aligned": 3,
+          "clip": "160",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 5,
+          "clip": "161",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 5,
+          "clip": "162",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "163",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "164",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 5,
+          "clip": "165",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 2,
+          "clip": "166",
+          "crossed": 1,
+          "score": 1
+        },
+        {
+          "aligned": 11,
+          "clip": "167",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 7,
+          "clip": "168",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 10,
+          "clip": "169",
+          "crossed": 0,
+          "score": 10
+        }
+      ]
+    },
+    {
+      "clip": "021",
+      "game": "2",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 36,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "022",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "023",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 4,
+          "clip": "024",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 7,
+          "clip": "025",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "026",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "027",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "028",
+          "crossed": 1,
+          "score": 5
+        }
+      ]
+    },
+    {
+      "clip": "022",
+      "game": "2",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 70,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "021",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 9,
+          "clip": "023",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "024",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 12,
+          "clip": "025",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 12,
+          "clip": "026",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 12,
+          "clip": "027",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 12,
+          "clip": "028",
+          "crossed": 1,
+          "score": 11
+        }
+      ]
+    },
+    {
+      "clip": "023",
+      "game": "2",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 54,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 4,
+          "clip": "021",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 9,
+          "clip": "022",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "024",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "025",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "026",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "027",
+          "crossed": 1,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "028",
+          "crossed": 1,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "024",
+      "game": "2",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 46,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 4,
+          "clip": "021",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 8,
+          "clip": "022",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "023",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "025",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "026",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "027",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "028",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "025",
+      "game": "2",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 71,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "021",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 12,
+          "clip": "022",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 9,
+          "clip": "023",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "024",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 12,
+          "clip": "026",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 12,
+          "clip": "027",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 12,
+          "clip": "028",
+          "crossed": 0,
+          "score": 12
+        }
+      ]
+    },
+    {
+      "clip": "026",
+      "game": "2",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 65,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "021",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 12,
+          "clip": "022",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 9,
+          "clip": "023",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "024",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 12,
+          "clip": "025",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 11,
+          "clip": "027",
+          "crossed": 1,
+          "score": 10
+        },
+        {
+          "aligned": 11,
+          "clip": "028",
+          "crossed": 2,
+          "score": 9
+        }
+      ]
+    },
+    {
+      "clip": "027",
+      "game": "2",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 68,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "021",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 12,
+          "clip": "022",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 10,
+          "clip": "023",
+          "crossed": 1,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "024",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 12,
+          "clip": "025",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 11,
+          "clip": "026",
+          "crossed": 1,
+          "score": 10
+        },
+        {
+          "aligned": 13,
+          "clip": "028",
+          "crossed": 0,
+          "score": 13
+        }
+      ]
+    },
+    {
+      "clip": "028",
+      "game": "2",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 66,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "021",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 12,
+          "clip": "022",
+          "crossed": 1,
+          "score": 11
+        },
+        {
+          "aligned": 9,
+          "clip": "023",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "024",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 12,
+          "clip": "025",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 11,
+          "clip": "026",
+          "crossed": 2,
+          "score": 9
+        },
+        {
+          "aligned": 13,
+          "clip": "027",
+          "crossed": 0,
+          "score": 13
+        }
+      ]
+    },
+    {
+      "clip": "029",
+      "game": "2",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 58,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 12,
+          "clip": "030",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 9,
+          "clip": "031",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "032",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 5,
+          "clip": "033",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 8,
+          "clip": "034",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 4,
+          "clip": "035",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 5,
+          "clip": "036",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 8,
+          "clip": "037",
+          "crossed": 2,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "038",
+          "crossed": 2,
+          "score": 4
+        }
+      ]
+    },
+    {
+      "clip": "030",
+      "game": "2",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 65,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 12,
+          "clip": "029",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 10,
+          "clip": "031",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "032",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "033",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 9,
+          "clip": "034",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 5,
+          "clip": "035",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "036",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 8,
+          "clip": "037",
+          "crossed": 2,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "038",
+          "crossed": 2,
+          "score": 5
+        }
+      ]
+    },
+    {
+      "clip": "031",
+      "game": "2",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 58,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 9,
+          "clip": "029",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "030",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 7,
+          "clip": "032",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 4,
+          "clip": "033",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "034",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "035",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "036",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 7,
+          "clip": "037",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "038",
+          "crossed": 1,
+          "score": 3
+        }
+      ]
+    },
+    {
+      "clip": "032",
+      "game": "2",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 47,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "029",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "030",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "031",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 3,
+          "clip": "033",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 6,
+          "clip": "034",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "035",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "036",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 5,
+          "clip": "037",
+          "crossed": 2,
+          "score": 3
+        },
+        {
+          "aligned": 4,
+          "clip": "038",
+          "crossed": 1,
+          "score": 3
+        }
+      ]
+    },
+    {
+      "clip": "033",
+      "game": "2",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 46,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 5,
+          "clip": "029",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "030",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "031",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 3,
+          "clip": "032",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 8,
+          "clip": "034",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 3,
+          "clip": "035",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 6,
+          "clip": "036",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "037",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "038",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "034",
+      "game": "2",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 72,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "029",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "030",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "031",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "032",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 8,
+          "clip": "033",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "035",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 9,
+          "clip": "036",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 12,
+          "clip": "037",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 11,
+          "clip": "038",
+          "crossed": 0,
+          "score": 11
+        }
+      ]
+    },
+    {
+      "clip": "035",
+      "game": "2",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 41,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 4,
+          "clip": "029",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 5,
+          "clip": "030",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "031",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "032",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 3,
+          "clip": "033",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 6,
+          "clip": "034",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "036",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "037",
+          "crossed": 2,
+          "score": 4
+        },
+        {
+          "aligned": 4,
+          "clip": "038",
+          "crossed": 1,
+          "score": 3
+        }
+      ]
+    },
+    {
+      "clip": "036",
+      "game": "2",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 53,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 5,
+          "clip": "029",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "030",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 5,
+          "clip": "031",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 5,
+          "clip": "032",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "033",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 9,
+          "clip": "034",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "035",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 9,
+          "clip": "037",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "038",
+          "crossed": 1,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "037",
+      "game": "2",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 63,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "029",
+          "crossed": 2,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "030",
+          "crossed": 2,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "031",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "032",
+          "crossed": 2,
+          "score": 3
+        },
+        {
+          "aligned": 6,
+          "clip": "033",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 12,
+          "clip": "034",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 6,
+          "clip": "035",
+          "crossed": 2,
+          "score": 4
+        },
+        {
+          "aligned": 9,
+          "clip": "036",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 12,
+          "clip": "038",
+          "crossed": 0,
+          "score": 12
+        }
+      ]
+    },
+    {
+      "clip": "038",
+      "game": "2",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 53,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "029",
+          "crossed": 2,
+          "score": 4
+        },
+        {
+          "aligned": 7,
+          "clip": "030",
+          "crossed": 2,
+          "score": 5
+        },
+        {
+          "aligned": 4,
+          "clip": "031",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 4,
+          "clip": "032",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 6,
+          "clip": "033",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 11,
+          "clip": "034",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 4,
+          "clip": "035",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 7,
+          "clip": "036",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 12,
+          "clip": "037",
+          "crossed": 0,
+          "score": 12
+        }
+      ]
+    },
+    {
+      "clip": "039",
+      "game": "3",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 87,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 12,
+          "clip": "040",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 9,
+          "clip": "041",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "042",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "043",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "044",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "045",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 11,
+          "clip": "046",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 12,
+          "clip": "047",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 6,
+          "clip": "048",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "040",
+      "game": "3",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 87,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 12,
+          "clip": "039",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 9,
+          "clip": "041",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "042",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "043",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "044",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "045",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 11,
+          "clip": "046",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 12,
+          "clip": "047",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 6,
+          "clip": "048",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "041",
+      "game": "3",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 75,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 9,
+          "clip": "039",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "040",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "042",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "043",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "044",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "045",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "046",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "047",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "048",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "042",
+      "game": "3",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 79,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "039",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "040",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 7,
+          "clip": "041",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "043",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "044",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "045",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "046",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 11,
+          "clip": "047",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 7,
+          "clip": "048",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "043",
+      "game": "3",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 80,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 9,
+          "clip": "039",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "040",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "041",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "042",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "044",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 10,
+          "clip": "045",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "046",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "047",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "048",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "044",
+      "game": "3",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 66,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "039",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "040",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "041",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "042",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "043",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "045",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "046",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "047",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "048",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "045",
+      "game": "3",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 82,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "039",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "040",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "041",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "042",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "043",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 7,
+          "clip": "044",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 10,
+          "clip": "046",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 11,
+          "clip": "047",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 6,
+          "clip": "048",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "046",
+      "game": "3",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 84,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 11,
+          "clip": "039",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 11,
+          "clip": "040",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 9,
+          "clip": "041",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "042",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "043",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "044",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 10,
+          "clip": "045",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 11,
+          "clip": "047",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 7,
+          "clip": "048",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "047",
+      "game": "3",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 91,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 12,
+          "clip": "039",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 12,
+          "clip": "040",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 9,
+          "clip": "041",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 11,
+          "clip": "042",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 10,
+          "clip": "043",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "044",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 11,
+          "clip": "045",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 11,
+          "clip": "046",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 7,
+          "clip": "048",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "048",
+      "game": "3",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 59,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "039",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "040",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "041",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "042",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "043",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "044",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "045",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "046",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "047",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "049",
+      "game": "3",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 49,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "050",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "051",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "052",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "053",
+          "crossed": 2,
+          "score": 3
+        },
+        {
+          "aligned": 7,
+          "clip": "054",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 4,
+          "clip": "055",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 4,
+          "clip": "056",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 4,
+          "clip": "057",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 4,
+          "clip": "058",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 4,
+          "clip": "059",
+          "crossed": 0,
+          "score": 4
+        }
+      ]
+    },
+    {
+      "clip": "050",
+      "game": "3",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 78,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "049",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 12,
+          "clip": "051",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 11,
+          "clip": "052",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 8,
+          "clip": "053",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 11,
+          "clip": "054",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 7,
+          "clip": "055",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 4,
+          "clip": "056",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 9,
+          "clip": "057",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "058",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 3,
+          "clip": "059",
+          "crossed": 0,
+          "score": 3
+        }
+      ]
+    },
+    {
+      "clip": "051",
+      "game": "3",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 78,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "049",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 12,
+          "clip": "050",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 11,
+          "clip": "052",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 8,
+          "clip": "053",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 11,
+          "clip": "054",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 7,
+          "clip": "055",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 4,
+          "clip": "056",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 9,
+          "clip": "057",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "058",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 3,
+          "clip": "059",
+          "crossed": 0,
+          "score": 3
+        }
+      ]
+    },
+    {
+      "clip": "052",
+      "game": "3",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 70,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "049",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 11,
+          "clip": "050",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 11,
+          "clip": "051",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 7,
+          "clip": "053",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 10,
+          "clip": "054",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 6,
+          "clip": "055",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "056",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "057",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 5,
+          "clip": "058",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 2,
+          "clip": "059",
+          "crossed": 0,
+          "score": 2
+        }
+      ]
+    },
+    {
+      "clip": "053",
+      "game": "3",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 48,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 5,
+          "clip": "049",
+          "crossed": 2,
+          "score": 3
+        },
+        {
+          "aligned": 8,
+          "clip": "050",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "051",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "052",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "054",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 5,
+          "clip": "055",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 2,
+          "clip": "056",
+          "crossed": 2,
+          "score": 0
+        },
+        {
+          "aligned": 6,
+          "clip": "057",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 3,
+          "clip": "058",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 3,
+          "clip": "059",
+          "crossed": 2,
+          "score": 1
+        }
+      ]
+    },
+    {
+      "clip": "054",
+      "game": "3",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 74,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "049",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 11,
+          "clip": "050",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 11,
+          "clip": "051",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 10,
+          "clip": "052",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 7,
+          "clip": "053",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "055",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 4,
+          "clip": "056",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "057",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "058",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 3,
+          "clip": "059",
+          "crossed": 0,
+          "score": 3
+        }
+      ]
+    },
+    {
+      "clip": "055",
+      "game": "3",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 55,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 4,
+          "clip": "049",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 7,
+          "clip": "050",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "051",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "052",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "053",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 7,
+          "clip": "054",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 3,
+          "clip": "056",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 6,
+          "clip": "057",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "058",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "059",
+          "crossed": 0,
+          "score": 4
+        }
+      ]
+    },
+    {
+      "clip": "056",
+      "game": "3",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 41,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 4,
+          "clip": "049",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 4,
+          "clip": "050",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 4,
+          "clip": "051",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 4,
+          "clip": "052",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 2,
+          "clip": "053",
+          "crossed": 2,
+          "score": 0
+        },
+        {
+          "aligned": 4,
+          "clip": "054",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 3,
+          "clip": "055",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 6,
+          "clip": "057",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "058",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "059",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "057",
+      "game": "3",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 69,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 4,
+          "clip": "049",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 9,
+          "clip": "050",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "051",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "052",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "053",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "054",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "055",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "056",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "058",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 5,
+          "clip": "059",
+          "crossed": 0,
+          "score": 5
+        }
+      ]
+    },
+    {
+      "clip": "058",
+      "game": "3",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 56,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 4,
+          "clip": "049",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 6,
+          "clip": "050",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "051",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "052",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 3,
+          "clip": "053",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 6,
+          "clip": "054",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "055",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "056",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "057",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "059",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "059",
+      "game": "3",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 38,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 4,
+          "clip": "049",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 3,
+          "clip": "050",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 3,
+          "clip": "051",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 2,
+          "clip": "052",
+          "crossed": 0,
+          "score": 2
+        },
+        {
+          "aligned": 3,
+          "clip": "053",
+          "crossed": 2,
+          "score": 1
+        },
+        {
+          "aligned": 3,
+          "clip": "054",
+          "crossed": 0,
+          "score": 3
+        },
+        {
+          "aligned": 4,
+          "clip": "055",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 7,
+          "clip": "056",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 5,
+          "clip": "057",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "058",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "078",
+      "game": "5",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 91,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "079",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 12,
+          "clip": "080",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 14,
+          "clip": "081",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 14,
+          "clip": "082",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 13,
+          "clip": "083",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 14,
+          "clip": "084",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 14,
+          "clip": "085",
+          "crossed": 0,
+          "score": 14
+        }
+      ]
+    },
+    {
+      "clip": "079",
+      "game": "5",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 70,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "078",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "080",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "081",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "082",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "083",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 11,
+          "clip": "084",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 11,
+          "clip": "085",
+          "crossed": 0,
+          "score": 11
+        }
+      ]
+    },
+    {
+      "clip": "080",
+      "game": "5",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 81,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 12,
+          "clip": "078",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 10,
+          "clip": "079",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 12,
+          "clip": "081",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 12,
+          "clip": "082",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 11,
+          "clip": "083",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 12,
+          "clip": "084",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 12,
+          "clip": "085",
+          "crossed": 0,
+          "score": 12
+        }
+      ]
+    },
+    {
+      "clip": "081",
+      "game": "5",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 91,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 14,
+          "clip": "078",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 10,
+          "clip": "079",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 12,
+          "clip": "080",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 14,
+          "clip": "082",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 13,
+          "clip": "083",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 14,
+          "clip": "084",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 14,
+          "clip": "085",
+          "crossed": 0,
+          "score": 14
+        }
+      ]
+    },
+    {
+      "clip": "082",
+      "game": "5",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 91,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 14,
+          "clip": "078",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 10,
+          "clip": "079",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 12,
+          "clip": "080",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 14,
+          "clip": "081",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 13,
+          "clip": "083",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 14,
+          "clip": "084",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 14,
+          "clip": "085",
+          "crossed": 0,
+          "score": 14
+        }
+      ]
+    },
+    {
+      "clip": "083",
+      "game": "5",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 82,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 13,
+          "clip": "078",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 9,
+          "clip": "079",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 11,
+          "clip": "080",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 13,
+          "clip": "081",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 13,
+          "clip": "082",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 13,
+          "clip": "084",
+          "crossed": 1,
+          "score": 12
+        },
+        {
+          "aligned": 13,
+          "clip": "085",
+          "crossed": 1,
+          "score": 12
+        }
+      ]
+    },
+    {
+      "clip": "084",
+      "game": "5",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 92,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 14,
+          "clip": "078",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 11,
+          "clip": "079",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 12,
+          "clip": "080",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 14,
+          "clip": "081",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 14,
+          "clip": "082",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 13,
+          "clip": "083",
+          "crossed": 1,
+          "score": 12
+        },
+        {
+          "aligned": 15,
+          "clip": "085",
+          "crossed": 0,
+          "score": 15
+        }
+      ]
+    },
+    {
+      "clip": "085",
+      "game": "5",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 92,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 14,
+          "clip": "078",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 11,
+          "clip": "079",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 12,
+          "clip": "080",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 14,
+          "clip": "081",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 14,
+          "clip": "082",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 13,
+          "clip": "083",
+          "crossed": 1,
+          "score": 12
+        },
+        {
+          "aligned": 15,
+          "clip": "084",
+          "crossed": 0,
+          "score": 15
+        }
+      ]
+    },
+    {
+      "clip": "086",
+      "game": "5",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 92,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 13,
+          "clip": "087",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 10,
+          "clip": "088",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 11,
+          "clip": "089",
+          "crossed": 1,
+          "score": 10
+        },
+        {
+          "aligned": 13,
+          "clip": "090",
+          "crossed": 1,
+          "score": 12
+        },
+        {
+          "aligned": 9,
+          "clip": "091",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 1,
+          "clip": "092",
+          "crossed": 12,
+          "score": -11
+        },
+        {
+          "aligned": 11,
+          "clip": "093",
+          "crossed": 1,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "094",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "095",
+          "crossed": 2,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "096",
+          "crossed": 1,
+          "score": 4
+        }
+      ]
+    },
+    {
+      "clip": "087",
+      "game": "5",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 105,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 13,
+          "clip": "086",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 10,
+          "clip": "088",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 12,
+          "clip": "089",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 14,
+          "clip": "090",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 10,
+          "clip": "091",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 0,
+          "clip": "092",
+          "crossed": 13,
+          "score": -13
+        },
+        {
+          "aligned": 12,
+          "clip": "093",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 9,
+          "clip": "094",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "095",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 5,
+          "clip": "096",
+          "crossed": 0,
+          "score": 5
+        }
+      ]
+    },
+    {
+      "clip": "088",
+      "game": "5",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 76,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "086",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "087",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "089",
+          "crossed": 1,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "090",
+          "crossed": 1,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "091",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 1,
+          "clip": "092",
+          "crossed": 10,
+          "score": -9
+        },
+        {
+          "aligned": 10,
+          "clip": "093",
+          "crossed": 1,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "094",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "095",
+          "crossed": 2,
+          "score": 4
+        },
+        {
+          "aligned": 4,
+          "clip": "096",
+          "crossed": 1,
+          "score": 3
+        }
+      ]
+    },
+    {
+      "clip": "089",
+      "game": "5",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 109,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 11,
+          "clip": "086",
+          "crossed": 1,
+          "score": 10
+        },
+        {
+          "aligned": 12,
+          "clip": "087",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 10,
+          "clip": "088",
+          "crossed": 1,
+          "score": 9
+        },
+        {
+          "aligned": 14,
+          "clip": "090",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 12,
+          "clip": "091",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 0,
+          "clip": "092",
+          "crossed": 14,
+          "score": -14
+        },
+        {
+          "aligned": 13,
+          "clip": "093",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 10,
+          "clip": "094",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "095",
+          "crossed": 1,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "096",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "090",
+      "game": "5",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 124,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 13,
+          "clip": "086",
+          "crossed": 1,
+          "score": 12
+        },
+        {
+          "aligned": 14,
+          "clip": "087",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 10,
+          "clip": "088",
+          "crossed": 1,
+          "score": 9
+        },
+        {
+          "aligned": 14,
+          "clip": "089",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 13,
+          "clip": "091",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 0,
+          "clip": "092",
+          "crossed": 17,
+          "score": -17
+        },
+        {
+          "aligned": 16,
+          "clip": "093",
+          "crossed": 0,
+          "score": 16
+        },
+        {
+          "aligned": 13,
+          "clip": "094",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 10,
+          "clip": "095",
+          "crossed": 1,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "096",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "091",
+      "game": "5",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 98,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 9,
+          "clip": "086",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "087",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "088",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 12,
+          "clip": "089",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 13,
+          "clip": "090",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 0,
+          "clip": "092",
+          "crossed": 13,
+          "score": -13
+        },
+        {
+          "aligned": 12,
+          "clip": "093",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 9,
+          "clip": "094",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "095",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "096",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "092",
+      "game": "5",
+      "half": "2",
+      "orientation": "swapped",
+      "signed_aggregate_margin": 122,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 1,
+          "clip": "086",
+          "crossed": 12,
+          "score": -11
+        },
+        {
+          "aligned": 0,
+          "clip": "087",
+          "crossed": 13,
+          "score": -13
+        },
+        {
+          "aligned": 1,
+          "clip": "088",
+          "crossed": 10,
+          "score": -9
+        },
+        {
+          "aligned": 0,
+          "clip": "089",
+          "crossed": 14,
+          "score": -14
+        },
+        {
+          "aligned": 0,
+          "clip": "090",
+          "crossed": 17,
+          "score": -17
+        },
+        {
+          "aligned": 0,
+          "clip": "091",
+          "crossed": 13,
+          "score": -13
+        },
+        {
+          "aligned": 0,
+          "clip": "093",
+          "crossed": 16,
+          "score": -16
+        },
+        {
+          "aligned": 0,
+          "clip": "094",
+          "crossed": 13,
+          "score": -13
+        },
+        {
+          "aligned": 1,
+          "clip": "095",
+          "crossed": 10,
+          "score": -9
+        },
+        {
+          "aligned": 0,
+          "clip": "096",
+          "crossed": 7,
+          "score": -7
+        }
+      ]
+    },
+    {
+      "clip": "093",
+      "game": "5",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 116,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 11,
+          "clip": "086",
+          "crossed": 1,
+          "score": 10
+        },
+        {
+          "aligned": 12,
+          "clip": "087",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 10,
+          "clip": "088",
+          "crossed": 1,
+          "score": 9
+        },
+        {
+          "aligned": 13,
+          "clip": "089",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 16,
+          "clip": "090",
+          "crossed": 0,
+          "score": 16
+        },
+        {
+          "aligned": 12,
+          "clip": "091",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 0,
+          "clip": "092",
+          "crossed": 16,
+          "score": -16
+        },
+        {
+          "aligned": 13,
+          "clip": "094",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 9,
+          "clip": "095",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "096",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "094",
+      "game": "5",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 98,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 9,
+          "clip": "086",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "087",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "088",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 10,
+          "clip": "089",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 13,
+          "clip": "090",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 9,
+          "clip": "091",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 0,
+          "clip": "092",
+          "crossed": 13,
+          "score": -13
+        },
+        {
+          "aligned": 13,
+          "clip": "093",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 9,
+          "clip": "095",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "096",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "095",
+      "game": "5",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 75,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "086",
+          "crossed": 2,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "087",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "088",
+          "crossed": 2,
+          "score": 4
+        },
+        {
+          "aligned": 10,
+          "clip": "089",
+          "crossed": 1,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "090",
+          "crossed": 1,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "091",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 1,
+          "clip": "092",
+          "crossed": 10,
+          "score": -9
+        },
+        {
+          "aligned": 9,
+          "clip": "093",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "094",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "096",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "096",
+      "game": "5",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 59,
+      "split": "valid",
+      "support": [
+        {
+          "aligned": 5,
+          "clip": "086",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 5,
+          "clip": "087",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 4,
+          "clip": "088",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 6,
+          "clip": "089",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "090",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "091",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 0,
+          "clip": "092",
+          "crossed": 7,
+          "score": -7
+        },
+        {
+          "aligned": 7,
+          "clip": "093",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "094",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "095",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "187",
+      "game": "11",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 87,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 12,
+          "clip": "188",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 13,
+          "clip": "189",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 11,
+          "clip": "190",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 13,
+          "clip": "191",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 11,
+          "clip": "192",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 13,
+          "clip": "193",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 14,
+          "clip": "194",
+          "crossed": 0,
+          "score": 14
+        }
+      ]
+    },
+    {
+      "clip": "188",
+      "game": "11",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 71,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 12,
+          "clip": "187",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 10,
+          "clip": "189",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "190",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 11,
+          "clip": "191",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 9,
+          "clip": "192",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "193",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 11,
+          "clip": "194",
+          "crossed": 0,
+          "score": 11
+        }
+      ]
+    },
+    {
+      "clip": "189",
+      "game": "11",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 68,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 13,
+          "clip": "187",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 10,
+          "clip": "188",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "190",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "191",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "192",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "193",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "194",
+          "crossed": 0,
+          "score": 10
+        }
+      ]
+    },
+    {
+      "clip": "190",
+      "game": "11",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 63,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 11,
+          "clip": "187",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 9,
+          "clip": "188",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "189",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "191",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "192",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "193",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 11,
+          "clip": "194",
+          "crossed": 0,
+          "score": 11
+        }
+      ]
+    },
+    {
+      "clip": "191",
+      "game": "11",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 75,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 13,
+          "clip": "187",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 11,
+          "clip": "188",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 10,
+          "clip": "189",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "190",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 11,
+          "clip": "192",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 9,
+          "clip": "193",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 12,
+          "clip": "194",
+          "crossed": 0,
+          "score": 12
+        }
+      ]
+    },
+    {
+      "clip": "192",
+      "game": "11",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 66,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 11,
+          "clip": "187",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 9,
+          "clip": "188",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "189",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "190",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 11,
+          "clip": "191",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 8,
+          "clip": "193",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 11,
+          "clip": "194",
+          "crossed": 0,
+          "score": 11
+        }
+      ]
+    },
+    {
+      "clip": "193",
+      "game": "11",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 65,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 13,
+          "clip": "187",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 9,
+          "clip": "188",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "189",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "190",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "191",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "192",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "194",
+          "crossed": 0,
+          "score": 10
+        }
+      ]
+    },
+    {
+      "clip": "194",
+      "game": "11",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 79,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 14,
+          "clip": "187",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 11,
+          "clip": "188",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 10,
+          "clip": "189",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 11,
+          "clip": "190",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 12,
+          "clip": "191",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 11,
+          "clip": "192",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 10,
+          "clip": "193",
+          "crossed": 0,
+          "score": 10
+        }
+      ]
+    },
+    {
+      "clip": "195",
+      "game": "11",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 49,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 12,
+          "clip": "196",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 1,
+          "clip": "197",
+          "crossed": 8,
+          "score": -7
+        },
+        {
+          "aligned": 11,
+          "clip": "198",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 8,
+          "clip": "199",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 11,
+          "clip": "200",
+          "crossed": 0,
+          "score": 11
+        }
+      ]
+    },
+    {
+      "clip": "196",
+      "game": "11",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 60,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 12,
+          "clip": "195",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 1,
+          "clip": "197",
+          "crossed": 12,
+          "score": -11
+        },
+        {
+          "aligned": 15,
+          "clip": "198",
+          "crossed": 0,
+          "score": 15
+        },
+        {
+          "aligned": 9,
+          "clip": "199",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 13,
+          "clip": "200",
+          "crossed": 0,
+          "score": 13
+        }
+      ]
+    },
+    {
+      "clip": "197",
+      "game": "11",
+      "half": "2",
+      "orientation": "swapped",
+      "signed_aggregate_margin": 46,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 1,
+          "clip": "195",
+          "crossed": 8,
+          "score": -7
+        },
+        {
+          "aligned": 1,
+          "clip": "196",
+          "crossed": 12,
+          "score": -11
+        },
+        {
+          "aligned": 0,
+          "clip": "198",
+          "crossed": 12,
+          "score": -12
+        },
+        {
+          "aligned": 0,
+          "clip": "199",
+          "crossed": 8,
+          "score": -8
+        },
+        {
+          "aligned": 1,
+          "clip": "200",
+          "crossed": 9,
+          "score": -8
+        }
+      ]
+    },
+    {
+      "clip": "198",
+      "game": "11",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 60,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 11,
+          "clip": "195",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 15,
+          "clip": "196",
+          "crossed": 0,
+          "score": 15
+        },
+        {
+          "aligned": 0,
+          "clip": "197",
+          "crossed": 12,
+          "score": -12
+        },
+        {
+          "aligned": 9,
+          "clip": "199",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 13,
+          "clip": "200",
+          "crossed": 0,
+          "score": 13
+        }
+      ]
+    },
+    {
+      "clip": "199",
+      "game": "11",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 43,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "195",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "196",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 0,
+          "clip": "197",
+          "crossed": 8,
+          "score": -8
+        },
+        {
+          "aligned": 9,
+          "clip": "198",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "200",
+          "crossed": 0,
+          "score": 9
+        }
+      ]
+    },
+    {
+      "clip": "200",
+      "game": "11",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 54,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 11,
+          "clip": "195",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 13,
+          "clip": "196",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 1,
+          "clip": "197",
+          "crossed": 9,
+          "score": -8
+        },
+        {
+          "aligned": 13,
+          "clip": "198",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 9,
+          "clip": "199",
+          "crossed": 0,
+          "score": 9
+        }
+      ]
+    },
+    {
+      "clip": "116",
+      "game": "7",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 55,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "117",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "118",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "119",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "120",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "121",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "122",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "123",
+          "crossed": 0,
+          "score": 9
+        }
+      ]
+    },
+    {
+      "clip": "117",
+      "game": "7",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 48,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "116",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "118",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "119",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "120",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "121",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "122",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 8,
+          "clip": "123",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "118",
+      "game": "7",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 46,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "116",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "117",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "119",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "120",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "121",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "122",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "123",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "119",
+      "game": "7",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 54,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 9,
+          "clip": "116",
+          "crossed": 1,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "117",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "118",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "120",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "121",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "122",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "123",
+          "crossed": 0,
+          "score": 9
+        }
+      ]
+    },
+    {
+      "clip": "120",
+      "game": "7",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 50,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "116",
+          "crossed": 1,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "117",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "118",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "119",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "121",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "122",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "123",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "121",
+      "game": "7",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 48,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "116",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "117",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "118",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "119",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "120",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "122",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "123",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "122",
+      "game": "7",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 43,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "116",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "117",
+          "crossed": 1,
+          "score": 5
+        },
+        {
+          "aligned": 5,
+          "clip": "118",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 7,
+          "clip": "119",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "120",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "121",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "123",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "123",
+      "game": "7",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 54,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 9,
+          "clip": "116",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "117",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "118",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "119",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "120",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 7,
+          "clip": "121",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "122",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "124",
+      "game": "7",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 35,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "125",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 1,
+          "clip": "126",
+          "crossed": 7,
+          "score": -6
+        },
+        {
+          "aligned": 4,
+          "clip": "127",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 6,
+          "clip": "128",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 7,
+          "clip": "129",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 4,
+          "clip": "130",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 1,
+          "clip": "131",
+          "crossed": 5,
+          "score": -4
+        }
+      ]
+    },
+    {
+      "clip": "125",
+      "game": "7",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 41,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "124",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 0,
+          "clip": "126",
+          "crossed": 8,
+          "score": -8
+        },
+        {
+          "aligned": 4,
+          "clip": "127",
+          "crossed": 2,
+          "score": 2
+        },
+        {
+          "aligned": 8,
+          "clip": "128",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "129",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "130",
+          "crossed": 2,
+          "score": 4
+        },
+        {
+          "aligned": 1,
+          "clip": "131",
+          "crossed": 5,
+          "score": -4
+        }
+      ]
+    },
+    {
+      "clip": "126",
+      "game": "7",
+      "half": "2",
+      "orientation": "swapped",
+      "signed_aggregate_margin": 35,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 1,
+          "clip": "124",
+          "crossed": 7,
+          "score": -6
+        },
+        {
+          "aligned": 0,
+          "clip": "125",
+          "crossed": 8,
+          "score": -8
+        },
+        {
+          "aligned": 2,
+          "clip": "127",
+          "crossed": 4,
+          "score": -2
+        },
+        {
+          "aligned": 0,
+          "clip": "128",
+          "crossed": 6,
+          "score": -6
+        },
+        {
+          "aligned": 0,
+          "clip": "129",
+          "crossed": 8,
+          "score": -8
+        },
+        {
+          "aligned": 2,
+          "clip": "130",
+          "crossed": 4,
+          "score": -2
+        },
+        {
+          "aligned": 5,
+          "clip": "131",
+          "crossed": 2,
+          "score": 3
+        }
+      ]
+    },
+    {
+      "clip": "127",
+      "game": "7",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 24,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 4,
+          "clip": "124",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 4,
+          "clip": "125",
+          "crossed": 2,
+          "score": 2
+        },
+        {
+          "aligned": 2,
+          "clip": "126",
+          "crossed": 4,
+          "score": -2
+        },
+        {
+          "aligned": 4,
+          "clip": "128",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 4,
+          "clip": "129",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 5,
+          "clip": "130",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 0,
+          "clip": "131",
+          "crossed": 4,
+          "score": -4
+        }
+      ]
+    },
+    {
+      "clip": "128",
+      "game": "7",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 45,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "124",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "125",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 0,
+          "clip": "126",
+          "crossed": 6,
+          "score": -6
+        },
+        {
+          "aligned": 4,
+          "clip": "127",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 9,
+          "clip": "129",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "130",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 1,
+          "clip": "131",
+          "crossed": 7,
+          "score": -6
+        }
+      ]
+    },
+    {
+      "clip": "129",
+      "game": "7",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 44,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "124",
+          "crossed": 1,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "125",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 0,
+          "clip": "126",
+          "crossed": 8,
+          "score": -8
+        },
+        {
+          "aligned": 4,
+          "clip": "127",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 9,
+          "clip": "128",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 5,
+          "clip": "130",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 2,
+          "clip": "131",
+          "crossed": 6,
+          "score": -4
+        }
+      ]
+    },
+    {
+      "clip": "130",
+      "game": "7",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 30,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 4,
+          "clip": "124",
+          "crossed": 1,
+          "score": 3
+        },
+        {
+          "aligned": 6,
+          "clip": "125",
+          "crossed": 2,
+          "score": 4
+        },
+        {
+          "aligned": 2,
+          "clip": "126",
+          "crossed": 4,
+          "score": -2
+        },
+        {
+          "aligned": 5,
+          "clip": "127",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "128",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "129",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 0,
+          "clip": "131",
+          "crossed": 5,
+          "score": -5
+        }
+      ]
+    },
+    {
+      "clip": "131",
+      "game": "7",
+      "half": "2",
+      "orientation": "swapped",
+      "signed_aggregate_margin": 30,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 1,
+          "clip": "124",
+          "crossed": 5,
+          "score": -4
+        },
+        {
+          "aligned": 1,
+          "clip": "125",
+          "crossed": 5,
+          "score": -4
+        },
+        {
+          "aligned": 5,
+          "clip": "126",
+          "crossed": 2,
+          "score": 3
+        },
+        {
+          "aligned": 0,
+          "clip": "127",
+          "crossed": 4,
+          "score": -4
+        },
+        {
+          "aligned": 1,
+          "clip": "128",
+          "crossed": 7,
+          "score": -6
+        },
+        {
+          "aligned": 2,
+          "clip": "129",
+          "crossed": 6,
+          "score": -4
+        },
+        {
+          "aligned": 0,
+          "clip": "130",
+          "crossed": 5,
+          "score": -5
+        }
+      ]
+    },
+    {
+      "clip": "132",
+      "game": "8",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 70,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "133",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "134",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "135",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "136",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "137",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 10,
+          "clip": "138",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "139",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "140",
+          "crossed": 0,
+          "score": 10
+        }
+      ]
+    },
+    {
+      "clip": "133",
+      "game": "8",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 70,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "132",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "134",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "135",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "136",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 6,
+          "clip": "137",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 10,
+          "clip": "138",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "139",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "140",
+          "crossed": 0,
+          "score": 10
+        }
+      ]
+    },
+    {
+      "clip": "134",
+      "game": "8",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 65,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "132",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "133",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "135",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 7,
+          "clip": "136",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "137",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 9,
+          "clip": "138",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "139",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "140",
+          "crossed": 0,
+          "score": 9
+        }
+      ]
+    },
+    {
+      "clip": "135",
+      "game": "8",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 88,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "132",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "133",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "134",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "136",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "137",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 14,
+          "clip": "138",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 13,
+          "clip": "139",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 14,
+          "clip": "140",
+          "crossed": 0,
+          "score": 14
+        }
+      ]
+    },
+    {
+      "clip": "136",
+      "game": "8",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 59,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "132",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "133",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "134",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 9,
+          "clip": "135",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 4,
+          "clip": "137",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "138",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "139",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 8,
+          "clip": "140",
+          "crossed": 0,
+          "score": 8
+        }
+      ]
+    },
+    {
+      "clip": "137",
+      "game": "8",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 62,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "132",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "133",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "134",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 9,
+          "clip": "135",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 4,
+          "clip": "136",
+          "crossed": 0,
+          "score": 4
+        },
+        {
+          "aligned": 11,
+          "clip": "138",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 10,
+          "clip": "139",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "140",
+          "crossed": 0,
+          "score": 10
+        }
+      ]
+    },
+    {
+      "clip": "138",
+      "game": "8",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 90,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "132",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "133",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "134",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 14,
+          "clip": "135",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 8,
+          "clip": "136",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 11,
+          "clip": "137",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 13,
+          "clip": "139",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 15,
+          "clip": "140",
+          "crossed": 0,
+          "score": 15
+        }
+      ]
+    },
+    {
+      "clip": "139",
+      "game": "8",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 81,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "132",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 8,
+          "clip": "133",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "134",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 13,
+          "clip": "135",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 7,
+          "clip": "136",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 10,
+          "clip": "137",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 13,
+          "clip": "138",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 13,
+          "clip": "140",
+          "crossed": 0,
+          "score": 13
+        }
+      ]
+    },
+    {
+      "clip": "140",
+      "game": "8",
+      "half": "1",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 89,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "132",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "133",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 9,
+          "clip": "134",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 14,
+          "clip": "135",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 8,
+          "clip": "136",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "137",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 15,
+          "clip": "138",
+          "crossed": 0,
+          "score": 15
+        },
+        {
+          "aligned": 13,
+          "clip": "139",
+          "crossed": 0,
+          "score": 13
+        }
+      ]
+    },
+    {
+      "clip": "141",
+      "game": "8",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 74,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 11,
+          "clip": "142",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 10,
+          "clip": "143",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "144",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 11,
+          "clip": "145",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 7,
+          "clip": "146",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "147",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "148",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 8,
+          "clip": "149",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 5,
+          "clip": "150",
+          "crossed": 0,
+          "score": 5
+        }
+      ]
+    },
+    {
+      "clip": "142",
+      "game": "8",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 97,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 11,
+          "clip": "141",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 14,
+          "clip": "143",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 14,
+          "clip": "144",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 15,
+          "clip": "145",
+          "crossed": 0,
+          "score": 15
+        },
+        {
+          "aligned": 10,
+          "clip": "146",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 6,
+          "clip": "147",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 10,
+          "clip": "148",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 11,
+          "clip": "149",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 6,
+          "clip": "150",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "143",
+      "game": "8",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 85,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "141",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 14,
+          "clip": "142",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 12,
+          "clip": "144",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 13,
+          "clip": "145",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 8,
+          "clip": "146",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 5,
+          "clip": "147",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 8,
+          "clip": "148",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "149",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 6,
+          "clip": "150",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "144",
+      "game": "8",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 90,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 10,
+          "clip": "141",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 14,
+          "clip": "142",
+          "crossed": 0,
+          "score": 14
+        },
+        {
+          "aligned": 12,
+          "clip": "143",
+          "crossed": 0,
+          "score": 12
+        },
+        {
+          "aligned": 13,
+          "clip": "145",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 10,
+          "clip": "146",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 6,
+          "clip": "147",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 9,
+          "clip": "148",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "149",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 6,
+          "clip": "150",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "145",
+      "game": "8",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 93,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 11,
+          "clip": "141",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 15,
+          "clip": "142",
+          "crossed": 0,
+          "score": 15
+        },
+        {
+          "aligned": 13,
+          "clip": "143",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 13,
+          "clip": "144",
+          "crossed": 0,
+          "score": 13
+        },
+        {
+          "aligned": 10,
+          "clip": "146",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 6,
+          "clip": "147",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 9,
+          "clip": "148",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "149",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 6,
+          "clip": "150",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "146",
+      "game": "8",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 70,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 7,
+          "clip": "141",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 10,
+          "clip": "142",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "143",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 10,
+          "clip": "144",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "145",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 5,
+          "clip": "147",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 8,
+          "clip": "148",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 7,
+          "clip": "149",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "150",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "147",
+      "game": "8",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 45,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "141",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "142",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "143",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "144",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "145",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "146",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 5,
+          "clip": "148",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 5,
+          "clip": "149",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 5,
+          "clip": "150",
+          "crossed": 1,
+          "score": 4
+        }
+      ]
+    },
+    {
+      "clip": "148",
+      "game": "8",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 72,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 6,
+          "clip": "141",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 10,
+          "clip": "142",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 8,
+          "clip": "143",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 9,
+          "clip": "144",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 9,
+          "clip": "145",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 8,
+          "clip": "146",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 5,
+          "clip": "147",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 11,
+          "clip": "149",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 7,
+          "clip": "150",
+          "crossed": 0,
+          "score": 7
+        }
+      ]
+    },
+    {
+      "clip": "149",
+      "game": "8",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 76,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 8,
+          "clip": "141",
+          "crossed": 0,
+          "score": 8
+        },
+        {
+          "aligned": 11,
+          "clip": "142",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 9,
+          "clip": "143",
+          "crossed": 0,
+          "score": 9
+        },
+        {
+          "aligned": 10,
+          "clip": "144",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 10,
+          "clip": "145",
+          "crossed": 0,
+          "score": 10
+        },
+        {
+          "aligned": 7,
+          "clip": "146",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 5,
+          "clip": "147",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 11,
+          "clip": "148",
+          "crossed": 0,
+          "score": 11
+        },
+        {
+          "aligned": 6,
+          "clip": "150",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    },
+    {
+      "clip": "150",
+      "game": "8",
+      "half": "2",
+      "orientation": "unchanged",
+      "signed_aggregate_margin": 52,
+      "split": "test",
+      "support": [
+        {
+          "aligned": 5,
+          "clip": "141",
+          "crossed": 0,
+          "score": 5
+        },
+        {
+          "aligned": 6,
+          "clip": "142",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "143",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "144",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "145",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 6,
+          "clip": "146",
+          "crossed": 0,
+          "score": 6
+        },
+        {
+          "aligned": 5,
+          "clip": "147",
+          "crossed": 1,
+          "score": 4
+        },
+        {
+          "aligned": 7,
+          "clip": "148",
+          "crossed": 0,
+          "score": 7
+        },
+        {
+          "aligned": 6,
+          "clip": "149",
+          "crossed": 0,
+          "score": 6
+        }
+      ]
+    }
+  ],
+  "team_normalization_errors": [],
+  "unit_policy": "original game_id and matching game_time_start/game_time_stop half; team labels normalized to match-half slots from shared player jersey identities",
   "units": [
     {
       "candidate_cutoff_count": 75,

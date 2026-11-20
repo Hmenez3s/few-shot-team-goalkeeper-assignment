@@ -1,0 +1,6 @@
+5414293fbceaaee4905611542545f97b24c286df2873acdf42dcddec8bbfae6e  models/one-reference.pth
+5502a472c71688073e75c364a562222c599faf7f6ffeccb7169deb851139b778  models/six-references.pth
+27523a4011b34f78bce195e142cdd88460f653f998b761afb229cca5a510a2bd  models/six-references-fp16.pth
+240d6ac1bf16c2548b5f5caf4a3188b2cd6af6e1b1200d7a12057f412d19388c  models/six-references-int8.mlpackage/Manifest.json
+c827fbdb00ec98f6bd2029ec82a0de9aef10b48587a7a4b8dd3ca0ce4d003ed4  models/six-references-int8.mlpackage/Data/com.apple.CoreML/model.mlmodel
+fd8c060f4481354c1e492ad821d7cb8f580df385502225efa67310ad5b386e4a  models/six-references-int8.mlpackage/Data/com.apple.CoreML/weights/weight.bin

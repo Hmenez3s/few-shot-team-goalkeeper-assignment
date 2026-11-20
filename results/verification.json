@@ -1,4 +1,7 @@
 {
+  "checkpoint_sha256": "5414293fbceaaee4905611542545f97b24c286df2873acdf42dcddec8bbfae6e",
+  "best_epoch": 7,
+  "test_boxes": 2659,
   "prepared_split_checks": {
     "train": {
       "games": [
@@ -28,12 +31,10 @@
       "unique_pixel_sha256": 6441
     }
   },
-  "cross_split_duplicate_crop_hashes": {
+  "cross_split_identical_crops": {
     "train_valid": 0,
     "train_test": 0,
     "valid_test": 0
   },
-  "checkpoint_epoch": 6,
-  "checkpoint_sha256": "e85b9de6153db41c3dac9a5139f81f1ca76a2db7aecc99610ade35b3ee5c210a",
-  "validation_macro_class_accuracy": 0.880858649157255
+  "six_reference_checkpoint_sha256": "5502a472c71688073e75c364a562222c599faf7f6ffeccb7169deb851139b778"
 }

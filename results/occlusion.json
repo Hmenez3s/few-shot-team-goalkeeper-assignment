@@ -1,0 +1,180 @@
+{
+  "query_count": 2659,
+  "errors": 117,
+  "confusion_matrix": [
+    [
+      1217,
+      24,
+      7,
+      19
+    ],
+    [
+      13,
+      1206,
+      8,
+      7
+    ],
+    [
+      14,
+      4,
+      58,
+      1
+    ],
+    [
+      13,
+      4,
+      3,
+      61
+    ]
+  ],
+  "zero_overlap_error_confusion_matrix": [
+    [
+      0,
+      3,
+      6,
+      4
+    ],
+    [
+      0,
+      0,
+      7,
+      3
+    ],
+    [
+      11,
+      2,
+      0,
+      1
+    ],
+    [
+      13,
+      1,
+      2,
+      0
+    ]
+  ],
+  "zero_overlap_errors_by_source_clip": {
+    "121": 2,
+    "122": 7,
+    "123": 6,
+    "128": 2,
+    "129": 3,
+    "130": 5,
+    "135": 2,
+    "136": 7,
+    "137": 4,
+    "138": 1,
+    "139": 1,
+    "140": 3,
+    "146": 1,
+    "147": 1,
+    "148": 1,
+    "149": 1,
+    "150": 1,
+    "193": 1,
+    "194": 2,
+    "198": 1,
+    "200": 1
+  },
+  "by_overlap_proxy": [
+    {
+      "bin": "zero",
+      "queries": 1704,
+      "errors": 53,
+      "error_rate": 0.031103286384976527
+    },
+    {
+      "bin": "(0,0.1)",
+      "queries": 226,
+      "errors": 1,
+      "error_rate": 0.004424778761061947
+    },
+    {
+      "bin": "[0.1,0.3)",
+      "queries": 345,
+      "errors": 13,
+      "error_rate": 0.03768115942028986
+    },
+    {
+      "bin": "[0.3,0.6)",
+      "queries": 256,
+      "errors": 23,
+      "error_rate": 0.08984375
+    },
+    {
+      "bin": "[0.6,1]",
+      "queries": 128,
+      "errors": 27,
+      "error_rate": 0.2109375
+    }
+  ],
+  "version": 1,
+  "metric_limit": "maximum same-frame annotated-human intersection divided by query box area; box-overlap proxy only, not physical occlusion or direction; no causal inference about overlapping class",
+  "baseline_reference": {
+    "path": "data/work/result.json",
+    "sha256": "d444eec9ea861c2ad96ae60f6b4c7cf0a16643438d7ad7ce7819347c76707b72",
+    "confusion_matrix": [
+      [
+        1217,
+        24,
+        7,
+        19
+      ],
+      [
+        13,
+        1206,
+        8,
+        7
+      ],
+      [
+        14,
+        4,
+        58,
+        1
+      ],
+      [
+        13,
+        4,
+        3,
+        61
+      ]
+    ]
+  },
+  "checkpoint": {
+    "path": "data/work/checkpoint.pth",
+    "sha256": "5414293fbceaaee4905611542545f97b24c286df2873acdf42dcddec8bbfae6e"
+  },
+  "coverage": {
+    "manifest_test_clips": 6,
+    "aligned_test_queries": 2659,
+    "source_clips": [
+      "121",
+      "122",
+      "123",
+      "127",
+      "128",
+      "129",
+      "130",
+      "131",
+      "135",
+      "136",
+      "137",
+      "138",
+      "139",
+      "140",
+      "145",
+      "146",
+      "147",
+      "148",
+      "149",
+      "150",
+      "191",
+      "192",
+      "193",
+      "194",
+      "198",
+      "199",
+      "200"
+    ]
+  }
+}

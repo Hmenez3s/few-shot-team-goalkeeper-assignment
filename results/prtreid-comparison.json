@@ -1,0 +1,230 @@
+{
+  "boxes": 2659,
+  "note": "Same SN-GSR-2025 test boxes (games 7, 8, 11). PRTReID + K-means uses ground-truth boxes, tracklets and pitch coordinates. PRTReID weights: official sn-gamestate checkpoint, trained on SoccerNet-Tracking train, whose 57 clips are the GSR train clips (disjoint from test).",
+  "prtreid_kmeans": {
+    "official_predicted_roles": {
+      "accuracy": 0.9729221511846559,
+      "macro_recall": 0.8354943462340241,
+      "confusion_matrix": [
+        [
+          1259,
+          3,
+          0,
+          0
+        ],
+        [
+          5,
+          1221,
+          1,
+          1
+        ],
+        [
+          18,
+          0,
+          59,
+          0
+        ],
+        [
+          2,
+          30,
+          0,
+          48
+        ]
+      ]
+    },
+    "ground_truth_roles": {
+      "accuracy": 0.9424595712673938,
+      "macro_recall": 0.9664835070383363,
+      "confusion_matrix": [
+        [
+          1198,
+          64,
+          0,
+          0
+        ],
+        [
+          77,
+          1151,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          77,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          80
+        ]
+      ]
+    },
+    "ground_truth_roles_oracle_team_mapping": {
+      "accuracy": 0.9924783753290711,
+      "macro_recall": 0.9931065231600853,
+      "confusion_matrix": [
+        [
+          1259,
+          3,
+          0,
+          0
+        ],
+        [
+          5,
+          1223,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          77,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          80
+        ]
+      ]
+    }
+  },
+  "reference_classifier": {
+    "one_reference": {
+      "per_box": {
+        "accuracy": 0.9559984956750658,
+        "macro_recall": 0.8610448590666839,
+        "confusion_matrix": [
+          [
+            1217,
+            24,
+            7,
+            19
+          ],
+          [
+            13,
+            1206,
+            8,
+            7
+          ],
+          [
+            14,
+            4,
+            58,
+            1
+          ],
+          [
+            13,
+            4,
+            3,
+            61
+          ]
+        ]
+      },
+      "tracklet_mean": {
+        "accuracy": 0.9815720195562242,
+        "macro_recall": 0.8898573120488407,
+        "confusion_matrix": [
+          [
+            1252,
+            0,
+            0,
+            15
+          ],
+          [
+            0,
+            1234,
+            0,
+            0
+          ],
+          [
+            14,
+            0,
+            63,
+            0
+          ],
+          [
+            19,
+            1,
+            0,
+            61
+          ]
+        ]
+      }
+    },
+    "six_references": {
+      "per_box": {
+        "accuracy": 0.9676570139150057,
+        "macro_recall": 0.9381140369414589,
+        "confusion_matrix": [
+          [
+            1222,
+            28,
+            5,
+            12
+          ],
+          [
+            19,
+            1208,
+            4,
+            3
+          ],
+          [
+            3,
+            5,
+            68,
+            1
+          ],
+          [
+            3,
+            3,
+            0,
+            75
+          ]
+        ]
+      },
+      "tracklet_mean": {
+        "accuracy": 0.9969913501316284,
+        "macro_recall": 0.9897541582624455,
+        "confusion_matrix": [
+          [
+            1262,
+            0,
+            0,
+            5
+          ],
+          [
+            0,
+            1234,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            77,
+            0
+          ],
+          [
+            2,
+            1,
+            0,
+            78
+          ]
+        ]
+      }
+    }
+  },
+  "weights_md5": {
+    "prtreid-soccernet-baseline.pth.tar": "9633825232bc89f23a94522c5561650e",
+    "hrnetv2_w32_imagenet_pretrained.pth": "58ea12b0420aa3adaa2f74114c9f9721"
+  },
+  "source_commits": {
+    "src-prtreid": "30617a7",
+    "src-sn-gamestate": "1c95834"
+  }
+}

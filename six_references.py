@@ -7,6 +7,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
+import reference_bank
 import train
 
 SEED = 25
@@ -19,16 +20,49 @@ REPLACEMENT_SEED = SEED + 400
 EVALUATION_SEED = SEED + 500
 
 
-def load_bank(path):
+def load_bank(path, root, manifest, entry):
+    expected = reference_bank.bank_identity(root, manifest, entry, path)
     with np.load(path, allow_pickle=False) as data:
+        required = ("bank_schema", "protocol_id", "prepared_sha256", "cutoff_ms")
+        missing = [key for key in required if key not in data.files]
+        if missing:
+            raise ValueError(f"{path}: missing bank identity fields: {', '.join(missing)}")
+        identity = {}
+        for key in required:
+            value = data[key]
+            if value.shape != ():
+                raise ValueError(f"{path}: {key} must be a scalar")
+            if key in ("protocol_id", "prepared_sha256"):
+                if value.dtype.kind not in ("U", "S") or value.dtype.itemsize > reference_bank.BANK_TEXT_SIZE * 4:
+                    raise ValueError(f"{path}: {key} must be a bounded text scalar")
+                text = value.item()
+                if len(text) != reference_bank.BANK_TEXT_SIZE:
+                    raise ValueError(f"{path}: {key} must contain {reference_bank.BANK_TEXT_SIZE} characters")
+                identity[key] = text.decode("ascii") if isinstance(text, bytes) else text
+            else:
+                if not np.issubdtype(value.dtype, np.integer):
+                    raise ValueError(f"{path}: {key} must be an integer scalar")
+                identity[key] = value.item()
         bank = {key: data[key] for key in ("x", "t", "y", "track", "desc")}
+    for key, value in expected.items():
+        if identity[key] != value:
+            raise ValueError(f"{path}: {key} does not match the current unit manifest and prepared clip")
     n = len(bank["y"])
     if bank["x"].shape != (n, 96, 48, 3) or bank["x"].dtype != np.uint8:
         raise ValueError(f"{path}: x must be uint8 [N,96,48,3]")
     if any(bank[key].shape != (n,) for key in ("t", "y", "track")) or bank["desc"].shape != (n, 5):
         raise ValueError(f"{path}: expected t/y/track [N] and desc [N,5]")
-    if np.any((bank["y"] < 0) | (bank["y"] >= 4)) or not np.isfinite(bank["desc"]).all():
-        raise ValueError(f"{path}: invalid labels or descriptors")
+    if not np.issubdtype(bank["t"].dtype, np.integer) or not np.issubdtype(bank["track"].dtype, np.integer):
+        raise ValueError(f"{path}: t and track must be integer arrays")
+    if np.any((bank["y"] < 0) | (bank["y"] >= 4)) or np.any(bank["t"] >= expected["cutoff_ms"]):
+        raise ValueError(f"{path}: invalid labels or a bank timestamp is at/after the unit cutoff")
+    if not np.isfinite(bank["desc"][:, 2:]).all():
+        raise ValueError(f"{path}: non-pitch descriptors must be finite")
+    pitch = bank["desc"][:, :2]
+    missing_pitch = np.isnan(pitch).all(axis=1)
+    present_pitch = np.isfinite(pitch).all(axis=1) & np.all((pitch >= 0) & (pitch <= 1), axis=1)
+    if not np.all(missing_pitch | present_pitch):
+        raise ValueError(f"{path}: pitch descriptors must be both NaN or both finite in [0,1]")
     return bank
 
 
@@ -94,13 +128,16 @@ def predict(model, clip, support, query, device):
 
 
 def sessions_for(entries, cache, bank_dir):
+    root = bank_dir.parent.parent
+    manifest, _, _ = train.load_manifest(root)
     sessions = []
     for entry in entries:
         clip = cache.get(entry["path"])
         episode = train.fixed_episode(clip)
         if episode is None:
             raise ValueError(f"no fixed episode for {entry['clip']}")
-        sessions.append((entry, clip, load_bank(bank_dir / f"{entry['clip']}.npz"), episode))
+        bank_path = bank_dir / f"{entry['clip']}.npz"
+        sessions.append((entry, clip, load_bank(bank_path, root, manifest, entry), episode))
     return sessions
 
 
@@ -136,7 +173,7 @@ def main():
     parser.add_argument("--root", type=Path, required=True)
     args = parser.parse_args()
     root = args.root.resolve()
-    _, splits, games = train.load_manifest(root)
+    manifest, splits, games = train.load_manifest(root)
     bank_dir = root / "work" / "references"
     output = root / "work" / "six-references"
     output.mkdir(parents=True, exist_ok=True)
@@ -144,7 +181,7 @@ def main():
     torch.manual_seed(SEED)
     cache = train.ClipCache(capacity=12)
     validation = sessions_for(splits["valid"], cache, bank_dir)
-    banks = {entry["clip"]: load_bank(bank_dir / f"{entry['clip']}.npz") for entry in splits["train"]}
+    banks = {entry["clip"]: load_bank(bank_dir / f"{entry['clip']}.npz", root, manifest, entry) for entry in splits["train"]}
     schedule = training_schedule(splits["train"], cache)
     model = train.build_model(root / "inputs" / "resnet18.pth", device)
     optimizer = torch.optim.AdamW((p for p in model.parameters() if p.requires_grad), lr=2e-4, weight_decay=1e-4)

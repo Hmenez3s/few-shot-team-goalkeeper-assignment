@@ -1,4 +1,5 @@
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -17,8 +18,65 @@ SPLITS = ("train", "valid", "test")
 SAMPLE_INTERVAL_MS = 500
 
 
+BANK_SCHEMA = 1
+BANK_TEXT_SIZE = 64
+
+
 def safe_text(value):
     return value.strip() if isinstance(value, str) else ""
+
+
+def normalized_protocol_id(manifest):
+    audit = manifest.get("audit", {})
+    normalization = audit.get("team_normalization")
+    if not isinstance(normalization, dict) or normalization.get("schema") != 1:
+        raise ValueError("corrected team normalization is missing; rerun prepare.py before consuming raw clips")
+    protocol = " ".join(safe_text(normalization.get("protocol")).split()).casefold()
+    classes = manifest.get("classes")
+    if not protocol or not isinstance(classes, list) or len(classes) != 4 or any(not isinstance(value, str) for value in classes):
+        raise ValueError("invalid bank protocol or class mapping")
+    identity = json.dumps({"protocol": protocol, "classes": classes}, separators=(",", ":"), ensure_ascii=True)
+    return hashlib.sha256(identity.encode("ascii")).hexdigest()
+
+
+def sha256_file(path):
+    digest = hashlib.sha256()
+    with Path(path).open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def bank_identity(root, manifest, entry, bank_path):
+    clips = [clip for clip in manifest.get("clips", [])
+             if isinstance(clip, dict) and clip.get("split") == entry.get("split")
+             and clip.get("game") == entry.get("game") and clip.get("clip") == entry.get("clip")]
+    if len(clips) != 1 or clips[0].get("path") != entry.get("path"):
+        raise ValueError(f"{entry.get('clip')}: prepared clip entry is missing or ambiguous")
+    units = [unit for unit in manifest.get("audit", {}).get("units", [])
+             if isinstance(unit, dict) and unit.get("split") == entry.get("split")
+             and str(unit.get("game")) == str(entry.get("game"))
+             and unit.get("key") == entry.get("clip")]
+    if len(units) != 1:
+        raise ValueError(f"{entry.get('clip')}: unit manifest entry is missing or ambiguous")
+    unit = units[0]
+    try:
+        cutoff_value = unit["cutoff_ms"]
+        cutoff = int(cutoff_value)
+    except (KeyError, TypeError, ValueError) as error:
+        raise ValueError(f"{entry.get('clip')}: invalid unit cutoff") from error
+    if not isinstance(cutoff_value, int) or isinstance(cutoff_value, bool):
+        raise ValueError(f"{entry.get('clip')}: unit cutoff must be an exact integer")
+    path = Path(bank_path)
+    if path.name != f"{entry['clip']}.npz":
+        raise ValueError(f"{path}: unexpected bank path for {entry['clip']}")
+    prepared_path = Path(root) / entry["path"]
+    if not prepared_path.is_file():
+        raise ValueError(f"{prepared_path}: prepared clip is missing")
+    return {"bank_schema": BANK_SCHEMA,
+            "protocol_id": normalized_protocol_id(manifest),
+            "prepared_sha256": sha256_file(prepared_path),
+            "cutoff_ms": cutoff}
 
 
 def frame_rows(record):
@@ -81,7 +139,7 @@ def descriptor(annotation, all_annotations, image, bbox):
     position = pitch_position(annotation)
     edges = bbox_edges(bbox, image.size)
     values = bbox_values(bbox)
-    if position is None or edges is None or values is None:
+    if edges is None or values is None:
         return None
     left, top, right, bottom = edges
     torso = image.crop((left + (right - left) * 0.25,
@@ -103,7 +161,8 @@ def descriptor(annotation, all_annotations, image, bbox):
     _, _, width, height = values
     aspect = width / height
     aspect_proxy = aspect / (1.0 + aspect)
-    return np.asarray([position[0], position[1], brightness, overlap, aspect_proxy], dtype=np.float32)
+    pitch_x, pitch_y = (np.nan, np.nan) if position is None else position
+    return np.asarray([pitch_x, pitch_y, brightness, overlap, aspect_proxy], dtype=np.float32)
 
 
 def clip_identity(record):
@@ -213,7 +272,7 @@ def read_unit_candidates(root, unit, prepared_times, audit, manifest):
                     continue
                 desc = descriptor(annotation, frame["annotations"], image, bbox)
                 if desc is None:
-                    audit["invalid_pitch_or_descriptor"] += 1
+                    audit["invalid_descriptor"] += 1
                     continue
                 dedup = (frame["time"], class_id, track if class_id in (0, 1) else None)
                 if dedup in seen:
@@ -290,8 +349,9 @@ def main():
              "source_policy": "each session reads only its own split archive and only frames earlier than its cut-off",
              "sampling": {"interval_ms": SAMPLE_INTERVAL_MS,
                           "additional_frames": "all earlier frames containing a goalkeeper annotation and frames at exact earlier prepared-NPZ times"},
-             "descriptors": {"pitch_x": "clip(bbox_pitch.x_bottom_middle / 105 + 0.5, 0, 1); missing excluded",
-                             "pitch_y": "clip(bbox_pitch.y_bottom_middle / 68 + 0.5, 0, 1); missing excluded",
+             "descriptors": {"pitch_x": "clip(bbox_pitch.x_bottom_middle / 105 + 0.5, 0, 1); optional, NaN when pitch position is missing",
+                             "pitch_y": "clip(bbox_pitch.y_bottom_middle / 68 + 0.5, 0, 1); optional, NaN when pitch position is missing",
+                             "pitch_consumers": "no current reference selection or evaluation consumer uses pitch_x or pitch_y",
                              "brightness": "median grayscale value in central torso crop, divided by 255; source crop excludes black padding",
                              "overlap": "maximum intersection area with another annotated human bbox divided by clipped subject bbox area",
                              "aspect_proxy": "bbox_image width/height transformed as r/(1+r)"},
@@ -303,12 +363,23 @@ def main():
             raise SystemExit(f"unexpected unit key: {unit['key']}")
         prepared_times = read_prepared_times(root, manifest, unit)
         candidates, frame_count, selected_count = read_unit_candidates(root, unit, prepared_times, audit["exclusions"], manifest)
+        bank_path = output / f"{unit['key']}.npz"
+        entries = [entry for entry in manifest.get("clips", [])
+                   if entry.get("split") == unit["split"] and str(entry.get("game")) == str(unit["game"])
+                   and entry.get("clip") == unit["key"]]
+        if len(entries) != 1:
+            raise ValueError(f"{unit['key']}: prepared clip entry is missing or ambiguous")
+        identity = bank_identity(root, manifest, entries[0], bank_path)
         arrays = {"x": np.stack([item["x"] for item in candidates]).astype(np.uint8, copy=False) if candidates else np.empty((0, 96, 48, 3), dtype=np.uint8),
                   "t": np.asarray([item["t"] for item in candidates], dtype=np.int64),
                   "y": np.asarray([item["y"] for item in candidates], dtype=np.int64),
                   "track": np.asarray([item["track"] for item in candidates], dtype=np.int64),
-                  "desc": np.stack([item["desc"] for item in candidates]).astype(np.float32, copy=False) if candidates else np.empty((0, 5), dtype=np.float32)}
-        atomic_npz(output / f"{unit['key']}.npz", arrays)
+                  "desc": np.stack([item["desc"] for item in candidates]).astype(np.float32, copy=False) if candidates else np.empty((0, 5), dtype=np.float32),
+                  "bank_schema": np.asarray(identity["bank_schema"], dtype=np.int64),
+                  "protocol_id": np.asarray(identity["protocol_id"], dtype=f"U{BANK_TEXT_SIZE}"),
+                  "prepared_sha256": np.asarray(identity["prepared_sha256"], dtype=f"U{BANK_TEXT_SIZE}"),
+                  "cutoff_ms": np.asarray(identity["cutoff_ms"], dtype=np.int64)}
+        atomic_npz(bank_path, arrays)
         coverage = {str(class_id): int(np.count_nonzero(arrays["y"] == class_id)) for class_id in range(4)}
         audit["units"].append({"split": unit["split"], "game": unit["game"], "half": unit["half"], "key": unit["key"],
                                "cutoff_ms": int(unit["cutoff_ms"]), "source_clip_ids": unit["source_clip_ids"],

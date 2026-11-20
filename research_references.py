@@ -17,11 +17,8 @@ PUBLISHED_SEED = 525
 BATCH_SIZE = 64
 
 
-def load_bank(path):
-    bank = six_references.load_bank(path)
-    if not np.issubdtype(bank["t"].dtype, np.integer) or not np.issubdtype(bank["track"].dtype, np.integer):
-        raise ValueError(f"{path}: t and track must be integer arrays")
-    return bank
+def load_bank(path, root, manifest, entry):
+    return six_references.load_bank(path, root, manifest, entry)
 
 
 def choose_support(clip, bank, episode, rng):
@@ -235,7 +232,7 @@ def main():
         if episode is None:
             raise ValueError(f"no fixed episode for {entry['clip']}")
         bank_path = bank_dir / f"{entry['clip']}.npz"
-        bank = load_bank(bank_path)
+        bank = load_bank(bank_path, root, manifest, entry)
         _, published_ids = choose_support(clip, bank, episode, published_rng)
         draw_selections = []
         for draw in range(args.draws):

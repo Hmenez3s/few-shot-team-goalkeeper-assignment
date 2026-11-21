@@ -1,0 +1,734 @@
+{
+  "description": "Cluster-bootstrap confidence intervals for box-level classification across six matches, comparing SoccerNet PRTReID, FewShot-R18 reference classifiers, frozen image encoders and Roboflow team clustering.",
+  "method": "For every scored box, preserve truth, match, half/session and (clip, track_id). Resample the unique tracklet clusters with replacement, or independently resample the 12 match halves with replacement, retaining all boxes in selected clusters/halves. Each replicate recomputes accuracy over boxes and score as the unweighted mean recall across non-empty truth groups. Empty-group replicate counts are recorded. Percentile bounds are 2.5th and 97.5th percentiles. Paired differences use identical replicate draws across methods. The tracklet bootstrap uses seed; match-half uses seed + 1.",
+  "seed": 20261121,
+  "bootstrap_seeds": {
+    "tracklet_cluster": 20261121,
+    "match_half_cluster": 20261122
+  },
+  "resamples": 10000,
+  "n_boxes": 5842,
+  "n_tracklets": 881,
+  "n_halves": 12,
+  "methods": {
+    "soccernet_baseline": {
+      "point_estimate": {
+        "score": 0.6615409450117734,
+        "accuracy": 0.7329681615884971
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.5877364629588866,
+          0.7313135192116018
+        ],
+        "accuracy_95_percentile_interval": [
+          0.7016222736323307,
+          0.7646563569313953
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.49102284970377125,
+          0.8078333075002744
+        ],
+        "accuracy_95_percentile_interval": [
+          0.5439092582684795,
+          0.9111470327345164
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    },
+    "fewshot_r18_1shot_per_box": {
+      "point_estimate": {
+        "score": 0.8768639935992651,
+        "accuracy": 0.9099623416638137
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.8375382261968775,
+          0.9095005964474605
+        ],
+        "accuracy_95_percentile_interval": [
+          0.8972792672930382,
+          0.922146204260338
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.814797585144016,
+          0.9291316957604472
+        ],
+        "accuracy_95_percentile_interval": [
+          0.8492116281789533,
+          0.9559443057935354
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    },
+    "fewshot_r18_1shot_tracklets": {
+      "point_estimate": {
+        "score": 0.9127402347472837,
+        "accuracy": 0.9419719274221157
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.8690803734847339,
+          0.9473774555651173
+        ],
+        "accuracy_95_percentile_interval": [
+          0.9253151981251655,
+          0.9574906089372388
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.843459982470366,
+          0.9707112100942369
+        ],
+        "accuracy_95_percentile_interval": [
+          0.8630451107675713,
+          0.9926410006868035
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    },
+    "fewshot_r18_6shot_per_box": {
+      "point_estimate": {
+        "score": 0.9241686569597671,
+        "accuracy": 0.9311879493324204
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.9044775800142263,
+          0.9411630063590387
+        ],
+        "accuracy_95_percentile_interval": [
+          0.9219982129697107,
+          0.9400417101147028
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.8916890870776925,
+          0.9506218673090395
+        ],
+        "accuracy_95_percentile_interval": [
+          0.8844508646268772,
+          0.9657162547048996
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    },
+    "fewshot_r18_6shot_tracklets": {
+      "point_estimate": {
+        "score": 0.9745088604976289,
+        "accuracy": 0.9813420061622732
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.9548085586435128,
+          0.9889194292239709
+        ],
+        "accuracy_95_percentile_interval": [
+          0.9715550825996306,
+          0.9899788291297812
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.9424202540283125,
+          0.9963668455256278
+        ],
+        "accuracy_95_percentile_interval": [
+          0.9555594856601568,
+          0.998322790058765
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    },
+    "soccernet_baseline_true_roles": {
+      "point_estimate": {
+        "score": 0.9279323578461298,
+        "accuracy": 0.8837726805888394
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.906878381307958,
+          0.9452921102377289
+        ],
+        "accuracy_95_percentile_interval": [
+          0.8602065840297609,
+          0.9065948268091826
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.872722126137601,
+          0.9756880074226681
+        ],
+        "accuracy_95_percentile_interval": [
+          0.7966404626410908,
+          0.9643375916169792
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    },
+    "siglip_six_references_per_box": {
+      "point_estimate": {
+        "score": 0.7434204016899157,
+        "accuracy": 0.766689489900719
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.7064380794861145,
+          0.7796385949705812
+        ],
+        "accuracy_95_percentile_interval": [
+          0.7501299223082121,
+          0.7832200859333717
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.6943460028097141,
+          0.7960681283541086
+        ],
+        "accuracy_95_percentile_interval": [
+          0.7228048148289207,
+          0.810393704063609
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    },
+    "siglip_six_references_tracklets": {
+      "point_estimate": {
+        "score": 0.879776014993398,
+        "accuracy": 0.890790825059911
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.8306147828327564,
+          0.9205541948197402
+        ],
+        "accuracy_95_percentile_interval": [
+          0.868038767473462,
+          0.9128250564398431
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.8368123945755225,
+          0.9242816643510893
+        ],
+        "accuracy_95_percentile_interval": [
+          0.8333294717330862,
+          0.9425002831009652
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    },
+    "clip_six_references_per_box": {
+      "point_estimate": {
+        "score": 0.6382877157406283,
+        "accuracy": 0.6638137624101336
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.6052399157363887,
+          0.6689339046485663
+        ],
+        "accuracy_95_percentile_interval": [
+          0.6447477714473122,
+          0.6827808087596609
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.5973239925264313,
+          0.6856346302239258
+        ],
+        "accuracy_95_percentile_interval": [
+          0.6166216062906154,
+          0.713041423638983
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    },
+    "clip_six_references_tracklets": {
+      "point_estimate": {
+        "score": 0.8216649665568287,
+        "accuracy": 0.8310510099281068
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.7684643785166143,
+          0.8689986192750236
+        ],
+        "accuracy_95_percentile_interval": [
+          0.8038817559055802,
+          0.8579161257575115
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.7670812261501869,
+          0.8776184835679481
+        ],
+        "accuracy_95_percentile_interval": [
+          0.764526340528119,
+          0.8927214416746186
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    },
+    "roboflow_predicted_roles_per_box": {
+      "point_estimate": {
+        "score": 0.7084564179430499,
+        "accuracy": 0.8267716535433071
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.6345907459060481,
+          0.7760934830538779
+        ],
+        "accuracy_95_percentile_interval": [
+          0.8047603285715029,
+          0.8477478025314755
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.5588153514592817,
+          0.8294356011263271
+        ],
+        "accuracy_95_percentile_interval": [
+          0.6750789911308204,
+          0.9447559143189052
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    },
+    "roboflow_predicted_roles_tracklets": {
+      "point_estimate": {
+        "score": 0.7084564179430499,
+        "accuracy": 0.8267716535433071
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.6345907459060481,
+          0.7760934830538779
+        ],
+        "accuracy_95_percentile_interval": [
+          0.8047603285715029,
+          0.8477478025314755
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.5588153514592817,
+          0.8294356011263271
+        ],
+        "accuracy_95_percentile_interval": [
+          0.6750789911308204,
+          0.9447559143189052
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    },
+    "roboflow_oracle_roles_per_box": {
+      "point_estimate": {
+        "score": 0.9605131756535772,
+        "accuracy": 0.953098254022595
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.9403500527989996,
+          0.9748794466362094
+        ],
+        "accuracy_95_percentile_interval": [
+          0.9460287814721722,
+          0.9599864375113035
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.9295144916082219,
+          0.9804700603010242
+        ],
+        "accuracy_95_percentile_interval": [
+          0.9350969086713701,
+          0.9668853420581196
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    },
+    "roboflow_oracle_roles_tracklets": {
+      "point_estimate": {
+        "score": 0.9605131756535772,
+        "accuracy": 0.953098254022595
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.9403500527989996,
+          0.9748794466362094
+        ],
+        "accuracy_95_percentile_interval": [
+          0.9460287814721722,
+          0.9599864375113035
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.9295144916082219,
+          0.9804700603010242
+        ],
+        "accuracy_95_percentile_interval": [
+          0.9350969086713701,
+          0.9668853420581196
+        ],
+        "empty_group_resamples": 0,
+        "empty_group_resamples_by_class": {
+          "team_a": 0,
+          "team_b": 0,
+          "goalkeeper_a": 0,
+          "goalkeeper_b": 0
+        }
+      }
+    }
+  },
+  "omitted_methods": {},
+  "paired_differences": {
+    "fewshot_r18_6shot_tracklets_minus_soccernet_baseline": {
+      "point_estimate": {
+        "score": 0.31296791548585545,
+        "accuracy": 0.2483738445737761
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.2443140029645069,
+          0.3855223774132096
+        ],
+        "accuracy_95_percentile_interval": [
+          0.21726090048926655,
+          0.27995174786183313
+        ]
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.1825118311935201,
+          0.45934615989831523
+        ],
+        "accuracy_95_percentile_interval": [
+          0.08518777444502895,
+          0.422327524362483
+        ]
+      }
+    },
+    "fewshot_r18_6shot_tracklets_minus_siglip_six_references_tracklets": {
+      "point_estimate": {
+        "score": 0.09473284550423089,
+        "accuracy": 0.09055118110236215
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.05040679981517111,
+          0.14436450150825686
+        ],
+        "accuracy_95_percentile_interval": [
+          0.0664945949223377,
+          0.11493980213898236
+        ]
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          0.03503514056460687,
+          0.1466140143534012
+        ],
+        "accuracy_95_percentile_interval": [
+          0.024172051493819586,
+          0.15876880503491864
+        ]
+      }
+    },
+    "fewshot_r18_6shot_tracklets_minus_roboflow_oracle_roles_tracklets": {
+      "point_estimate": {
+        "score": 0.01399568484405167,
+        "accuracy": 0.028243752139678224
+      },
+      "tracklet_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          -0.010359152254864086,
+          0.03771563326646353
+        ],
+        "accuracy_95_percentile_interval": [
+          0.017147660933062754,
+          0.039072200552575945
+        ]
+      },
+      "match_half_cluster_bootstrap": {
+        "score_95_percentile_interval": [
+          -0.022060732205018106,
+          0.0532442232647442
+        ],
+        "accuracy_95_percentile_interval": [
+          0.0008644238153641542,
+          0.05380234447264866
+        ]
+      }
+    }
+  },
+  "empty_group_resamples": {
+    "tracklet_cluster_bootstrap": 0,
+    "match_half_cluster_bootstrap": 0
+  },
+  "self_check": {
+    "passed": true,
+    "tolerance": 1e-09,
+    "published_point_estimates": {
+      "soccernet_baseline": {
+        "score": 0.6615409450117734,
+        "accuracy": 0.7329681615884971
+      },
+      "fewshot_r18_1shot_per_box": {
+        "score": 0.8768639935992651,
+        "accuracy": 0.9099623416638137
+      },
+      "fewshot_r18_1shot_tracklets": {
+        "score": 0.9127402347472837,
+        "accuracy": 0.9419719274221157
+      },
+      "fewshot_r18_6shot_per_box": {
+        "score": 0.9241686569597671,
+        "accuracy": 0.9311879493324204
+      },
+      "fewshot_r18_6shot_tracklets": {
+        "score": 0.9745088604976289,
+        "accuracy": 0.9813420061622732
+      },
+      "soccernet_baseline_true_roles": {
+        "score": 0.9279323578461298,
+        "accuracy": 0.8837726805888394
+      },
+      "siglip_six_references_per_box": {
+        "score": 0.7434204016899157,
+        "accuracy": 0.766689489900719
+      },
+      "siglip_six_references_tracklets": {
+        "score": 0.879776014993398,
+        "accuracy": 0.890790825059911
+      },
+      "clip_six_references_per_box": {
+        "score": 0.6382877157406283,
+        "accuracy": 0.6638137624101336
+      },
+      "clip_six_references_tracklets": {
+        "score": 0.8216649665568287,
+        "accuracy": 0.8310510099281068
+      },
+      "roboflow_predicted_roles_per_box": {
+        "score": 0.7084564179430499,
+        "accuracy": 0.8267716535433071
+      },
+      "roboflow_predicted_roles_tracklets": {
+        "score": 0.7084564179430499,
+        "accuracy": 0.8267716535433071
+      },
+      "roboflow_oracle_roles_per_box": {
+        "score": 0.9605131756535772,
+        "accuracy": 0.953098254022595
+      },
+      "roboflow_oracle_roles_tracklets": {
+        "score": 0.9605131756535772,
+        "accuracy": 0.953098254022595
+      }
+    }
+  },
+  "runtime_seconds": 111.57866045786068,
+  "oracle_methods": [
+    "soccernet_baseline_true_roles",
+    "roboflow_oracle_roles_per_box",
+    "roboflow_oracle_roles_tracklets"
+  ],
+  "method_notes": {
+    "soccernet_baseline_true_roles": "Uses ground-truth player and goalkeeper roles.",
+    "roboflow_oracle_roles_per_box": "Oracle variant; receives ground-truth player and goalkeeper roles.",
+    "roboflow_oracle_roles_tracklets": "Oracle variant; receives ground-truth player and goalkeeper roles."
+  },
+  "reproduction_mismatches": {}
+}

@@ -194,13 +194,19 @@ def training_schedule(entries, cache):
 
 
 def main():
+    global SEED, SELECTOR_SEED, REPLACEMENT_SEED
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, required=True)
+    parser.add_argument("--seed", type=int, default=SEED)
+    parser.add_argument("--out", type=Path)
     args = parser.parse_args()
+    SEED = args.seed
+    SELECTOR_SEED = SEED + 100
+    REPLACEMENT_SEED = SEED + 400
     root = args.root.resolve()
     manifest, splits, games = train.load_manifest(root)
     bank_dir = root / "work" / "references"
-    output = root / "work" / "six-references"
+    output = args.out if args.out is not None else root / "work" / "six-references"
     output.mkdir(parents=True, exist_ok=True)
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
     torch.manual_seed(SEED)

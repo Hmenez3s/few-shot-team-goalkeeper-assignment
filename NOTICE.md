@@ -22,3 +22,17 @@ The checkpoints in `models/` were initialised from these weights and trained on 
 
 - Source: <https://zenodo.org/records/10653453> (`prtreid-soccernet-baseline.pth.tar`) and <https://zenodo.org/records/10604211> (HRNet-W32)
 - Used for: the SoccerNet baseline comparison in `experiments/`; the weights are downloaded separately and not redistributed here
+
+## SoccerTrack
+
+- Source: <https://www.kaggle.com/datasets/atomscott/soccertrack> (version 6, `wide_view`), project <https://github.com/AtomScott/SoccerTrack>
+- License declared on the Kaggle dataset: LGPL-3.0
+- Used for: the transfer test in `experiments/transfer_datasets.py` and `experiments/transfer_baselines.py`
+
+The dataset is not redistributed here; `transfer_datasets.py --download` fetches the clips from Kaggle. The numbers in `results/transfer-soccertrack.json` were measured on it.
+
+## OSNet and SigLIP/CLIP weights
+
+- OSNet: Market-1501 weights from torchreid (MIT), used frozen as a comparison encoder
+- SigLIP (`google/siglip-base-patch16-224`) and CLIP (`openai/clip-vit-base-patch32`) from Hugging Face, used frozen as comparison encoders; revisions are recorded in `results/`
+- None of these weights are redistributed here

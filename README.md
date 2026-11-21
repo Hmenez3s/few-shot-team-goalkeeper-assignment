@@ -41,10 +41,16 @@ Same 5,842 boxes from six held-out matches (2, 3, 5, 7, 8, 11), with the same tr
 | **FewShot-R18, 6-shot, averaged over each tracklet** | 6 per group | **97.45%** | 96.88% | 99.57% | 98.06% | 95.29% |
 | FewShot-R18, 6-shot, each box alone | 6 per group | 92.42% | 92.13% | 94.28% | 90.32% | 92.94% |
 
-The SoccerNet and Roboflow pipelines take the player/goalkeeper role of each box from PRTReID's role head. Boxes the pipeline leaves without a team count as errors: 484 of 5,842 with predicted roles (voted referee, other or ball, or no pitch position). Given the true role of every box instead, the Roboflow pipeline reaches 96.05%. That number is not directly comparable: the method is handed the hardest part of the task, while FewShot-R18 decides roles itself. FewShot-R18 still scores higher with tracklets.
+The SoccerNet and Roboflow pipelines take the player/goalkeeper role of each box from PRTReID's role head. Boxes the pipeline leaves without a team count as errors: 484 of 5,842 with predicted roles (voted referee, other or ball, or no pitch position). Given the true role of every box instead, the Roboflow pipeline reaches 96.05%. That number is not directly comparable: the method is handed the hardest part of the task, while FewShot-R18 decides roles itself. FewShot-R18 with tracklets is 1.40 points above it, a difference that is not significant (95% interval -2.21 to 5.32).
 
 - **Matches 7, 8, 11:** 98.98% against 83.55% for the SoccerNet baseline.
 - **Matches 2, 3, 5:** 96.08% against 50.93%. In match 3 the baseline labels 418 of its 1,072 boxes as referees or the ball.
+
+**How sure are these numbers?**
+
+- **Interval:** resampling the 12 match halves 10,000 times, the 95% interval of the 97.45% is 94.24 to 99.64. The gap to the SoccerNet baseline is 31.30 points (18.25 to 45.93) and the gap to frozen SigLIP is 9.47 points (3.50 to 14.66). See [`results/bootstrap-intervals.json`](results/bootstrap-intervals.json).
+- **Training seeds:** five seeds of the 6-shot model score 98.88% ± 1.28 with tracklets and 93.16% ± 0.62 with each box alone on matches 7, 8, 11.
+- **All nine matches:** holding out each group of three matches in turn, the 6-shot model scores 97.24% with tracklets and 91.12% with each box alone over 9,130 boxes. See [`results/six-shot-variance.json`](results/six-shot-variance.json).
 
 **Another dataset, no retraining.** On [SoccerTrack](https://github.com/AtomScott/SoccerTrack) (a fixed 8K fish-eye camera, small players, two teams, no goalkeeper labels), 12 clips from one match, 30 reference draws, queries excluding the reference athletes. Score is the mean of the two team accuracies, tracklets averaged:
 

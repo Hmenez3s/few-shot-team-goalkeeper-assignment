@@ -3,6 +3,8 @@
 | File | Contents | Producing script |
 |---|---|---|
 | `audit.json` | Prepared data, class mapping, exclusions, and label-normalization audit | `prepare.py` |
+| `bootstrap-intervals.json` | 95% cluster-bootstrap intervals (by tracklet and by match half) for every method on the six held-out matches, and for the differences to FewShot-R18 | `experiments/bootstrap_intervals.py` |
+| `six-shot-variance.json` | Five training seeds and three rotated folds of the 6-shot model, each box alone and with tracklets | `six_references.py --seed`, `experiments/summarize_six_shot_variance.py` |
 | `transfer-soccertrack.json` | Every encoder and baseline on SoccerTrack without retraining: 12 clips, two teams, 30 paired reference draws, reference athletes excluded from the queries | `experiments/transfer_datasets.py` (crops), `experiments/transfer_baselines.py` |
 | `frozen-encoders.json` | Frozen SigLIP and CLIP with the same six references, and the Roboflow team pipeline with predicted and true roles, on six held-out matches | `experiments/frozen_encoders.py` |
 | `formats.json` | Runtime environment and format accuracy/latency measurements | `evaluate_formats.py` |

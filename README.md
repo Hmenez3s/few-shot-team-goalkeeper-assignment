@@ -4,7 +4,7 @@
 ![Dataset: SoccerNet GSR 2025](https://img.shields.io/badge/dataset-SoccerNet%20GSR%202025-334155)
 ![Backbone: ResNet-18](https://img.shields.io/badge/backbone-ResNet--18-334155)
 
-Sorts the players of a football match into four groups — **team A, team B, goalkeeper A, goalkeeper B** — from a few example crops of each group taken earlier in the same match. The model, **FewShot-R18**, is a ResNet-18 trained to compare each player with those examples; it works with one example per group (1-shot) or six (6-shot).
+Sorts the players of a football match into four groups (**team A, team B, goalkeeper A, goalkeeper B**) from a few example crops of each group taken earlier in the same match. The model, **FewShot-R18**, is a ResNet-18 trained to compare each player with those examples; it works with one example per group (1-shot) or six (6-shot).
 
 <p align="center">
   <a href="media/classification-game-7-6shot-tracklets.mp4"><img src="media/classification-game-7-6shot-tracklets.gif" width="100%" alt="FewShot-R18 with six references per group classifies football players and goalkeepers by tracklet."></a>

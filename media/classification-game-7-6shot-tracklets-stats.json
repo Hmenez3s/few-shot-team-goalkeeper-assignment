@@ -1,0 +1,46 @@
+{
+  "session": "game-7-half-2",
+  "source_clip": "SNGS-129",
+  "first_frame": "000026.jpg",
+  "last_frame": "000324.jpg",
+  "frames": 150,
+  "boxes": 2443,
+  "accuracy": 1.0,
+  "class_names": [
+    "player_left",
+    "player_right",
+    "goalkeeper_left",
+    "goalkeeper_right"
+  ],
+  "confusion_matrix": [
+    [
+      1251,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1170,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      8,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      14
+    ]
+  ],
+  "model": "FewShot-R18 6-shot",
+  "references_per_group": 6,
+  "tracklets": 22,
+  "aggregation": "mean of normalized embeddings per dataset track ID within the video window",
+  "macro_recall": 1.0
+}

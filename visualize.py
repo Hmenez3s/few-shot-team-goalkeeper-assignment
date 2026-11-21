@@ -1,6 +1,7 @@
 import argparse
 import collections
 import json
+import random
 import shutil
 import subprocess
 import zipfile
@@ -12,6 +13,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 import prepare
 import reference_bank
+import six_references
 import train
 
 LABELS = ["Player A", "Player B", "Goalkeeper A", "Goalkeeper B"]
@@ -39,9 +41,9 @@ def font(size, bold=False):
     return ImageFont.load_default(size)
 
 
-def load_model(root, device):
+def load_model(root, device, checkpoint=None):
     model = train.build_model(root / "inputs" / "resnet18.pth", device)
-    locked = torch.load(root / "work" / "checkpoint.pth", map_location=device, weights_only=True)
+    locked = torch.load(checkpoint or root / "work" / "checkpoint.pth", map_location=device, weights_only=True)
     model.load_state_dict(locked["model"])
     model.eval()
     return model
@@ -120,22 +122,65 @@ def example_sheet(root, model, device, unit, output):
 def keeper_coverage(rows, boxes, start):
     counts = collections.Counter()
     for row in rows[start:start + VIDEO_FRAMES * VIDEO_STRIDE:VIDEO_STRIDE]:
-        counts.update(class_id for class_id, _ in boxes[str(row["image_id"])])
+        counts.update(class_id for class_id, _, _ in boxes[str(row["image_id"])])
     return min(counts[2], counts[3]), counts[2] + counts[3], sum(counts.values())
 
 
-def video(root, model, device, unit, source_clip, output):
+def source_frame(archive, folder, row):
+    with archive.open(f"{folder}/{row['file_name']}") as stream, Image.open(stream) as source:
+        return source.convert("RGB")
+
+def encode_video_boxes(model, device, archive, folder, frames, boxes, prototypes, tracklets):
+    visible_by_frame, crops, by_track = [], [], collections.defaultdict(list)
+    for row in frames:
+        frame = source_frame(archive, folder, row)
+        visible = []
+        for class_id, bbox, track in boxes[str(row["image_id"])]:
+            crop = prepare.crop_box(frame, bbox)
+            if crop is None:
+                continue
+            if tracklets:
+                if track is None:
+                    raise ValueError(f"visible box in {row['file_name']} has no track ID")
+                by_track[str(track)].append(len(crops))
+            visible.append((class_id, bbox, len(crops)))
+            crops.append(crop)
+        visible_by_frame.append(visible)
+    with torch.inference_mode():
+        features = torch.cat([torch.nn.functional.normalize(model(six_references.batch_crops(crops[i:i + 128], device)), dim=1)
+                              for i in range(0, len(crops), 128)])
+        predictions = train.cosine_logits(features, prototypes).argmax(dim=1).cpu().numpy()
+        if tracklets:
+            groups = list(by_track.values())
+            means = torch.stack([features[indices].mean(dim=0) for indices in groups])
+            labels = train.cosine_logits(means, prototypes).argmax(dim=1).cpu().tolist()
+            for indices, label in zip(groups, labels):
+                predictions[indices] = label
+    return visible_by_frame, predictions, len(by_track)
+
+def video(root, model, device, unit, source_clip, output, tracklets=False):
     if shutil.which("ffmpeg") is None:
         raise RuntimeError("ffmpeg is required to render the video")
     entry, clip, episode = load_session(root, unit)
-    support, _ = episode
-    if list(clip["y"][support]) != [0, 1, 2, 3]:
+    manifest, _, _ = train.load_manifest(root)
+    anchors, _ = episode
+    if list(clip["y"][anchors]) != [0, 1, 2, 3]:
         raise ValueError("references must be ordered by class")
-    with torch.no_grad():
-        prototypes = model(train.batch_images(clip, support, device))
+    reference_limit = int(clip["t"][anchors].max())
+    references_per_group = six_references.REFERENCES if tracklets else 1
+    if tracklets:
+        bank = six_references.load_bank(root / "work" / "references" / f"{unit}.npz", root, manifest, entry)
+        episode = six_references.resolve_episode(clip, bank, episode, unit)
+        support, query = six_references.make_session(clip, bank, episode, random.Random(six_references.EVALUATION_SEED), True)
+        reference_limit = int(clip["t"][query].min()) - 1
+    else:
+        support = clip["x"][anchors]
+    with torch.inference_mode():
+        prototypes = six_references.class_prototypes(model(six_references.batch_crops(support, device)), references_per_group)
     width, height = VIDEO_SIZE
-    large, small, badge = font(26, True), font(15), font(13, True)
-    reference_images = [Image.fromarray(clip["x"][index]).resize((26, 52), Image.Resampling.BICUBIC) for index in support]
+    large, small, badge = font(26, True), font(15, True), font(13, True)
+    crop_size = (19, 38) if tracklets else (26, 52)
+    reference_images = [Image.fromarray(crop).resize(crop_size, Image.Resampling.BICUBIC) for crop in support]
     matrix = np.zeros((4, 4), dtype=int)
     previews = []
     pending = output.with_name(output.stem + ".pending.mp4")
@@ -152,20 +197,23 @@ def video(root, model, device, unit, source_clip, output):
                 or timing is None
                 or timing[0] != half):
             raise ValueError(f"{source_clip} does not belong to {unit}")
-        manifest = json.loads((root / "work" / "manifest.json").read_text(encoding="utf-8"))
         swap_teams = reference_bank.team_swap_for_clip(manifest, "test", entry["game"], half, identity[1])
         boxes = collections.defaultdict(list)
         for annotation in labels["annotations"]:
             class_id = prepare.label_class(annotation, swap_teams)
             if annotation.get("supercategory") == "object" and class_id is not None and isinstance(annotation.get("bbox_image"), dict):
-                boxes[str(annotation["image_id"])].append((class_id, annotation["bbox_image"]))
+                boxes[str(annotation["image_id"])].append((class_id, annotation["bbox_image"], annotation.get("track_id")))
         rows = sorted((row for row in labels["images"] if row.get("is_labeled") is True), key=lambda row: row["file_name"])
         span = VIDEO_FRAMES * VIDEO_STRIDE
         start = max(range(0, len(rows) - span + 1, 25), key=lambda candidate: keeper_coverage(rows, boxes, candidate))
         frames = rows[start:start + span:VIDEO_STRIDE]
         first_time = int(info["clip_start"]) + (int(Path(frames[0]["file_name"]).stem) - 1) * 40
-        if first_time <= int(clip["t"][support].max()):
+        if first_time <= reference_limit:
             raise ValueError("video frames must come after every reference")
+        folder = f"{source_clip}/{info['im_dir']}"
+        visible_by_frame, predictions, track_count = encode_video_boxes(
+            model, device, archive, folder, frames, boxes, prototypes, tracklets,
+        )
         encoder = subprocess.Popen(
             ["ffmpeg", "-hide_banner", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{width}x{height}",
              "-r", f"25/{VIDEO_STRIDE}", "-i", "-", "-an", "-c:v", "libx264", "-preset", "fast", "-crf", "20",
@@ -174,33 +222,31 @@ def video(root, model, device, unit, source_clip, output):
         )
         try:
             for number, row in enumerate(frames):
-                with archive.open(f"{source_clip}/{info['im_dir']}/{row['file_name']}") as stream, Image.open(stream) as source:
-                    frame = source.convert("RGB")
-                visible = []
-                for class_id, bbox in boxes[str(row["image_id"])]:
-                    crop = prepare.crop_box(frame, bbox)
-                    if crop is not None:
-                        visible.append((class_id, bbox, crop))
+                frame = source_frame(archive, folder, row)
+                visible = visible_by_frame[number]
                 canvas = Image.new("RGB", (width, height), "#111b2b")
                 canvas.paste(frame.resize((width, height - VIDEO_HEADER), Image.Resampling.BILINEAR), (0, VIDEO_HEADER))
                 draw = ImageDraw.Draw(canvas)
-                draw.text((16, 12), "Four-reference classification", font=large, fill="#ffffff")
+                draw.text((16, 12), "FewShot-R18 · 6-shot + tracklets" if tracklets else "Four-reference classification",
+                          font=large, fill="#ffffff")
                 draw.text((17, 49), session_title(entry), font=small, fill="#c9d3e2")
                 draw.text((17, 73), "Boxes from the dataset · labels predicted by the model", font=small, fill="#c9d3e2")
-                for class_id, reference in enumerate(reference_images):
+                for class_id in range(4):
                     left = 563 + class_id * 171
-                    canvas.paste(reference, (left, 12))
-                    draw.text((left + 34, 22), LABELS[class_id], font=small, fill=COLORS[class_id])
-                    draw.text((left + 34, 44), "Reference", font=small, fill="#cad3df")
+                    if tracklets:
+                        draw.text((left, 8), LABELS[class_id], font=small, fill=COLORS[class_id])
+                        for i in range(references_per_group):
+                            canvas.paste(reference_images[class_id * references_per_group + i], (left + i * 22, 31))
+                    else:
+                        canvas.paste(reference_images[class_id], (left, 12))
+                        draw.text((left + 34, 22), LABELS[class_id], font=small, fill=COLORS[class_id])
+                        draw.text((left + 34, 44), "Reference", font=small, fill="#cad3df")
                 draw.text((562, 77), "P = player  ·  G = goalkeeper  ·  ! = differs from the dataset label", font=small, fill="#cad3df")
                 if visible:
-                    batch = {"x": np.stack([crop for _, _, crop in visible])}
-                    with torch.no_grad():
-                        features = model(train.batch_images(batch, list(range(len(visible))), device))
-                    predicted = train.cosine_logits(features, prototypes).argmax(dim=1).cpu().tolist()
                     scale_x = width / frame.width
                     scale_y = (height - VIDEO_HEADER) / frame.height
-                    for (class_id, bbox, _), guess in zip(visible, predicted):
+                    for class_id, bbox, index in visible:
+                        guess = int(predictions[index])
                         matrix[class_id, guess] += 1
                         cx, cy, w, h = (float(bbox[key]) for key in ("x_center", "y_center", "w", "h"))
                         x0 = max(0, int((cx - w / 2) * scale_x))
@@ -243,6 +289,10 @@ def video(root, model, device, unit, source_clip, output):
         "frames": len(frames), "boxes": int(matrix.sum()), "accuracy": float(matrix.trace() / matrix.sum()),
         "class_names": train.CLASSES, "confusion_matrix": matrix.tolist(),
     }
+    if tracklets:
+        stats.update({"model": "FewShot-R18 6-shot", "references_per_group": references_per_group,
+                      "tracklets": track_count, "aggregation": "mean of normalized embeddings per dataset track ID within the video window",
+                      "macro_recall": float(np.mean(matrix.diagonal() / matrix.sum(axis=1)))})
     train.atomic_json(output.with_name(output.stem + "-stats.json"), stats)
     print(f"{output}: {stats['frames']} frames, {matrix.trace()}/{matrix.sum()} boxes match the dataset label", flush=True)
 
@@ -251,10 +301,17 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--six-shot-tracklets", action="store_true", help="render only the 6-shot tracklet video")
     args = parser.parse_args()
     root = args.root.resolve()
     args.out.mkdir(parents=True, exist_ok=True)
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+    if args.six_shot_tracklets:
+        checkpoint = Path(__file__).resolve().parent / "models" / "six-references.pth"
+        model = load_model(root, device, checkpoint)
+        video(root, model, device, VIDEO_UNIT, VIDEO_SOURCE_CLIP,
+              args.out / "classification-game-7-6shot-tracklets.mp4", tracklets=True)
+        return
     model = load_model(root, device)
     for unit in SHEET_UNITS:
         example_sheet(root, model, device, unit, args.out / f"examples-{unit}.png")

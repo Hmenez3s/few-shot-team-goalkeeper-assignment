@@ -7,10 +7,10 @@
 Sorts the players of a football match into four groups — **team A, team B, goalkeeper A, goalkeeper B** — from a few example crops of each group taken earlier in the same match. The model, **FewShot-R18**, is a ResNet-18 trained to compare each player with those examples; it works with one example per group (1-shot) or six (6-shot).
 
 <p align="center">
-  <a href="media/classification-game-7.mp4"><img src="media/classification-game-7.gif" width="100%" alt="Football match with every player box labelled by team and role."></a>
+  <a href="media/classification-game-7-6shot-tracklets.mp4"><img src="media/classification-game-7-6shot-tracklets.gif" width="100%" alt="FewShot-R18 with six references per group classifies football players and goalkeepers by tracklet."></a>
 </p>
 
-Orange and blue are the two teams, `P` is an outfield player, `G` a goalkeeper, `!` a wrong label. [Full-resolution video](media/classification-game-7.mp4).
+**FewShot-R18, 6 references per group + tracklet averaging.** The model assigns one label per tracklet using all its boxes within this window. Boxes and track IDs come from SoccerNet. It matched **2,443 of 2,443 box labels (100%)** on this 150-frame window from match 7; this is a single-clip demo, not the six-match benchmark. Orange and blue are the two teams; `P` denotes an outfield player and `G` a goalkeeper. [Full-resolution video](media/classification-game-7-6shot-tracklets.mp4) · [Clip metrics](media/classification-game-7-6shot-tracklets-stats.json) · [Original 1-shot demo](media/classification-game-7.mp4).
 
 ## Results
 

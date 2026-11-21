@@ -1,4 +1,4 @@
-# Four-Reference Team Classifier
+# FewShot-R18: few-shot team and goalkeeper assignment
 
 ![License: MIT](https://img.shields.io/badge/code%20license-MIT-0f766e)
 ![Dataset: SoccerNet GSR 2025](https://img.shields.io/badge/dataset-SoccerNet%20GSR%202025-334155)

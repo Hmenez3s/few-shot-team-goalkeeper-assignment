@@ -32,7 +32,7 @@
 \maketitle
 
 \begin{abstract}
-Kit colours change every match, so a fixed classifier cannot assign football players to teams. We study the task as 4-way few-shot classification, with one or six labelled examples per class: given the player boxes of a broadcast clip and $k$ labelled reference crops for each of four groups (team A, team B, goalkeeper A, goalkeeper B) taken earlier in the same half, a ResNet-18 embeds all crops and each box takes the group whose mean reference embedding is closest in cosine similarity. We call the model FewShot-R18, a ResNet-18 trained as a prototypical network. On 5,842 boxes from six held-out SoccerNet Game State Reconstruction matches, with the same ground-truth boxes, tracklets and pitch positions for every method, the official SoccerNet baseline (PRTReID embeddings, per-clip K-means) scores 66.15\%, the mean of four per-group accuracies. FewShot-R18 with six references and tracklet averaging scores 97.45\%. With the same six references, frozen SigLIP and CLIP encoders score 87.98\% and 82.17\%. A SigLIP, UMAP and K-means team pipeline from the Roboflow sports toolkit scores 70.85\% with predicted roles, and 96.05\% when it is given the true role of every box. We also report reference-draw variance, rotated folds, a prospective replay, and Core ML latency (2.24 ms for 20 crops). Five SN-GSR-2025 clips have swapped outfield team labels; we give the evidence and use corrected labels.
+Kit colours change every match, so a fixed classifier cannot assign football players to teams. We study the task as 4-way few-shot classification, with one or six labelled examples per class: given the player boxes of a broadcast clip and $k$ labelled reference crops for each of four groups (team A, team B, goalkeeper A, goalkeeper B) taken earlier in the same half, a ResNet-18 embeds all crops and each box takes the group whose mean reference embedding is closest in cosine similarity. We call the model FewShot-R18, a ResNet-18 trained as a prototypical network. On 5,842 boxes from six held-out SoccerNet Game State Reconstruction matches, with the same ground-truth boxes, tracklets and pitch positions for every method, the official SoccerNet baseline (PRTReID embeddings, per-clip K-means) scores 66.15\%, the mean of four per-group accuracies. FewShot-R18 with six references and tracklet averaging scores 97.45\%. With the same six references, frozen SigLIP and CLIP encoders score 87.98\% and 82.17\%. A SigLIP, UMAP and K-means team pipeline from the Roboflow sports toolkit scores 70.85\% with predicted roles, and 96.05\% when it is given the true role of every box. On SoccerTrack, a different camera and match with two teams, the same weights score 84.24\% with one reference, against 82.00\% for an HSV colour descriptor and 57.55\% for frozen SigLIP. We also report reference-draw variance, rotated folds, a prospective replay, and Core ML latency (2.24 ms for 20 crops). Five SN-GSR-2025 clips have swapped outfield team labels; we give the evidence and use corrected labels.
 \end{abstract}
 
 \section{Introduction}
@@ -41,7 +41,7 @@ A broadcast analysis system must decide, for every player box, which team the pl
 
 We ask a different question: how much does a small amount of labelled evidence from the same half help? An operator supplies $k$ labelled crops for each of four groups, taken earlier in the same half. A single four-way decision then assigns every box to team A, team B, goalkeeper A or goalkeeper B, and so ties each goalkeeper to a team. No clustering and no camera calibration are needed.
 
-We call the model FewShot-R18: a ResNet-18~\cite{he2016resnet} without its classification layer, trained as a prototypical network~\cite{snell2017prototypical} to compare player crops with the references. The contributions are the four-group formulation with references from the same half (Section~\ref{sec:method}); a like-for-like comparison with the official SoccerNet team method on 5,842 boxes from six held-out matches, with the same ground-truth tracklets and pitch coordinates for both, extended to frozen SigLIP and CLIP encoders and to the Roboflow team pipeline (Section~\ref{sec:results}); an evaluation of reference choice, seeds, held-out matches, prospective use and box overlap (Sections~\ref{sec:variance}--\ref{sec:errors}); and the finding that five clips of SN-GSR-2025 have swapped outfield team labels (Section~\ref{sec:audit}). Code, checkpoints, results and the label audit are released as version 1.4 at \url{https://github.com/Hmenez3s/four-reference-team-classifier/tree/v1.4}.
+We call the model FewShot-R18: a ResNet-18~\cite{he2016resnet} without its classification layer, trained as a prototypical network~\cite{snell2017prototypical} to compare player crops with the references. The contributions are the four-group formulation with references from the same half (Section~\ref{sec:method}); a like-for-like comparison with the official SoccerNet team method on 5,842 boxes from six held-out matches, with the same ground-truth tracklets and pitch coordinates for both, extended to frozen SigLIP and CLIP encoders and to the Roboflow team pipeline (Section~\ref{sec:results}); an evaluation of reference choice, seeds, held-out matches, transfer to another dataset, prospective use and box overlap (Sections~\ref{sec:variance}--\ref{sec:errors}); and the finding that five clips of SN-GSR-2025 have swapped outfield team labels (Section~\ref{sec:audit}). Code, checkpoints, results and the label audit are released as version 1.5 at \url{https://github.com/Hmenez3s/four-reference-team-classifier/tree/v1.5}.
 
 \section{Related work}
 
@@ -229,6 +229,38 @@ Frozen ImageNet ResNet-18 & 50.27 $\pm$ 4.34 & 69.37 $\pm$ 2.61 & 54.60 $\pm$ 5.
 
 \textbf{Rotated folds.} Three folds hold out whole matches in turn (7, 8, 11; 2, 3, 5; 4, 6, 9), with FewShot-R18 1-shot. Fold scores are 86.10\%, 89.49\% and 80.53\%, and fold accuracies are 95.60\%, 87.15\% and 85.77\%. Pooled over the nine matches (9,130 boxes), the score is 85.04\% and the accuracy 89.11\%.
 
+\section{Transfer to SoccerTrack}
+\label{sec:transfer}
+
+To test the encoder outside SN-GSR-2025 we use SoccerTrack~\cite{scott2022soccertrack}, a match filmed with a fixed 8K fish-eye camera that covers the whole pitch. Players are small (median box height 39 pixels), and the camera and kits differ from the training data. The annotations give each box a team and a track identity but no goalkeeper role, so the task here has two groups; goalkeepers carry their team's label, although their kits differ from it. We take 12 of the 66 annotated 30-second clips at even intervals and every tenth frame. No model is retrained.
+
+The protocol follows Section~\ref{sec:variance}. In each clip, references come from the first 30\% of the frames: for each team one athlete with at least six early boxes is drawn, and one or six of that athlete's crops are the references. Queries are all later boxes except those of the two reference athletes, about 12,478 per draw. We repeat this for 30 draws, and every method receives the same crops, references and queries. The Roboflow pipeline clusters the later tracklets of each clip; SoccerTrack has no pitch coordinates, so its two clusters are named by their similarity to the same SigLIP references, and it gives one label per tracklet.
+
+Table~\ref{tab:transfer} gives the scores. With one reference and tracklets FewShot-R18 scores 84.24\%, against 65.43\% for the ImageNet network it was fine-tuned from, 70.67\% for OSNet and 57.55\% for frozen SigLIP. FewShot-R18 is the best method in all four columns. The HSV torso-colour descriptor is second, with 82.00\% and 84.44\% against 84.24\% and 85.39\%; on the same draws FewShot-R18 is ahead in 21 of 30 draws with one reference and in 18 of 30 with six. We inspected crops from every clip: each shows one whole player, but at a median height of 39 pixels they are small and blurred. On them the general-purpose encoders, which resize each crop to 224 pixels, are the weakest methods. The model trained with one reference transfers better than the one trained with six.
+
+\begin{table}[tbp]
+\centering
+\caption{SoccerTrack, 12 clips from one match, two teams, no retraining. Score is the mean of the two per-team accuracies, averaged over 30 reference draws; queries exclude the reference athletes. $\ddagger$: one label per tracklet, clusters named by the SigLIP references.}
+\label{tab:transfer}
+\small
+\begin{tabular}{lrrrr}
+\toprule
+ & \multicolumn{2}{c}{1 reference} & \multicolumn{2}{c}{6 references} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Method & Each box & Tracklets & Each box & Tracklets \\
+\midrule
+FewShot-R18, trained 1-shot & \textbf{80.87} & \textbf{84.24} & \textbf{82.05} & \textbf{85.39} \\
+FewShot-R18, trained 6-shot & 78.34 & 81.08 & 79.41 & 82.14 \\
+HSV torso colour & 78.33 & 82.00 & 81.03 & 84.44 \\
+Frozen Market-1501 OSNet & 66.70 & 70.67 & 70.84 & 74.36 \\
+Frozen ImageNet ResNet-18 & 61.72 & 65.43 & 66.04 & 70.50 \\
+Frozen SigLIP & 56.35 & 57.55 & 58.51 & 60.18 \\
+Frozen CLIP & 55.53 & 56.85 & 58.23 & 60.68 \\
+Roboflow pipeline (SigLIP + UMAP + K-means)$^\ddagger$ & -- & 54.57 & -- & 56.35 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \section{Prospective replay}
 \label{sec:prospective}
 
@@ -348,7 +380,7 @@ PRTReID (HRNet-W32)$^\ast$ & 256$\times$128 & 33.4 & 5.31 & 2,201 & -- \\
 
 \section{Limitations}
 
-All results use ground-truth boxes and tracklets, so detector and tracker errors are not measured. Six matches from one dataset were evaluated, and the nine-match folds are internal to it; other datasets were not tested. The method needs labelled crops of each group from the same half (24 with six references), and the prospective replay covered only 3 of 6 halves because goalkeeper references were missing in the others. The retrospective protocol uses later jersey labels to pick references, so its figures are not deployment estimates. The standard deviations in Table~\ref{tab:draws} are over reference choices on three matches. Box overlap in Section~\ref{sec:errors} is geometric and does not establish the cause of an error. The classifier has four classes, so a referee receives a team or goalkeeper label. The baseline was used with its published weights.
+All results use ground-truth boxes and tracklets, so detector and tracker errors are not measured. The main evaluation uses six matches from one dataset, and the nine-match folds are internal to it. The SoccerTrack test covers one match with two teams, so it does not measure goalkeepers on other data, and its spread is over reference choices within that match. The method needs labelled crops of each group from the same half (24 with six references), and the prospective replay covered only 3 of 6 halves because goalkeeper references were missing in the others. The retrospective protocol uses later jersey labels to pick references, so its figures are not deployment estimates. The standard deviations in Table~\ref{tab:draws} are over reference choices on three matches. Box overlap in Section~\ref{sec:errors} is geometric and does not establish the cause of an error. The classifier has four classes, so a referee receives a team or goalkeeper label. The baseline was used with its published weights.
 
 \bibliographystyle{plain}
 \bibliography{references}

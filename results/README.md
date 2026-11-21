@@ -3,6 +3,7 @@
 | File | Contents | Producing script |
 |---|---|---|
 | `audit.json` | Prepared data, class mapping, exclusions, and label-normalization audit | `prepare.py` |
+| `transfer-soccertrack.json` | Every encoder and baseline on SoccerTrack without retraining: 12 clips, two teams, 30 paired reference draws, reference athletes excluded from the queries | `experiments/transfer_datasets.py` (crops), `experiments/transfer_baselines.py` |
 | `frozen-encoders.json` | Frozen SigLIP and CLIP with the same six references, and the Roboflow team pipeline with predicted and true roles, on six held-out matches | `experiments/frozen_encoders.py` |
 | `formats.json` | Runtime environment and format accuracy/latency measurements | `evaluate_formats.py` |
 | `gpu-formats-rtx3060.json`, `gpu-formats-rtx5070ti.json` | TensorRT FP16, INT8, FP8 and 2:4 sparse accuracy and latency, batch-256 throughput, and simulated INT4/NVFP4 accuracy per GPU | `experiments/gpu_formats.py` |

@@ -9,6 +9,7 @@ Each script answers one question from [RESEARCH.md](../RESEARCH.md). Run them fr
 | `research_references` | How much does the choice of reference crops matter, and how do colour and re-identification baselines compare? | file given by `--out` |
 | `prtreid_comparison`, `prtreid_embed`, `tracklet_comparison` | How does the classifier compare with the official SoccerNet team method? | files given by `--out` |
 | `frozen_encoders` | Do general-purpose encoders (SigLIP, CLIP) or the Roboflow team pipeline match the trained encoder? | file given by `--out` |
+| `transfer_datasets`, `transfer_baselines` | Does the encoder, without retraining, still beat the other methods on SoccerTrack, another camera and dataset? `transfer_datasets` downloads clips (`--clip`) and caches crops; `transfer_baselines` runs every method on the same reference draws | files given by `--output` |
 | `speed_general_encoders` | How much compute do our encoder, SigLIP and CLIP need per crop? | file given by `--out` |
 | `export_eval_bundle` | Packs the fixed test sessions and calibration crops into one portable file | file given by `--out` |
 | `gpu_formats` | How accurate and fast is the encoder in TensorRT FP16, INT8, FP8 and 2:4 sparsity on NVIDIA GPUs? | file given by `--out` |

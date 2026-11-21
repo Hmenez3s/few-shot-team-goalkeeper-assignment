@@ -44,6 +44,20 @@ The SoccerNet and Roboflow pipelines take the player/goalkeeper role of each box
 - **Matches 7, 8, 11:** 98.98% against 83.55% for the SoccerNet baseline.
 - **Matches 2, 3, 5:** 96.08% against 50.93%. In match 3 the baseline labels 418 of its 1,072 boxes as referees or the ball.
 
+**Another dataset, no retraining.** On [SoccerTrack](https://github.com/AtomScott/SoccerTrack) (a fixed 8K fish-eye camera, small players, two teams, no goalkeeper labels), 12 clips from one match, 30 reference draws, queries excluding the reference athletes. Score is the mean of the two team accuracies, tracklets averaged:
+
+| Method | 1 reference | 6 references |
+|---|---:|---:|
+| **FewShot-R18, trained 1-shot** | **84.24%** | **85.39%** |
+| HSV torso colour | 82.00% | 84.44% |
+| Frozen OSNet (re-identification) | 70.67% | 74.36% |
+| Frozen ImageNet ResNet-18 | 65.43% | 70.50% |
+| Frozen SigLIP | 57.55% | 60.18% |
+| Frozen CLIP | 56.85% | 60.68% |
+| Roboflow pipeline | 54.57% | 56.35% |
+
+FewShot-R18 is the best method in every setting; colour is second. Goalkeepers carry their team's label here. Details: [`results/transfer-soccertrack.json`](results/transfer-soccertrack.json).
+
 Details in [RESEARCH.md](RESEARCH.md) and the [preprint](paper/main.pdf).
 
 ## Speed
